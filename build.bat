@@ -8,7 +8,7 @@ set OBJCOPY=xtensa-esp32s3-elf-objcopy
 set OBJDUMP=xtensa-esp32s3-elf-objdump
 set SIZE=xtensa-esp32s3-elf-size
 
-set CFLAGS=-std=c11 -ffreestanding -nostdlib -nostartfiles -nodefaultlibs -Wall -Wextra -Werror -O2 -g -mlongcalls -mtext-section-literals -mno-target-align -Iinclude -Iarch/xtensa/include -Ilibc/include -DBAREOS_VERSION="0.1.0" -DBAREOS_ARCH="xtensa"
+set CFLAGS=-std=c11 -ffreestanding -nostdlib -nostartfiles -nodefaultlibs -Wall -Wextra -Werror -O2 -g -mlongcalls -mtext-section-literals -mno-target-align -Iinclude -Iarch/xtensa/include -Ilibc/include -Ikernel -DBAREOS_VERSION="0.1.0" -DBAREOS_ARCH="xtensa"
 set ASFLAGS=-mlongcalls -mtext-section-literals -mno-target-align -Iarch/xtensa/include
 set LDFLAGS=-T linker/bareos.ld -nostdlib -nostartfiles -nodefaultlibs -Wl,--gc-sections -Wl,-Map=build/bareos.map
 
@@ -26,6 +26,7 @@ if not exist build\kernel\task mkdir build\kernel\task
 if not exist build\kernel\process mkdir build\kernel\process
 if not exist build\kernel\syscall mkdir build\kernel\syscall
 if not exist build\kernel\memory mkdir build\kernel\memory
+if not exist build\kernel\exec mkdir build\kernel\exec
 if not exist build\kernel\ipc mkdir build\kernel\ipc
 if not exist build\kernel\sync mkdir build\kernel\sync
 if not exist build\kernel\signal mkdir build\kernel\signal
@@ -55,6 +56,7 @@ if not exist build\userland\sbin mkdir build\userland\sbin
 if not exist build\userland\usr.bin mkdir build\userland\usr.bin
 if not exist build\userland\usr.sbin mkdir build\userland\usr.sbin
 if not exist build\userland\sh mkdir build\userland\sh
+if not exist build\userland\init mkdir build\userland\init
 
 echo Compiling arch/xtensa/boot/startup.S
 %CC% %CFLAGS% %ASFLAGS% -c arch/xtensa/boot/startup.S -o build/arch/xtensa/boot/startup.o
@@ -106,6 +108,10 @@ if errorlevel 1 exit /b 1
 
 echo Compiling kernel/syscall/syscall.c
 %CC% %CFLAGS% -c kernel/syscall/syscall.c -o build/kernel/syscall/syscall.o
+if errorlevel 1 exit /b 1
+
+echo Compiling kernel/exec/exec.c
+%CC% %CFLAGS% -c kernel/exec/exec.c -o build/kernel/exec/exec.o
 if errorlevel 1 exit /b 1
 
 echo Compiling kernel/memory/memory.c
@@ -208,6 +214,14 @@ echo Compiling libc/posix/posix.c
 %CC% %CFLAGS% -c libc/posix/posix.c -o build/libc/posix/posix.o
 if errorlevel 1 exit /b 1
 
+echo Compiling userland/init/init.c
+%CC% %CFLAGS% -c userland/init/init.c -o build/userland/init/init.o
+if errorlevel 1 exit /b 1
+
+echo Compiling userland/sh/shell.c
+%CC% %CFLAGS% -c userland/sh/shell.c -o build/userland/sh/shell.o
+if errorlevel 1 exit /b 1
+
 echo Linking build/bareos.elf
 %CC% %LDFLAGS% -o build/bareos.elf ^
   build/arch/xtensa/boot/startup.o ^
@@ -223,6 +237,7 @@ echo Linking build/bareos.elf
   build/kernel/task/task.o ^
   build/kernel/process/process.o ^
   build/kernel/syscall/syscall.o ^
+  build/kernel/exec/exec.o ^
   build/kernel/memory/memory.o ^
   build/kernel/ipc/ipc.o ^
   build/kernel/sync/sync.o ^
@@ -247,7 +262,9 @@ echo Linking build/bareos.elf
   build/libc/stdlib/stdlib.o ^
   build/libc/ctype/ctype.o ^
   build/libc/time/time.o ^
-  build/libc/posix/posix.o
+  build/libc/posix/posix.o ^
+  build/userland/init/init.o ^
+  build/userland/sh/shell.o
 if errorlevel 1 exit /b 1
 
 echo Creating build/bareos.bin

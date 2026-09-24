@@ -3,6 +3,22 @@
 #include <libc.h>
 #include <memory.h>
 #include <vfs.h>
+#include <exec/exec.h>
+
+struct pipe {
+    char buffer[4096];
+    int read_pos;
+    int write_pos;
+    int readers;
+    int writers;
+    struct file *read_fd;
+    struct file *write_fd;
+};
+
+ssize_t pipe_read(struct file *file, void *buf, size_t count);
+ssize_t pipe_write(struct file *file, const void *buf, size_t count);
+int pipe_close_read(struct file *file);
+int pipe_close_write(struct file *file);
 
 void syscall_exit(int status);
 int syscall_fork(void);
@@ -39,7 +55,6 @@ void syscall_handler(struct task_context *ctx) {
             const char *path = (const char *)ctx->a3;
             char **argv = (char **)ctx->a4;
             char **envp = (char **)ctx->a5;
-            (void)path; (void)argv; (void)envp;
             ret = syscall_exec(path, argv, envp);
             break;
         }
@@ -161,7 +176,6 @@ void syscall_handler(struct task_context *ctx) {
         }
         case SYSCALL_PIPE: {
             int *pipefd = (int *)ctx->a3;
-            (void)pipefd;
             ret = syscall_pipe(pipefd);
             break;
         }
@@ -216,16 +230,90 @@ void syscall_exit(int status) {
 }
 
 int syscall_fork(void) {
-    return -1;
+    struct task *current = cpu_states[0].current_task;
+    if (!current || !current->process) return -1;
+
+    struct process *new_proc = kzalloc(sizeof(struct process));
+    if (!new_proc) return -1;
+
+    new_proc->pid = alloc_pid();
+    if (!new_proc->pid) {
+        kfree(new_proc);
+        return -1;
+    }
+
+    new_proc->ppid = current->process->pid;
+    new_proc->uid = current->process->uid;
+    new_proc->gid = current->process->gid;
+    strncpy(new_proc->name, current->process->name, 31);
+    new_proc->name[31] = 0;
+
+    new_proc->fd_max = current->process->fd_max;
+    new_proc->fd_table = kzalloc(sizeof(struct file *) * new_proc->fd_max);
+    if (!new_proc->fd_table) {
+        free_pid(new_proc->pid);
+        kfree(new_proc);
+        return -1;
+    }
+    new_proc->fd_count = current->process->fd_count;
+    for (int i = 0; i < new_proc->fd_count; i++) {
+        if (current->process->fd_table[i]) {
+            new_proc->fd_table[i] = current->process->fd_table[i];
+            new_proc->fd_table[i]->ref_count++;
+        }
+    }
+
+    struct task *new_task = task_create(new_proc, (void *)current->context->pc, current->priority);
+    if (!new_task) {
+        for (int i = 0; i < new_proc->fd_count; i++) {
+            if (new_proc->fd_table[i]) new_proc->fd_table[i]->ref_count--;
+        }
+        kfree(new_proc->fd_table);
+        free_pid(new_proc->pid);
+        kfree(new_proc);
+        return -1;
+    }
+
+    memcpy(new_task->context, current->context, sizeof(struct task_context));
+    new_task->context->a2 = 0;
+
+    new_proc->parent = current->process;
+    new_proc->sibling = current->process->children;
+    current->process->children = new_proc;
+
+    return new_proc->pid;
 }
 
 int syscall_exec(const char *path, char **argv, char **envp) {
-    (void)path; (void)argv; (void)envp;
     return do_execve(path, argv, envp);
 }
 
 int syscall_waitpid(pid_t pid, int *status, int options) {
-    (void)pid; (void)status; (void)options;
+    (void)options;
+    struct task *current = cpu_states[0].current_task;
+    if (!current || !current->process) return -1;
+
+    struct process *child = current->process->children;
+    struct process *prev = NULL;
+    while (child) {
+        if (pid == -1 || child->pid == pid) {
+            if (child->exited) {
+                if (status) *status = child->exit_code;
+                if (prev) prev->sibling = child->sibling;
+                else current->process->children = child->sibling;
+
+                free_pid(child->pid);
+                if (child->fd_table) kfree(child->fd_table);
+                kfree(child);
+                return pid == -1 ? child->pid : pid;
+            }
+        }
+        prev = child;
+        child = child->sibling;
+    }
+
+    current->state = TASK_STATE_BLOCKED;
+    schedule();
     return -1;
 }
 
@@ -243,17 +331,123 @@ int syscall_kill(pid_t pid, int sig) {
 }
 
 int syscall_pipe(int *pipefd) {
-    (void)pipefd;
-    return -1;
+    struct pipe *pipe = kzalloc(sizeof(struct pipe));
+    if (!pipe) return -1;
+
+    pipe->read_fd = kzalloc(sizeof(struct file));
+    pipe->write_fd = kzalloc(sizeof(struct file));
+    if (!pipe->read_fd || !pipe->write_fd) {
+        kfree(pipe->read_fd);
+        kfree(pipe->write_fd);
+        kfree(pipe);
+        return -1;
+    }
+
+    static struct file_operations pipe_read_fops = {
+        .read = pipe_read,
+        .close = pipe_close_read,
+    };
+    static struct file_operations pipe_write_fops = {
+        .write = pipe_write,
+        .close = pipe_close_write,
+    };
+
+    pipe->read_fd->fops = &pipe_read_fops;
+    pipe->read_fd->private_data = pipe;
+    pipe->read_fd->ref_count = 1;
+    pipe->write_fd->fops = &pipe_write_fops;
+    pipe->write_fd->private_data = pipe;
+    pipe->write_fd->ref_count = 1;
+
+    struct task *current = cpu_states[0].current_task;
+    struct file **fd_table = current->process->fd_table;
+
+    int read_fd = -1, write_fd = -1;
+    for (int i = 0; i < 32; i++) {
+        if (!fd_table[i]) {
+            if (read_fd == -1) {
+                read_fd = i;
+                fd_table[i] = pipe->read_fd;
+            } else if (write_fd == -1) {
+                write_fd = i;
+                fd_table[i] = pipe->write_fd;
+                break;
+            }
+        }
+    }
+
+    if (read_fd == -1 || write_fd == -1) {
+        kfree(pipe->read_fd);
+        kfree(pipe->write_fd);
+        kfree(pipe);
+        return -1;
+    }
+
+    current->process->fd_count = (write_fd > read_fd) ? write_fd + 1 : read_fd + 1;
+    pipefd[0] = read_fd;
+    pipefd[1] = write_fd;
+    return 0;
 }
 
-int do_execve(const char *path, char **argv, char **envp) {
-    (void)path; (void)argv; (void)envp;
-    return -1;
+ssize_t pipe_read(struct file *file, void *buf, size_t count) {
+    struct pipe *pipe = (struct pipe *)file->private_data;
+    if (!pipe) return -1;
+
+    while (pipe->read_pos == pipe->write_pos && pipe->writers > 0) {
+        schedule();
+    }
+
+    if (pipe->read_pos == pipe->write_pos && pipe->writers == 0) {
+        return 0;
+    }
+
+    int available = pipe->write_pos - pipe->read_pos;
+    if (available > (int)count) available = count;
+    if (available > 0) {
+        memcpy(buf, pipe->buffer + pipe->read_pos, available);
+        pipe->read_pos += available;
+        if (pipe->read_pos == pipe->write_pos) {
+            pipe->read_pos = pipe->write_pos = 0;
+        }
+    }
+    return available;
 }
 
-int access(const char *path, int mode) {
-    (void)mode;
-    struct stat st;
-    return stat(path, &st);
+ssize_t pipe_write(struct file *file, const void *buf, size_t count) {
+    struct pipe *pipe = (struct pipe *)file->private_data;
+    if (!pipe) return -1;
+
+    while (pipe->write_pos - pipe->read_pos >= 4096 && pipe->readers > 0) {
+        schedule();
+    }
+
+    if (pipe->readers == 0) return -1;
+
+    int available = 4096 - (pipe->write_pos - pipe->read_pos);
+    if (available > (int)count) available = count;
+    if (available > 0) {
+        memcpy(pipe->buffer + pipe->write_pos, buf, available);
+        pipe->write_pos += available;
+    }
+    return available;
+}
+
+int pipe_close_read(struct file *file) {
+    struct pipe *pipe = (struct pipe *)file->private_data;
+    if (!pipe) return -1;
+    pipe->readers--;
+    if (pipe->readers == 0 && pipe->writers > 0) {
+        schedule();
+    }
+    return 0;
+}
+
+int pipe_close_write(struct file *file) {
+    struct pipe *pipe = (struct pipe *)file->private_data;
+    if (!pipe) return -1;
+    pipe->writers--;
+    if (pipe->writers == 0 && pipe->readers > 0) {
+        schedule();
+    }
+    return 0;
 }

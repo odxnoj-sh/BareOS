@@ -10,13 +10,7 @@ extern void uart_putdec(uint32_t);
 extern void uart_putc(char);
 extern int uart_getc(void);
 extern void fs_init(void);
-extern int chdir(const char *path);
-
-#define EOF (-1)
-
-static inline int isspace(int c) {
-    return c == ' ' || c == '\t' || c == '\n' || c == '\r' || c == '\f' || c == '\v';
-}
+extern void user_init(void);
 
 struct cpu_state cpu_states[2];
 struct process *process_table[MAX_PROCESSES];
@@ -26,99 +20,6 @@ int current_tid = 1;
 
 static char kernel_stack[2][KERNEL_STACK_SIZE];
 static uint32_t kernel_stack_top[2];
-
-static char shell_line[1024];
-static char shell_cwd[256] = "/";
-
-static int shell_parse_line(char *line, char **argv, int max_args) {
-    int argc = 0;
-    char *p = line;
-
-    while (*p && argc < max_args - 1) {
-        while (*p && isspace(*p)) p++;
-        if (!*p) break;
-
-        if (*p == '"' || *p == '\'') {
-            char quote = *p++;
-            argv[argc++] = p;
-            while (*p && *p != quote) p++;
-            if (*p) *p++ = 0;
-        } else {
-            argv[argc++] = p;
-            while (*p && !isspace(*p)) p++;
-            if (*p) *p++ = 0;
-        }
-    }
-    argv[argc] = NULL;
-    return argc;
-}
-
-void shell_main(void) {
-    shell_cwd[0] = '/'; shell_cwd[1] = 0;
-
-    while (1) {
-        uart_puts("bare@esp32:");
-        uart_puts(shell_cwd);
-        uart_puts("$ ");
-
-        int c;
-        int pos = 0;
-        while ((c = uart_getc()) != '\n' && c != '\r' && c != EOF && pos < 1023) {
-            if (c == '\b' || c == 127) {
-                if (pos > 0) {
-                    pos--;
-                    uart_putc('\b');
-                    uart_putc(' ');
-                    uart_putc('\b');
-                }
-            } else if (c >= 32 && c < 127) {
-                shell_line[pos++] = c;
-                uart_putc(c);
-            }
-        }
-        shell_line[pos] = 0;
-        uart_puts("\n");
-
-        if (!*shell_line) continue;
-
-        int argc = shell_parse_line(shell_line, (char**)0x3FFE0000, 64);
-        char **argv = (char**)0x3FFE0000;
-
-        if (argc == 0) continue;
-
-        if (strcmp(argv[0], "exit") == 0) {
-            uart_puts("Exiting shell...\n");
-            return;
-        } else if (strcmp(argv[0], "cd") == 0) {
-            const char *path = argc > 1 ? ((char**)0x3FFE0000)[1] : "/";
-            if (chdir(path) < 0) {
-                uart_puts("cd: ");
-                uart_puts(path);
-                uart_puts(": No such directory\n");
-            }
-        } else if (strcmp(argv[0], "pwd") == 0) {
-            uart_puts(shell_cwd);
-            uart_puts("\n");
-        } else if (strcmp(argv[0], "echo") == 0) {
-            for (int i = 1; i < argc; i++) {
-                uart_puts(((char**)0x3FFE0000)[i]);
-                if (i + 1 < argc) uart_puts(" ");
-            }
-            uart_puts("\n");
-        } else if (strcmp(argv[0], "env") == 0) {
-            for (char **env = (char**)0x3FFE0000; *env; env++) {
-                uart_puts(*env);
-                uart_puts("\n");
-            }
-        } else if (strcmp(argv[0], "help") == 0) {
-            uart_puts("Built-in commands: cd, pwd, echo, env, help, exit\n");
-        } else {
-            uart_puts("bare: ");
-            uart_puts((char*)argv[0]);
-            uart_puts(": command not found\n");
-        }
-    }
-}
 
 void kernel_main(void) {
     int cpu = 0;
@@ -154,7 +55,7 @@ void kernel_main(void) {
     uart_puts("Filesystem initialized\n");
 
     struct process *init_proc = process_create("init");
-    struct task *init_task = task_create(init_proc, (void*)shell_main, PRIORITY_DEFAULT);
+    struct task *init_task = task_create(init_proc, (void*)user_init, PRIORITY_DEFAULT);
     task_wake(init_task);
 
     uart_puts("Starting scheduler\n");
@@ -197,3 +98,5 @@ void free_tid(tid_t tid) {
         task_table[tid] = NULL;
     }
 }
+
+extern void user_init(void);

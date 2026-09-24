@@ -1,27 +1,24 @@
 #include <libc.h>
-#include <kernel.h>
 
-#define MAX_ARGS 64
-#define MAX_LINE 1024
-#define MAX_HISTORY 32
+#define MAX_ARGS 32
+#define MAX_LINE 512
+#define MAX_HISTORY 8
 
 static char history[MAX_HISTORY][MAX_LINE];
 static int history_count = 0;
 static int history_pos = 0;
 
-static char *builtins[] = {
-    "cd", "pwd", "exit", "export", "unset", "set", "env",
-    "echo", "printf", "jobs", "fg", "bg", "wait",
-    "alias", "unalias", "history", "type", NULL
-};
-
-static char *aliases[32];
-static int alias_count = 0;
-
-extern char **environ;
-extern char *cwd;
+int parse_line(char *line, char **argv, int max_args);
+void execute_command(int argc, char **argv);
+void builtin_cd(int argc, char **argv);
+void builtin_echo(int argc, char **argv);
+void builtin_env(void);
+void builtin_export(int argc, char **argv);
+void builtin_unset(int argc, char **argv);
+void builtin_history(void);
 
 void shell_init(void) {
+    extern char *cwd;
     cwd[0] = '/'; cwd[1] = 0;
 }
 
@@ -98,6 +95,7 @@ int parse_line(char *line, char **argv, int max_args) {
 }
 
 void execute_command(int argc, char **argv) {
+    (void)argc;
     pid_t pid = fork();
     if (pid == 0) {
         execvp(argv[0], argv);
@@ -107,19 +105,6 @@ void execute_command(int argc, char **argv) {
         int status;
         waitpid(pid, &status, 0);
     }
-}
-
-int execvp(const char *file, char *const argv[]) {
-    char path[256];
-    if (strchr(file, '/')) {
-        return execve(file, argv, environ);
-    }
-    char *paths[] = {"/bin", "/usr/bin", "/sbin", "/usr/sbin", NULL};
-    for (int i = 0; paths[i]; i++) {
-        snprintf(path, sizeof(path), "%s/%s", paths[i], file);
-        execve(path, argv, environ);
-    }
-    return -1;
 }
 
 void builtin_cd(int argc, char **argv) {
@@ -138,6 +123,7 @@ void builtin_echo(int argc, char **argv) {
 }
 
 void builtin_env(void) {
+    extern char **environ;
     for (char **env = environ; *env; env++) {
         printf("%s\n", *env);
     }
@@ -159,8 +145,4 @@ void builtin_history(void) {
     for (int i = 0; i < history_count; i++) {
         printf("%d  %s\n", i + 1, history[i]);
     }
-}
-
-int putenv(char *string) {
-    return setenv(strtok(string, "="), strtok(NULL, "="), 1);
 }

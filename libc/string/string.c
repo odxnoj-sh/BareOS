@@ -137,3 +137,13 @@ char *strtok(char *str, const char *delim) {
     if (*next) *next++ = 0;
     return token;
 }
+
+size_t strcspn(const char *s, const char *reject) {
+    size_t len = 0;
+    while (*s) {
+        if (strchr(reject, *s)) break;
+        s++;
+        len++;
+    }
+    return len;
+}

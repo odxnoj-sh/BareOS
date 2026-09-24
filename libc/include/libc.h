@@ -25,6 +25,10 @@ struct _FILE {
 
 typedef struct _FILE FILE;
 
+extern FILE *stdin;
+extern FILE *stdout;
+extern FILE *stderr;
+
 struct tm {
     int tm_sec;
     int tm_min;
@@ -104,9 +108,11 @@ void *realloc(void *ptr, size_t size);
 
 char *getcwd(char *buf, size_t size);
 int chdir(const char *path);
+extern char *cwd;
 
 int fork(void);
 int execve(const char *pathname, char *const argv[], char *const envp[]);
+int execvp(const char *file, char *const argv[]);
 int waitpid(pid_t pid, int *wstatus, int options);
 void exit(int status);
 void _exit(int status);
@@ -142,6 +148,7 @@ char *strchr(const char *s, int c);
 char *strrchr(const char *s, int c);
 char *strstr(const char *haystack, const char *needle);
 char *strtok(char *str, const char *delim);
+size_t strcspn(const char *s, const char *reject);
 
 int isdigit(int c);
 int isalpha(int c);
@@ -191,5 +198,6 @@ int system(const char *command);
 char *getenv(const char *name);
 int setenv(const char *name, const char *value, int overwrite);
 int unsetenv(const char *name);
+int putenv(char *string);
 
 #endif

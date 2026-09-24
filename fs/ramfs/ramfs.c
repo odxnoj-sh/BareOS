@@ -4,8 +4,8 @@
 #include <string.h>
 #include <stdlib.h>
 
-#define RAMFS_MAX_FILES 256
-#define RAMFS_MAX_DATA 65536
+#define RAMFS_MAX_FILES 64
+#define RAMFS_MAX_DATA 8192
 
 struct ramfs_node {
     char name[256];

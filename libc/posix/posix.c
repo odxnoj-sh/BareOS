@@ -148,3 +148,21 @@ char *getlogin(void) {
 int isatty(int fd) {
     return fd >= 0 && fd <= 2;
 }
+
+int execvp(const char *file, char *const argv[]) {
+    char path[256];
+    extern char **environ;
+    if (strchr(file, '/')) {
+        return execve(file, argv, environ);
+    }
+    char *paths[] = {"/bin", "/usr/bin", "/sbin", "/usr/sbin", NULL};
+    for (int i = 0; paths[i]; i++) {
+        snprintf(path, sizeof(path), "%s/%s", paths[i], file);
+        execve(path, argv, environ);
+    }
+    return -1;
+}
+
+int putenv(char *string) {
+    return setenv(strtok(string, "="), strtok(NULL, "="), 1);
+}
