@@ -13,9 +13,15 @@ struct file_operations {
     ssize_t (*read)(struct file *, void *, size_t);
     ssize_t (*write)(struct file *, const void *, size_t);
     off_t (*lseek)(struct file *, off_t, int);
+    ssize_t (*pread)(struct file *, void *, size_t, off_t);
+    ssize_t (*pwrite)(struct file *, const void *, size_t, off_t);
     int (*ioctl)(struct file *, int, void *);
     int (*readdir)(struct file *, struct dirent *);
     int (*stat)(struct file *, struct stat *);
+    int (*mkdir)(struct file *, const char *, mode_t);
+    int (*rmdir)(struct file *, const char *);
+    int (*unlink)(struct file *, const char *);
+    int (*rename)(struct file *, const char *, const char *);
 };
 
 struct file {
@@ -93,6 +99,10 @@ struct mount {
 #define S_IFLNK 0120000
 #define S_IFSOCK 0140000
 
+#define S_ISDIR(mode) (((mode) & S_IFMT) == S_IFDIR)
+#define S_ISREG(mode) (((mode) & S_IFMT) == S_IFREG)
+#define S_ISCHR(mode) (((mode) & S_IFMT) == S_IFCHR)
+
 #define S_IRUSR 0400
 #define S_IWUSR 0200
 #define S_IXUSR 0100
@@ -111,15 +121,21 @@ int vfs_close(struct file *file);
 ssize_t vfs_read(struct file *file, void *buf, size_t count);
 ssize_t vfs_write(struct file *file, const void *buf, size_t count);
 off_t vfs_lseek(struct file *file, off_t offset, int whence);
+ssize_t vfs_pread(struct file *file, void *buf, size_t count, off_t offset);
+ssize_t vfs_pwrite(struct file *file, const void *buf, size_t count, off_t offset);
 int vfs_ioctl(struct file *file, int request, void *arg);
 int vfs_readdir(struct file *file, struct dirent *ent);
 int vfs_stat(const char *path, struct stat *st);
+int vfs_fstat(struct file *file, struct stat *st);
 int vfs_mkdir(const char *path, mode_t mode);
 int vfs_rmdir(const char *path);
 int vfs_unlink(const char *path);
 int vfs_rename(const char *oldpath, const char *newpath);
+int vfs_chdir(const char *path);
+int vfs_getcwd(char *buf, size_t size);
 
 int vfs_register_fs(const char *mountpoint, struct file_operations *fops, void *data);
+int vfs_unregister_fs(const char *mountpoint);
 
 int vfs_pipe(int *pipefd);
 

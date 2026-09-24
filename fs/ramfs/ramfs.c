@@ -61,6 +61,37 @@ struct ramfs_node *ramfs_find_child(struct ramfs_node *parent, const char *name)
     return NULL;
 }
 
+static struct ramfs_node *ramfs_resolve_parent(const char *path, char *basename) {
+    struct ramfs_node *node = ramfs_superblock.root;
+    const char *p = path;
+    char name[256];
+
+    while (*p == '/') p++;
+    while (*p) {
+        const char *end = p;
+        while (*end && *end != '/') end++;
+        size_t len = end - p;
+        if (len == 0) break;
+
+        if (len >= 256) len = 255;
+        memcpy(name, p, len);
+        name[len] = 0;
+
+        struct ramfs_node *child = ramfs_find_child(node, name);
+        if (!child) return NULL;
+
+        while (*end == '/') end++;
+        p = end;
+        if (*p == '\0') {
+            if (basename) strncpy(basename, name, 255);
+            return node;
+        }
+        node = child;
+        p = end;
+    }
+    return node;
+}
+
 int ramfs_open(struct file *file, const char *path, int flags) {
     struct ramfs_sb *sb = (struct ramfs_sb *)file->private_data;
     if (!sb) sb = &ramfs_superblock;
@@ -156,6 +187,37 @@ off_t ramfs_lseek(struct file *file, off_t offset, int whence) {
     return new_offset;
 }
 
+ssize_t ramfs_pread(struct file *file, void *buf, size_t count, off_t offset) {
+    struct ramfs_node *node = (struct ramfs_node *)file->private_data;
+    if (!node || !node->data) return 0;
+    if ((uint32_t)offset >= node->size) return 0;
+    size_t to_read = count;
+    if ((uint32_t)offset + to_read > node->size) to_read = node->size - (uint32_t)offset;
+    memcpy(buf, node->data + offset, to_read);
+    return to_read;
+}
+
+ssize_t ramfs_pwrite(struct file *file, const void *buf, size_t count, off_t offset) {
+    struct ramfs_node *node = (struct ramfs_node *)file->private_data;
+    if (!node) return -1;
+
+    if (!node->data) {
+        if (ramfs_data_used + count > RAMFS_MAX_DATA) return -1;
+        node->data = &ramfs_data_pool[ramfs_data_used];
+        ramfs_data_used += count;
+    } else if ((uint32_t)offset + count > node->size) {
+        if (ramfs_data_used + count > RAMFS_MAX_DATA) return -1;
+        uint8_t *new_data = &ramfs_data_pool[ramfs_data_used];
+        memcpy(new_data, node->data, node->size);
+        node->data = new_data;
+        ramfs_data_used += count;
+    }
+
+    memcpy(node->data + offset, buf, count);
+    if ((uint32_t)offset + count > node->size) node->size = (uint32_t)offset + count;
+    return count;
+}
+
 int ramfs_stat(struct file *file, struct stat *st) {
     struct ramfs_node *node = (struct ramfs_node *)file->private_data;
     if (!node) return -1;
@@ -169,17 +231,225 @@ int ramfs_stat(struct file *file, struct stat *st) {
 }
 
 int ramfs_readdir(struct file *file, struct dirent *ent) {
-    static struct ramfs_node *iter = NULL;
     struct ramfs_node *node = (struct ramfs_node *)file->private_data;
-
-    if (!iter) iter = node->children;
+    struct ramfs_node *iter = (struct ramfs_node *)file->private_data;
+    
     if (!iter) return 0;
-
+    
+    if (iter->children) {
+        iter = iter->children;
+    } else {
+        while (iter && !iter->next) {
+            if (iter == node) return 0;
+            iter = iter->parent;
+        }
+        if (!iter) return 0;
+        iter = iter->next;
+    }
+    
+    if (!iter) return 0;
+    
+    file->private_data = iter;
+    
     ent->d_ino = 0;
     strncpy(ent->d_name, iter->name, 255);
     ent->d_type = (iter->mode & S_IFDIR) ? DT_DIR : DT_REG;
-    iter = iter->next;
     return 1;
+}
+
+int ramfs_mkdir(struct file *file, const char *path, mode_t mode) {
+    (void)mode;
+    struct ramfs_sb *sb = (struct ramfs_sb *)file->private_data;
+    if (!sb) sb = &ramfs_superblock;
+
+    struct ramfs_node *node = sb->root;
+    const char *p = path;
+    char name[256];
+
+    while (*p == '/') p++;
+    while (*p) {
+        const char *end = p;
+        while (*end && *end != '/') end++;
+        size_t len = end - p;
+        if (len == 0) break;
+
+        if (len >= 256) len = 255;
+        memcpy(name, p, len);
+        name[len] = 0;
+
+        struct ramfs_node *child = ramfs_find_child(node, name);
+        if (!child) {
+            child = ramfs_alloc_node();
+            if (!child) return -1;
+            strncpy(child->name, name, 255);
+            child->mode = S_IFDIR | 0755;
+            child->parent = node;
+            child->next = node->children;
+            if (node->children) node->children->prev = child;
+            node->children = child;
+        }
+        node = child;
+        while (*end == '/') end++;
+        p = end;
+    }
+
+    if (!node || !S_ISDIR(node->mode)) return -1;
+
+    struct ramfs_node *child = ramfs_find_child(node, name);
+    if (child) return -1;
+
+    child = ramfs_alloc_node();
+    if (!child) return -1;
+    strncpy(child->name, name, 255);
+    child->mode = S_IFDIR | 0755;
+    child->parent = node;
+    child->next = node->children;
+    if (node->children) node->children->prev = child;
+    node->children = child;
+    return 0;
+}
+
+int ramfs_rmdir(struct file *file, const char *path) {
+    struct ramfs_sb *sb = (struct ramfs_sb *)file->private_data;
+    if (!sb) sb = &ramfs_superblock;
+
+    struct ramfs_node *node = sb->root;
+    const char *p = path;
+    char name[256];
+
+    while (*p == '/') p++;
+    while (*p) {
+        const char *end = p;
+        while (*end && *end != '/') end++;
+        size_t len = end - p;
+        if (len == 0) break;
+
+        if (len >= 256) len = 255;
+        memcpy(name, p, len);
+        name[len] = 0;
+
+        node = ramfs_find_child(node, name);
+        if (!node) return -1;
+        
+        while (*end == '/') end++;
+        p = end;
+    }
+
+    if (!node || !S_ISDIR(node->mode)) return -1;
+    if (node->children) return -1;
+
+    ramfs_free_node(node);
+    return 0;
+}
+
+int ramfs_unlink(struct file *file, const char *path) {
+    struct ramfs_sb *sb = (struct ramfs_sb *)file->private_data;
+    if (!sb) sb = &ramfs_superblock;
+
+    struct ramfs_node *node = sb->root;
+    const char *p = path;
+    char name[256];
+
+    while (*p == '/') p++;
+    while (*p) {
+        const char *end = p;
+        while (*end && *end != '/') end++;
+        size_t len = end - p;
+        if (len == 0) break;
+
+        if (len >= 256) len = 255;
+        memcpy(name, p, len);
+        name[len] = 0;
+
+        struct ramfs_node *child = ramfs_find_child(node, name);
+        if (!child) return -1;
+        
+        if (*end == '\0') {
+            if (S_ISDIR(child->mode)) return -1;
+            ramfs_free_node(child);
+            return 0;
+        }
+        
+        node = child;
+        while (*end == '/') end++;
+        p = end;
+    }
+    return -1;
+}
+
+int ramfs_rename(struct file *file, const char *oldpath, const char *newpath) {
+    (void)file;
+    struct ramfs_sb *sb = &ramfs_superblock;
+
+    struct ramfs_node *node = sb->root;
+    const char *p = oldpath;
+    char old_name[256];
+    struct ramfs_node *old_node = NULL;
+
+    while (*p == '/') p++;
+    while (*p) {
+        const char *end = p;
+        while (*end && *end != '/') end++;
+        size_t len = end - p;
+        if (len == 0) break;
+
+        if (len >= 256) len = 255;
+        char name[256];
+        memcpy(name, p, len);
+        name[len] = 0;
+
+        struct ramfs_node *child = ramfs_find_child(node, name);
+        if (!child) return -1;
+
+        if (*end == '\0') {
+            strncpy(old_name, name, 255);
+            old_node = child;
+            break;
+        }
+
+        node = child;
+        while (*end == '/') end++;
+        p = end;
+    }
+
+    if (!old_node || old_node == ramfs_superblock.root) return -1;
+
+    char new_basename[256];
+    struct ramfs_node *new_parent = ramfs_resolve_parent(newpath, new_basename);
+    if (!new_parent) return -1;
+
+    if (strcmp(old_name, new_basename) == 0 && new_parent == old_node->parent) return 0;
+
+    if (new_parent == old_node || (S_ISDIR(old_node->mode) && old_node == new_parent)) {
+        return -1;
+    }
+
+    struct ramfs_node *existing = ramfs_find_child(new_parent, new_basename);
+    if (existing) {
+        if (S_ISDIR(existing->mode)) {
+            if (existing->children) return -1;
+            ramfs_free_node(existing);
+        } else {
+            ramfs_free_node(existing);
+        }
+    }
+
+    if (old_node->parent) {
+        if (old_node->prev) old_node->prev->next = old_node->next;
+        if (old_node->next) old_node->next->prev = old_node->prev;
+        if (old_node->parent->children == old_node) {
+            old_node->parent->children = old_node->next;
+        }
+    }
+
+    strncpy(old_node->name, new_basename, 255);
+    old_node->parent = new_parent;
+    old_node->next = new_parent->children;
+    old_node->prev = NULL;
+    if (new_parent->children) new_parent->children->prev = old_node;
+    new_parent->children = old_node;
+
+    return 0;
 }
 
 struct file_operations ramfs_fops = {
@@ -188,8 +458,14 @@ struct file_operations ramfs_fops = {
     .read = ramfs_read,
     .write = ramfs_write,
     .lseek = ramfs_lseek,
+    .pread = ramfs_pread,
+    .pwrite = ramfs_pwrite,
     .stat = ramfs_stat,
     .readdir = ramfs_readdir,
+    .mkdir = ramfs_mkdir,
+    .rmdir = ramfs_rmdir,
+    .unlink = ramfs_unlink,
+    .rename = ramfs_rename,
 };
 
 int ramfs_mount(const char *source, const char *target, int flags, void *data) {

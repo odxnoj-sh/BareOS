@@ -22,12 +22,12 @@ int pipe_close_write(struct file *file);
 
 void syscall_exit(int status);
 int syscall_fork(void);
-int syscall_exec(const char *path, char **argv, char **envp);
+int syscall_exec(const char *path, char *const argv[], char *const envp[]);
 int syscall_waitpid(pid_t pid, int *status, int options);
 void syscall_sleep(unsigned int seconds);
 int syscall_kill(pid_t pid, int sig);
 int syscall_pipe(int *pipefd);
-int do_execve(const char *path, char **argv, char **envp);
+int do_execve(const char *path, char *const argv[], char *const envp[]);
 
 struct file *get_file(int fd) {
     struct task *current = cpu_states[0].current_task;
@@ -123,28 +123,6 @@ void syscall_handler(struct task_context *ctx) {
             ret = vfs_stat(path, st);
             break;
         }
-        case SYSCALL_MKDIR: {
-            const char *path = (const char *)ctx->a3;
-            mode_t mode = ctx->a4;
-            ret = vfs_mkdir(path, mode);
-            break;
-        }
-        case SYSCALL_RMDIR: {
-            const char *path = (const char *)ctx->a3;
-            ret = vfs_rmdir(path);
-            break;
-        }
-        case SYSCALL_UNLINK: {
-            const char *path = (const char *)ctx->a3;
-            ret = vfs_unlink(path);
-            break;
-        }
-        case SYSCALL_RENAME: {
-            const char *oldpath = (const char *)ctx->a3;
-            const char *newpath = (const char *)ctx->a4;
-            ret = vfs_rename(oldpath, newpath);
-            break;
-        }
         case SYSCALL_GETPID: {
             struct task *current = cpu_states[0].current_task;
             ret = current ? current->pid : 0;
@@ -179,38 +157,80 @@ void syscall_handler(struct task_context *ctx) {
             ret = syscall_pipe(pipefd);
             break;
         }
-        case SYSCALL_DUP: {
-            int oldfd = ctx->a3;
-            struct file *file = get_file(oldfd);
-            if (file) {
-                struct task *current = cpu_states[0].current_task;
-                for (int i = 0; i < 32; i++) {
-                    if (!current->process->fd_table[i]) {
-                        current->process->fd_table[i] = file;
-                        ret = i;
-                        break;
-                    }
-                }
-            }
-            break;
-        }
-        case SYSCALL_DUP2: {
-            int oldfd = ctx->a3;
-            int newfd = ctx->a4;
-            struct file *file = get_file(oldfd);
-            if (file && newfd >= 0 && newfd < 32) {
-                struct task *current = cpu_states[0].current_task;
-                if (current->process->fd_table[newfd]) vfs_close(current->process->fd_table[newfd]);
-                current->process->fd_table[newfd] = file;
-                ret = newfd;
-            }
-            break;
-        }
         case SYSCALL_KILL: {
             pid_t pid = ctx->a3;
             int sig = ctx->a4;
             (void)pid; (void)sig;
             ret = syscall_kill(pid, sig);
+            break;
+        }
+        case SYSCALL_PREAD: {
+            int fd = ctx->a3;
+            void *buf = (void *)ctx->a4;
+            size_t count = ctx->a4;
+            off_t offset = ctx->a5;
+            struct file *file = get_file(fd);
+            if (file) ret = vfs_pread(file, buf, count, offset);
+            break;
+        }
+        case SYSCALL_PWRITE: {
+            int fd = ctx->a3;
+            const void *buf = (const void *)ctx->a4;
+            size_t count = ctx->a4;
+            off_t offset = ctx->a5;
+            struct file *file = get_file(fd);
+            if (file) ret = vfs_pwrite(file, buf, count, offset);
+            break;
+        }
+        case SYSCALL_MKDIR: {
+            const char *path = (const char *)ctx->a3;
+            mode_t mode = ctx->a4;
+            ret = syscall_mkdir(path, mode);
+            break;
+        }
+        case SYSCALL_RMDIR: {
+            const char *path = (const char *)ctx->a3;
+            ret = syscall_rmdir(path);
+            break;
+        }
+        case SYSCALL_UNLINK: {
+            const char *path = (const char *)ctx->a3;
+            ret = syscall_unlink(path);
+            break;
+        }
+        case SYSCALL_RENAME: {
+            const char *oldpath = (const char *)ctx->a3;
+            const char *newpath = (const char *)ctx->a4;
+            ret = syscall_rename(oldpath, newpath);
+            break;
+        }
+        case SYSCALL_CHDIR: {
+            const char *path = (const char *)ctx->a3;
+            ret = syscall_chdir(path);
+            break;
+        }
+        case SYSCALL_GETCWD: {
+            char *buf = (char *)ctx->a3;
+            size_t size = ctx->a4;
+            ret = syscall_getcwd(buf, size);
+            break;
+        }
+        case SYSCALL_FSTAT: {
+            int fd = ctx->a3;
+            struct stat *st = (struct stat *)ctx->a4;
+            struct file *file = get_file(fd);
+            if (file) ret = vfs_fstat(file, st);
+            break;
+        }
+        case SYSCALL_DUP: {
+            int oldfd = ctx->a3;
+            ret = syscall_dup(oldfd);
+            break;
+        }
+        case SYSCALL_DUP2: {
+            int oldfd = ctx->a3;
+            int newfd = ctx->a4;
+            ret = syscall_dup2(oldfd, newfd);
             break;
         }
         default:
@@ -284,7 +304,7 @@ int syscall_fork(void) {
     return new_proc->pid;
 }
 
-int syscall_exec(const char *path, char **argv, char **envp) {
+int syscall_exec(const char *path, char *const argv[], char *const envp[]) {
     return do_execve(path, argv, envp);
 }
 
@@ -450,4 +470,72 @@ int pipe_close_write(struct file *file) {
         schedule();
     }
     return 0;
+}
+
+int syscall_pread(int fd, void *buf, size_t count, off_t offset) {
+    struct file *file = get_file(fd);
+    if (!file) return -1;
+    return vfs_pread(file, buf, count, offset);
+}
+
+int syscall_pwrite(int fd, const void *buf, size_t count, off_t offset) {
+    struct file *file = get_file(fd);
+    if (!file) return -1;
+    return vfs_pwrite(file, buf, count, offset);
+}
+
+int syscall_mkdir(const char *path, mode_t mode) {
+    return vfs_mkdir(path, mode);
+}
+
+int syscall_rmdir(const char *path) {
+    return vfs_rmdir(path);
+}
+
+int syscall_unlink(const char *path) {
+    return vfs_unlink(path);
+}
+
+int syscall_rename(const char *oldpath, const char *newpath) {
+    return vfs_rename(oldpath, newpath);
+}
+
+int syscall_chdir(const char *path) {
+    return vfs_chdir(path);
+}
+
+int syscall_getcwd(char *buf, size_t size) {
+    return vfs_getcwd(buf, size);
+}
+
+int syscall_fstat(int fd, struct stat *st) {
+    struct file *file = get_file(fd);
+    if (!file) return -1;
+    return vfs_fstat(file, st);
+}
+
+int syscall_dup(int oldfd) {
+    struct file *file = get_file(oldfd);
+    if (!file) return -1;
+    
+    struct task *current = cpu_states[0].current_task;
+    for (int i = 0; i < 32; i++) {
+        if (!current->process->fd_table[i]) {
+            current->process->fd_table[i] = file;
+            file->ref_count++;
+            return i;
+        }
+    }
+    return -1;
+}
+
+int syscall_dup2(int oldfd, int newfd) {
+    struct file *file = get_file(oldfd);
+    if (!file || newfd < 0 || newfd >= 32) return -1;
+    
+    struct task *current = cpu_states[0].current_task;
+    if (current->process->fd_table[newfd]) vfs_close(current->process->fd_table[newfd]);
+    current->process->fd_table[newfd] = file;
+    file->ref_count++;
+    return newfd;
 }

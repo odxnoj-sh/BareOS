@@ -12,7 +12,7 @@ struct exec_header {
     uint32_t stack_size;
 };
 
-int load_binary(const char *path, struct task *task, char **argv, char **envp);
-int do_execve(const char *path, char **argv, char **envp);
+int load_binary(const char *path, struct task *task, char *const argv[], char *const envp[]);
+int do_execve(const char *path, char *const argv[], char *const envp[]);
 
 #endif

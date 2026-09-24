@@ -55,6 +55,11 @@
 #define SYSCALL_SIGACTION 28
 #define SYSCALL_MMAP 29
 #define SYSCALL_MUNMAP 30
+#define SYSCALL_PREAD 31
+#define SYSCALL_PWRITE 32
+#define SYSCALL_CHDIR 33
+#define SYSCALL_GETCWD 34
+#define SYSCALL_FSTAT 35
 
 typedef int pid_t;
 typedef int tid_t;
@@ -66,6 +71,8 @@ typedef unsigned int mode_t;
 typedef unsigned int dev_t;
 typedef long time_t;
 typedef long clock_t;
+
+struct stat;
 
 struct task_context {
     uint32_t a0, a1, a2, a3, a4, a5, a6, a7;
@@ -159,5 +166,25 @@ void kfree(void *ptr);
 void *kmalloc_aligned(size_t size, size_t align);
 
 void syscall_handler(struct task_context *ctx);
+
+void syscall_exit(int status);
+int syscall_fork(void);
+int syscall_exec(const char *path, char *const argv[], char *const envp[]);
+int syscall_waitpid(pid_t pid, int *status, int options);
+void syscall_sleep(unsigned int seconds);
+int syscall_kill(pid_t pid, int sig);
+int syscall_pipe(int *pipefd);
+int syscall_pread(int fd, void *buf, size_t count, off_t offset);
+int syscall_pwrite(int fd, const void *buf, size_t count, off_t offset);
+int syscall_mkdir(const char *path, mode_t mode);
+int syscall_rmdir(const char *path);
+int syscall_unlink(const char *path);
+int syscall_rename(const char *oldpath, const char *newpath);
+int syscall_chdir(const char *path);
+int syscall_getcwd(char *buf, size_t size);
+int syscall_fstat(int fd, struct stat *st);
+int syscall_dup(int oldfd);
+int syscall_dup2(int oldfd, int newfd);
+int do_execve(const char *path, char *const argv[], char *const envp[]);
 
 #endif

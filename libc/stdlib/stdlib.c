@@ -133,17 +133,13 @@ int unsetenv(const char *name) {
 }
 
 char *getcwd(char *buf, size_t size) {
-    extern char *cwd;
-    if (!buf) buf = malloc(size);
-    if (!buf) return NULL;
-    strncpy(buf, cwd, size);
-    return buf;
+    extern int syscall_getcwd(char *buf, size_t size);
+    return syscall_getcwd(buf, size) == 0 ? buf : NULL;
 }
 
 int chdir(const char *path) {
-    extern char *cwd;
-    strncpy(cwd, path, 255);
-    return 0;
+    extern int syscall_chdir(const char *path);
+    return syscall_chdir(path);
 }
 
 char **environ = NULL;
