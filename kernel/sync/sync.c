@@ -19,12 +19,6 @@ void spinlock_release(volatile int *lock) {
     __sync_lock_release(lock);
 }
 
-struct mutex {
-    volatile int locked;
-    struct task *owner;
-    int count;
-};
-
 void mutex_init(struct mutex *m) {
     m->locked = 0;
     m->owner = NULL;
@@ -64,11 +58,6 @@ void mutex_unlock(struct mutex *m) {
     m->owner = NULL;
     __sync_lock_release(&m->locked);
 }
-
-struct semaphore {
-    volatile int count;
-    struct task *waiters;
-};
 
 void semaphore_init(struct semaphore *s, int value) {
     s->count = value;

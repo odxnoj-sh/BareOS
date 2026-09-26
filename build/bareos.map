@@ -9,21 +9,8 @@ Discarded input sections
  .xt.lit        0x0000000000000000       0x18 build/arch/xtensa/boot/startup.o
  .xt.prop       0x0000000000000000       0xd8 build/arch/xtensa/boot/startup.o
  .literal       0x0000000000000000        0x0 build/arch/xtensa/cpu/cpu.o
- .text          0x0000000000000000       0x6d build/arch/xtensa/cpu/cpu.o
  .data          0x0000000000000000        0x0 build/arch/xtensa/cpu/cpu.o
  .bss           0x0000000000000000        0x0 build/arch/xtensa/cpu/cpu.o
- .debug_frame   0x0000000000000000       0x58 build/arch/xtensa/cpu/cpu.o
- .debug_info    0x0000000000000000      0x203 build/arch/xtensa/cpu/cpu.o
- .debug_abbrev  0x0000000000000000      0x12e build/arch/xtensa/cpu/cpu.o
- .debug_loclists
-                0x0000000000000000       0x3d build/arch/xtensa/cpu/cpu.o
- .debug_aranges
-                0x0000000000000000       0x20 build/arch/xtensa/cpu/cpu.o
- .debug_line    0x0000000000000000      0x11b build/arch/xtensa/cpu/cpu.o
- .debug_str     0x0000000000000000      0x185 build/arch/xtensa/cpu/cpu.o
- .debug_line_str
-                0x0000000000000000      0x11d build/arch/xtensa/cpu/cpu.o
- .comment       0x0000000000000000       0x27 build/arch/xtensa/cpu/cpu.o
  .xt.lit        0x0000000000000000       0x10 build/arch/xtensa/cpu/cpu.o
  .xt.prop       0x0000000000000000       0x78 build/arch/xtensa/cpu/cpu.o
  .data          0x0000000000000000        0x0 build/arch/xtensa/cpu/xtensa_regs.o
@@ -73,28 +60,15 @@ Discarded input sections
  .xt.lit        0x0000000000000000       0x40 build/kernel/scheduler/scheduler.o
  .xt.prop       0x0000000000000000      0x30c build/kernel/scheduler/scheduler.o
  .literal       0x0000000000000000        0x0 build/kernel/task/task.o
- .text          0x0000000000000000       0x91 build/kernel/task/task.o
  .data          0x0000000000000000        0x0 build/kernel/task/task.o
  .bss           0x0000000000000000        0x0 build/kernel/task/task.o
- .debug_frame   0x0000000000000000       0x28 build/kernel/task/task.o
- .debug_info    0x0000000000000000      0x489 build/kernel/task/task.o
- .debug_abbrev  0x0000000000000000      0x14c build/kernel/task/task.o
- .debug_loclists
-                0x0000000000000000       0x1c build/kernel/task/task.o
- .debug_aranges
-                0x0000000000000000       0x20 build/kernel/task/task.o
- .debug_line    0x0000000000000000      0x203 build/kernel/task/task.o
- .debug_str     0x0000000000000000      0x269 build/kernel/task/task.o
- .debug_line_str
-                0x0000000000000000      0x160 build/kernel/task/task.o
- .comment       0x0000000000000000       0x27 build/kernel/task/task.o
- .xt.lit        0x0000000000000000        0x8 build/kernel/task/task.o
- .xt.prop       0x0000000000000000       0x60 build/kernel/task/task.o
+ .xt.lit        0x0000000000000000       0x18 build/kernel/task/task.o
+ .xt.prop       0x0000000000000000      0x168 build/kernel/task/task.o
  .literal       0x0000000000000000        0x0 build/kernel/process/process.o
  .data          0x0000000000000000        0x0 build/kernel/process/process.o
  .bss           0x0000000000000000        0x0 build/kernel/process/process.o
- .xt.lit        0x0000000000000000       0x30 build/kernel/process/process.o
- .xt.prop       0x0000000000000000      0x270 build/kernel/process/process.o
+ .xt.lit        0x0000000000000000       0x28 build/kernel/process/process.o
+ .xt.prop       0x0000000000000000      0x27c build/kernel/process/process.o
  .literal       0x0000000000000000        0x0 build/kernel/syscall/syscall.o
  .bss           0x0000000000000000        0x0 build/kernel/syscall/syscall.o
  .xt.lit        0x0000000000000000       0xb8 build/kernel/syscall/syscall.o
@@ -106,42 +80,29 @@ Discarded input sections
  .xt.prop       0x0000000000000000       0xfc build/kernel/exec/exec.o
  .literal       0x0000000000000000        0x0 build/kernel/memory/memory.o
  .data          0x0000000000000000        0x0 build/kernel/memory/memory.o
- .xt.lit        0x0000000000000000       0x40 build/kernel/memory/memory.o
- .xt.prop       0x0000000000000000      0x294 build/kernel/memory/memory.o
+ .xt.lit        0x0000000000000000       0xa8 build/kernel/memory/memory.o
+ .xt.prop       0x0000000000000000      0x87c build/kernel/memory/memory.o
  .literal       0x0000000000000000        0x0 build/kernel/ipc/ipc.o
  .text          0x0000000000000000       0x35 build/kernel/ipc/ipc.o
  .data          0x0000000000000000        0x0 build/kernel/ipc/ipc.o
  .bss           0x0000000000000000        0x0 build/kernel/ipc/ipc.o
  .debug_frame   0x0000000000000000       0x40 build/kernel/ipc/ipc.o
- .debug_info    0x0000000000000000      0x4b8 build/kernel/ipc/ipc.o
+ .debug_info    0x0000000000000000      0x4f9 build/kernel/ipc/ipc.o
  .debug_abbrev  0x0000000000000000      0x167 build/kernel/ipc/ipc.o
  .debug_loclists
                 0x0000000000000000       0x14 build/kernel/ipc/ipc.o
  .debug_aranges
                 0x0000000000000000       0x20 build/kernel/ipc/ipc.o
  .debug_line    0x0000000000000000       0xd4 build/kernel/ipc/ipc.o
- .debug_str     0x0000000000000000      0x28b build/kernel/ipc/ipc.o
+ .debug_str     0x0000000000000000      0x2b0 build/kernel/ipc/ipc.o
  .debug_line_str
                 0x0000000000000000      0x10b build/kernel/ipc/ipc.o
  .comment       0x0000000000000000       0x27 build/kernel/ipc/ipc.o
  .xt.lit        0x0000000000000000       0x10 build/kernel/ipc/ipc.o
  .xt.prop       0x0000000000000000       0x6c build/kernel/ipc/ipc.o
  .literal       0x0000000000000000        0x0 build/kernel/sync/sync.o
- .text          0x0000000000000000      0x1f5 build/kernel/sync/sync.o
  .data          0x0000000000000000        0x0 build/kernel/sync/sync.o
  .bss           0x0000000000000000        0x0 build/kernel/sync/sync.o
- .debug_frame   0x0000000000000000       0xe8 build/kernel/sync/sync.o
- .debug_info    0x0000000000000000      0x798 build/kernel/sync/sync.o
- .debug_abbrev  0x0000000000000000      0x1c4 build/kernel/sync/sync.o
- .debug_loclists
-                0x0000000000000000       0x83 build/kernel/sync/sync.o
- .debug_aranges
-                0x0000000000000000       0x20 build/kernel/sync/sync.o
- .debug_line    0x0000000000000000      0x4df build/kernel/sync/sync.o
- .debug_str     0x0000000000000000      0x36f build/kernel/sync/sync.o
- .debug_line_str
-                0x0000000000000000      0x12e build/kernel/sync/sync.o
- .comment       0x0000000000000000       0x27 build/kernel/sync/sync.o
  .xt.lit        0x0000000000000000       0x20 build/kernel/sync/sync.o
  .xt.prop       0x0000000000000000      0x1ec build/kernel/sync/sync.o
  .literal       0x0000000000000000        0x0 build/kernel/signal/signal.o
@@ -228,23 +189,10 @@ Discarded input sections
  .xt.lit        0x0000000000000000       0x28 build/drivers/flash/flash.o
  .xt.prop       0x0000000000000000      0x264 build/drivers/flash/flash.o
  .literal       0x0000000000000000        0x0 build/drivers/psram/psram.o
- .text          0x0000000000000000       0x24 build/drivers/psram/psram.o
  .data          0x0000000000000000        0x0 build/drivers/psram/psram.o
  .bss           0x0000000000000000        0x0 build/drivers/psram/psram.o
- .debug_frame   0x0000000000000000       0x70 build/drivers/psram/psram.o
- .debug_info    0x0000000000000000      0x14d build/drivers/psram/psram.o
- .debug_abbrev  0x0000000000000000       0xf2 build/drivers/psram/psram.o
- .debug_loclists
-                0x0000000000000000       0x1e build/drivers/psram/psram.o
- .debug_aranges
-                0x0000000000000000       0x20 build/drivers/psram/psram.o
- .debug_line    0x0000000000000000       0xb9 build/drivers/psram/psram.o
- .debug_str     0x0000000000000000      0x13a build/drivers/psram/psram.o
- .debug_line_str
-                0x0000000000000000      0x109 build/drivers/psram/psram.o
- .comment       0x0000000000000000       0x27 build/drivers/psram/psram.o
- .xt.lit        0x0000000000000000        0x8 build/drivers/psram/psram.o
- .xt.prop       0x0000000000000000       0x78 build/drivers/psram/psram.o
+ .xt.lit        0x0000000000000000       0x20 build/drivers/psram/psram.o
+ .xt.prop       0x0000000000000000      0x198 build/drivers/psram/psram.o
  .text          0x0000000000000000       0x15 build/drivers/spi/spi.o
  .data          0x0000000000000000        0x0 build/drivers/spi/spi.o
  .bss           0x0000000000000000        0x0 build/drivers/spi/spi.o
@@ -359,14 +307,14 @@ Discarded input sections
  .rodata.str1.4
                 0x0000000000000000       0x21 build/libc/time/time.o
  .debug_frame   0x0000000000000000       0x88 build/libc/time/time.o
- .debug_info    0x0000000000000000      0xa91 build/libc/time/time.o
+ .debug_info    0x0000000000000000      0xad2 build/libc/time/time.o
  .debug_abbrev  0x0000000000000000      0x1d0 build/libc/time/time.o
  .debug_loclists
                 0x0000000000000000       0xeb build/libc/time/time.o
  .debug_aranges
                 0x0000000000000000       0x20 build/libc/time/time.o
  .debug_line    0x0000000000000000      0x37c build/libc/time/time.o
- .debug_str     0x0000000000000000      0x459 build/libc/time/time.o
+ .debug_str     0x0000000000000000      0x47e build/libc/time/time.o
  .debug_line_str
                 0x0000000000000000      0x125 build/libc/time/time.o
  .comment       0x0000000000000000       0x27 build/libc/time/time.o
@@ -384,14 +332,15 @@ Discarded input sections
  .xt.prop       0x0000000000000000       0x30 build/userland/init/init.o
  .literal       0x0000000000000000        0x0 build/userland/sh/shell.o
  .data          0x0000000000000000        0x0 build/userland/sh/shell.o
- .xt.lit        0x0000000000000000       0x50 build/userland/sh/shell.o
- .xt.prop       0x0000000000000000      0x480 build/userland/sh/shell.o
+ .xt.lit        0x0000000000000000       0x58 build/userland/sh/shell.o
+ .xt.prop       0x0000000000000000      0x4f8 build/userland/sh/shell.o
 
 Memory Configuration
 
 Name             Origin             Length             Attributes
 iram0_0_seg      0x0000000040080000 0x0000000000040000 xr
 dram0_0_seg      0x000000003fc88000 0x0000000000030000 xrw
+psram_seg        0x000000003f800000 0x0000000000800000 rw
 *default*        0x0000000000000000 0xffffffffffffffff
 
 Linker script and memory map
@@ -440,7 +389,7 @@ LOAD build/userland/init/init.o
 LOAD build/userland/sh/shell.o
                 0x0000000040080000                . = 0x40080000
 
-.text           0x0000000040080000     0x58f0
+.text           0x0000000040080000     0x6a28
  *(.vector_table)
  .vector_table  0x0000000040080000       0x74 build/arch/xtensa/boot/startup.o
                                          0x78 (size before relaxing)
@@ -454,380 +403,427 @@ LOAD build/userland/sh/shell.o
                                          0x10 (size before relaxing)
                 0x00000000400802f8                _kernel_main
  *fill*         0x0000000040080301        0x3 
- .text          0x0000000040080304       0xa9 build/arch/xtensa/exceptions/vectors.o
+ .text          0x0000000040080304       0x6d build/arch/xtensa/cpu/cpu.o
+                0x0000000040080304                cpu_get_id
+                0x0000000040080328                cpu_init
+                0x0000000040080364                cpu_idle
+ *fill*         0x0000000040080371        0x3 
+ .text          0x0000000040080374       0xa9 build/arch/xtensa/exceptions/vectors.o
                                          0xb1 (size before relaxing)
-                0x0000000040080304                _exception_entry
-                0x0000000040080362                _interrupt_entry
- *fill*         0x00000000400803ad        0x3 
- .text          0x00000000400803b0      0x228 build/arch/xtensa/traps/traps.o
-                0x00000000400803e8                _default_exception_handler
-                0x000000004008044c                _timer_interrupt_handler
-                0x0000000040080490                trap_init
-                0x00000000400804e0                trap_register_exception
-                0x00000000400804f8                trap_register_interrupt
-                0x0000000040080514                interrupt_enable
-                0x0000000040080538                interrupt_disable
-                0x0000000040080560                trap_dispatch_exception
-                0x00000000400805a4                trap_dispatch_interrupt
- .text          0x00000000400805d8       0xef build/arch/xtensa/timer/timer.o
-                0x00000000400805f0                timer_init
-                0x0000000040080630                timer_set_freq
-                0x0000000040080654                timer_get_ticks
-                0x0000000040080664                timer_get_freq
-                0x0000000040080678                udelay
-                0x00000000400806a8                mdelay
- *fill*         0x00000000400806c7        0x1 
- .text          0x00000000400806c8      0x22a build/kernel/core/kernel.o
-                0x000000004008077c                kernel_main
-                0x0000000040080874                kernel_init
-                0x0000000040080880                alloc_pid
-                0x00000000400808a0                alloc_tid
-                0x00000000400808c0                free_pid
-                0x00000000400808dc                free_tid
- *fill*         0x00000000400808f2        0x2 
- .text          0x00000000400808f4      0x2a0 build/kernel/scheduler/scheduler.o
-                0x00000000400808fc                scheduler_init
-                0x0000000040080918                task_enqueue
-                0x000000004008094c                task_dequeue
-                0x0000000040080980                scheduler_pick_next
-                0x00000000400809cc                task_wake
-                0x0000000040080a54                scheduler_tick
-                0x0000000040080ac8                schedule
-                0x0000000040080b64                task_sleep
-                0x0000000040080b8c                task_yield
- .text          0x0000000040080b94      0x26b build/kernel/process/process.o
-                0x0000000040080bbc                task_create
-                0x0000000040080c7c                task_destroy
-                0x0000000040080ce4                process_create
-                0x0000000040080d74                process_destroy
-                0x0000000040080dd4                get_fd_table
-                0x0000000040080dec                get_fd_count
- *fill*         0x0000000040080dff        0x1 
- .text          0x0000000040080e00      0x9cd build/kernel/syscall/syscall.o
-                0x0000000040080e04                pipe_close_read
-                0x0000000040080e34                pipe_close_write
-                0x0000000040080e68                pipe_read
-                0x0000000040080ed8                pipe_write
-                0x0000000040080f3c                get_file
-                0x0000000040080f6c                syscall_exit
-                0x0000000040080fb4                syscall_fork
-                0x00000000400810d4                syscall_exec
-                0x00000000400810fc                syscall_waitpid
-                0x0000000040081184                syscall_sleep
-                0x00000000400811ac                syscall_kill
-                0x00000000400811dc                syscall_pipe
-                0x0000000040081298                syscall_pread
-                0x00000000400812d8                syscall_pwrite
-                0x0000000040081314                syscall_mkdir
-                0x000000004008132c                syscall_rmdir
-                0x0000000040081340                syscall_unlink
-                0x0000000040081354                syscall_rename
-                0x000000004008136c                syscall_chdir
-                0x0000000040081380                syscall_getcwd
-                0x000000004008139c                syscall_fstat
-                0x00000000400813d4                syscall_dup
-                0x000000004008141c                syscall_dup2
-                0x00000000400814c0                syscall_handler
- *fill*         0x00000000400817cd        0x3 
- .text          0x00000000400817d0       0xf4 build/kernel/exec/exec.o
-                0x00000000400817f4                load_binary
-                0x00000000400818a4                do_execve
- .text          0x00000000400818c4      0x227 build/kernel/memory/memory.o
-                0x0000000040081940                memory_init
-                0x0000000040081978                kmalloc
-                0x00000000400819a8                kzalloc
-                0x00000000400819e4                kfree
-                0x0000000040081a3c                kmalloc_aligned
-                0x0000000040081a78                psram_malloc
-                0x0000000040081aa0                psram_free
-                0x0000000040081ab0                memory_stats
- *fill*         0x0000000040081aeb        0x1 
- .text          0x0000000040081aec      0x1ac build/kernel/panic/panic.o
-                0x0000000040081b94                kernel_panic
- .text          0x0000000040081c98      0x1a0 build/drivers/uart/uart.o
-                0x0000000040081cac                uart_init
-                0x0000000040081ce8                uart_putc
-                0x0000000040081d10                uart_puts
-                0x0000000040081d58                uart_puthex
-                0x0000000040081d9c                uart_putdec
-                0x0000000040081e18                uart_getc
- .text          0x0000000040081e38      0x258 build/drivers/flash/flash.o
-                0x0000000040081e3c                flash_init
-                0x0000000040081e64                flash_read
-                0x0000000040081eec                flash_write
-                0x0000000040081ff0                flash_erase
-                0x0000000040082088                flash_get_size
- .text          0x0000000040082090      0xa0f build/fs/vfs/vfs.o
-                0x0000000040082218                file_alloc
-                0x0000000040082258                file_free
-                0x0000000040082284                vfs_open
-                0x0000000040082344                vfs_close
-                0x0000000040082374                vfs_read
-                0x0000000040082394                vfs_write
-                0x00000000400823b4                vfs_lseek
-                0x00000000400823d4                vfs_pread
-                0x0000000040082438                vfs_pwrite
-                0x000000004008249c                vfs_ioctl
-                0x00000000400824bc                vfs_readdir
-                0x00000000400824f0                vfs_stat
-                0x00000000400825ac                vfs_fstat
-                0x00000000400825fc                fs_init
-                0x000000004008265c                vfs_mkdir
-                0x0000000040082704                vfs_rmdir
-                0x00000000400827a4                vfs_unlink
-                0x0000000040082848                vfs_rename
-                0x0000000040082910                vfs_chdir
-                0x0000000040082980                vfs_getcwd
-                0x00000000400829b8                vfs_register_fs
-                0x0000000040082a1c                vfs_unregister_fs
-                0x0000000040082a98                vfs_pipe
- *fill*         0x0000000040082a9f        0x1 
- .text          0x0000000040082aa0      0xb0e build/fs/ramfs/ramfs.o
-                0x0000000040082aa0                ramfs_close
-                0x0000000040082aa8                ramfs_lseek
-                0x0000000040082ad8                ramfs_stat
-                0x0000000040082b14                ramfs_read
-                0x0000000040082b64                ramfs_write
-                0x0000000040082be8                ramfs_pread
-                0x0000000040082c30                ramfs_pwrite
-                0x0000000040082cb0                ramfs_readdir
-                0x0000000040082d18                ramfs_open
-                0x0000000040082e64                ramfs_mkdir
-                0x000000004008300c                ramfs_alloc_node
-                0x0000000040083058                ramfs_free_node
-                0x00000000400830b8                ramfs_rmdir
-                0x0000000040083178                ramfs_unlink
-                0x0000000040083254                ramfs_rename
-                0x0000000040083478                ramfs_find_child
-                0x00000000400834c8                ramfs_mount
- *fill*         0x00000000400835ae        0x2 
- .text          0x00000000400835b0      0x34e build/fs/devfs/devfs.o
-                0x0000000040083714                devfs_register
-                0x00000000400837b8                devfs_mount
- *fill*         0x00000000400838fe        0x2 
- .text          0x0000000040083900      0x2ac build/fs/flashfs/flashfs.o
-                0x0000000040083900                flashfs_open
-                0x0000000040083908                flashfs_close
-                0x0000000040083910                flashfs_read
-                0x0000000040083918                flashfs_lseek
-                0x0000000040083920                flashfs_stat
-                0x0000000040083928                flashfs_mkdir
-                0x0000000040083930                flashfs_rmdir
-                0x0000000040083938                flashfs_rename
-                0x0000000040083940                flashfs_chdir
-                0x0000000040083948                flashfs_write
-                0x0000000040083950                flashfs_readdir
-                0x0000000040083958                flashfs_unlink
-                0x00000000400839a0                flashfs_format
-                0x0000000040083acc                flashfs_mount
-                0x0000000040083b60                flashfs_unmount
- .text          0x0000000040083bac      0x324 build/libc/string/string.o
-                0x0000000040083bac                memcpy
-                0x0000000040083bc4                memmove
-                0x0000000040083bfc                memset
-                0x0000000040083c18                memcmp
-                0x0000000040083c40                memchr
-                0x0000000040083c60                strcpy
-                0x0000000040083c74                strncpy
-                0x0000000040083cac                strcat
-                0x0000000040083cd4                strncat
-                0x0000000040083d0c                strcmp
-                0x0000000040083d38                strncmp
-                0x0000000040083d64                strlen
-                0x0000000040083d7c                strchr
-                0x0000000040083d9c                strrchr
-                0x0000000040083dc4                strstr
-                0x0000000040083e08                strtok
-                0x0000000040083e9c                strcspn
- .text          0x0000000040083ed0      0x79d build/libc/stdio/stdio.o
-                0x0000000040083ee0                fputc
-                0x0000000040083f60                fputs
-                0x0000000040083f80                putchar
-                0x0000000040083f98                puts
-                0x0000000040083fc8                fgetc
-                0x0000000040084024                getchar
-                0x0000000040084078                ungetc
-                0x00000000400840a8                fgets
-                0x0000000040084154                vsnprintf
-                0x00000000400843a8                snprintf
-                0x00000000400843d4                vfprintf
-                0x0000000040084410                fprintf
-                0x0000000040084440                printf
-                0x0000000040084474                vprintf
-                0x0000000040084494                fread
-                0x000000004008450c                fwrite
-                0x000000004008453c                fseek
-                0x0000000040084568                ftell
-                0x0000000040084578                fflush
-                0x00000000400845b4                feof
-                0x00000000400845bc                ferror
-                0x00000000400845d0                fopen
-                0x0000000040084640                fclose
- *fill*         0x000000004008466d        0x3 
- .text          0x0000000040084670      0x2fb build/libc/stdlib/stdlib.o
-                0x0000000040084674                malloc
-                0x0000000040084688                free
-                0x00000000400846a0                calloc
-                0x00000000400846c4                realloc
-                0x00000000400846d4                atoi
-                0x0000000040084780                atol
-                0x000000004008478c                strtol
-                0x0000000040084858                strtoul
-                0x0000000040084874                rand
-                0x0000000040084894                srand
-                0x00000000400848a4                exit
-                0x00000000400848b8                _exit
-                0x00000000400848c8                abs
-                0x00000000400848d0                labs
-                0x00000000400848d8                system
-                0x00000000400848ec                getenv
-                0x0000000040084930                setenv
-                0x0000000040084938                unsetenv
-                0x0000000040084944                getcwd
-                0x000000004008495c                chdir
- *fill*         0x000000004008496b        0x1 
- .text          0x000000004008496c      0x440 build/libc/posix/posix.o
-                0x000000004008497c                open
-                0x00000000400849c8                close
-                0x00000000400849f8                read
-                0x0000000040084a28                write
-                0x0000000040084a58                lseek
-                0x0000000040084a84                stat
-                0x0000000040084aa0                fstat
-                0x0000000040084ad0                mkdir
-                0x0000000040084ae8                rmdir
-                0x0000000040084afc                unlink
-                0x0000000040084b10                rename
-                0x0000000040084b24                chmod
-                0x0000000040084b2c                chown
-                0x0000000040084b38                getpid
-                0x0000000040084b4c                getppid
-                0x0000000040084b6c                getuid
-                0x0000000040084b74                getgid
-                0x0000000040084b7c                setuid
-                0x0000000040084b84                setgid
-                0x0000000040084b8c                fork
-                0x0000000040084b98                execve
-                0x0000000040084bb0                waitpid
-                0x0000000040084bc8                pipe
-                0x0000000040084be4                dup
-                0x0000000040084c34                dup2
-                0x0000000040084c84                ioctl
-                0x0000000040084ccc                getlogin
-                0x0000000040084cd4                isatty
-                0x0000000040084d08                execvp
-                0x0000000040084d80                putenv
- .text          0x0000000040084dac        0x8 build/userland/init/init.o
+                0x0000000040080374                _exception_entry
+                0x00000000400803d2                _interrupt_entry
+ *fill*         0x000000004008041d        0x3 
+ .text          0x0000000040080420      0x228 build/arch/xtensa/traps/traps.o
+                0x0000000040080458                _default_exception_handler
+                0x00000000400804bc                _timer_interrupt_handler
+                0x0000000040080500                trap_init
+                0x0000000040080550                trap_register_exception
+                0x0000000040080568                trap_register_interrupt
+                0x0000000040080584                interrupt_enable
+                0x00000000400805a8                interrupt_disable
+                0x00000000400805d0                trap_dispatch_exception
+                0x0000000040080614                trap_dispatch_interrupt
+ .text          0x0000000040080648       0xef build/arch/xtensa/timer/timer.o
+                0x0000000040080660                timer_init
+                0x00000000400806a0                timer_set_freq
+                0x00000000400806c4                timer_get_ticks
+                0x00000000400806d4                timer_get_freq
+                0x00000000400806e8                udelay
+                0x0000000040080718                mdelay
+ *fill*         0x0000000040080737        0x1 
+ .text          0x0000000040080738      0x22a build/kernel/core/kernel.o
+                0x00000000400807ec                kernel_main
+                0x00000000400808e4                kernel_init
+                0x00000000400808f0                alloc_pid
+                0x0000000040080910                alloc_tid
+                0x0000000040080930                free_pid
+                0x000000004008094c                free_tid
+ *fill*         0x0000000040080962        0x2 
+ .text          0x0000000040080964      0x2a0 build/kernel/scheduler/scheduler.o
+                0x000000004008096c                scheduler_init
+                0x0000000040080988                task_enqueue
+                0x00000000400809bc                task_dequeue
+                0x00000000400809f0                scheduler_pick_next
+                0x0000000040080a3c                task_wake
+                0x0000000040080ac4                scheduler_tick
+                0x0000000040080b38                schedule
+                0x0000000040080bd4                task_sleep
+                0x0000000040080bfc                task_yield
+ .text          0x0000000040080c04      0x1dc build/kernel/task/task.o
+                0x0000000040080c2c                task_create_idle
+                0x0000000040080cd4                task_create_user
+                0x0000000040080d84                task_destroy
+                0x0000000040080dac                task_stack_watermark
+ .text          0x0000000040080de0      0x275 build/kernel/process/process.o
+                0x0000000040080e0c                task_create
+                0x0000000040080ef0                process_create
+                0x0000000040080f8c                process_destroy
+                0x0000000040080fec                get_fd_table
+                0x0000000040081004                get_fd_count
+                0x0000000040081018                process_account_alloc
+                0x0000000040081028                process_account_free
+                0x0000000040081038                task_account_alloc
+                0x0000000040081048                task_account_free
+ *fill*         0x0000000040081055        0x3 
+ .text          0x0000000040081058      0x9cd build/kernel/syscall/syscall.o
+                0x000000004008105c                pipe_close_read
+                0x000000004008108c                pipe_close_write
+                0x00000000400810c0                pipe_read
+                0x0000000040081130                pipe_write
+                0x0000000040081194                get_file
+                0x00000000400811c4                syscall_exit
+                0x000000004008120c                syscall_fork
+                0x000000004008132c                syscall_exec
+                0x0000000040081354                syscall_waitpid
+                0x00000000400813dc                syscall_sleep
+                0x0000000040081404                syscall_kill
+                0x0000000040081434                syscall_pipe
+                0x00000000400814f0                syscall_pread
+                0x0000000040081530                syscall_pwrite
+                0x000000004008156c                syscall_mkdir
+                0x0000000040081584                syscall_rmdir
+                0x0000000040081598                syscall_unlink
+                0x00000000400815ac                syscall_rename
+                0x00000000400815c4                syscall_chdir
+                0x00000000400815d8                syscall_getcwd
+                0x00000000400815f4                syscall_fstat
+                0x000000004008162c                syscall_dup
+                0x0000000040081674                syscall_dup2
+                0x0000000040081718                syscall_handler
+ *fill*         0x0000000040081a25        0x3 
+ .text          0x0000000040081a28       0xf4 build/kernel/exec/exec.o
+                0x0000000040081a4c                load_binary
+                0x0000000040081afc                do_execve
+ .text          0x0000000040081b1c      0x91e build/kernel/memory/memory.o
+                0x0000000040081d84                memory_init
+                0x0000000040081e70                kmalloc
+                0x0000000040081e94                kzalloc
+                0x0000000040081ebc                kfree
+                0x0000000040081ee4                kmalloc_aligned
+                0x0000000040082038                kmalloc_psram
+                0x000000004008206c                kzalloc_psram
+                0x00000000400820a0                kfree_psram
+                0x00000000400820d0                krealloc
+                0x0000000040082200                memory_stats
+                0x0000000040082248                memory_region_stats
+                0x00000000400822a0                memory_get_regions
+                0x00000000400822f8                memory_check_heap
+                0x00000000400823a8                psram_is_available
+                0x00000000400823bc                psram_get_total
+                0x00000000400823d8                psram_get_free
+                0x00000000400823f8                psram_get_used
+                0x0000000040082410                internal_get_total
+                0x0000000040082420                internal_get_free
+                0x0000000040082430                internal_get_used
+ *fill*         0x000000004008243a        0x2 
+ .text          0x000000004008243c      0x1f5 build/kernel/sync/sync.o
+                0x000000004008243c                spinlock_init
+                0x0000000040082448                spinlock_acquire
+                0x0000000040082474                spinlock_release
+                0x0000000040082480                mutex_init
+                0x00000000400824b4                mutex_lock
+                0x0000000040082540                mutex_unlock
+                0x0000000040082564                semaphore_init
+                0x000000004008258c                semaphore_wait
+                0x00000000400825f4                semaphore_signal
+ *fill*         0x0000000040082631        0x3 
+ .text          0x0000000040082634      0x1ac build/kernel/panic/panic.o
+                0x00000000400826dc                kernel_panic
+ .text          0x00000000400827e0      0x1a0 build/drivers/uart/uart.o
+                0x00000000400827f4                uart_init
+                0x0000000040082830                uart_putc
+                0x0000000040082858                uart_puts
+                0x00000000400828a0                uart_puthex
+                0x00000000400828e4                uart_putdec
+                0x0000000040082960                uart_getc
+ .text          0x0000000040082980      0x258 build/drivers/flash/flash.o
+                0x0000000040082984                flash_init
+                0x00000000400829ac                flash_read
+                0x0000000040082a34                flash_write
+                0x0000000040082b38                flash_erase
+                0x0000000040082bd0                flash_get_size
+ .text          0x0000000040082bd8      0x280 build/drivers/psram/psram.o
+                0x0000000040082c1c                psram_init
+                0x0000000040082d1c                psram_read
+                0x0000000040082da8                psram_write
+                0x0000000040082e50                psram_get_size
+ .text          0x0000000040082e58      0xa0f build/fs/vfs/vfs.o
+                0x0000000040082fe0                file_alloc
+                0x0000000040083020                file_free
+                0x000000004008304c                vfs_open
+                0x000000004008310c                vfs_close
+                0x000000004008313c                vfs_read
+                0x000000004008315c                vfs_write
+                0x000000004008317c                vfs_lseek
+                0x000000004008319c                vfs_pread
+                0x0000000040083200                vfs_pwrite
+                0x0000000040083264                vfs_ioctl
+                0x0000000040083284                vfs_readdir
+                0x00000000400832b8                vfs_stat
+                0x0000000040083374                vfs_fstat
+                0x00000000400833c4                fs_init
+                0x0000000040083424                vfs_mkdir
+                0x00000000400834cc                vfs_rmdir
+                0x000000004008356c                vfs_unlink
+                0x0000000040083610                vfs_rename
+                0x00000000400836d8                vfs_chdir
+                0x0000000040083748                vfs_getcwd
+                0x0000000040083780                vfs_register_fs
+                0x00000000400837e4                vfs_unregister_fs
+                0x0000000040083860                vfs_pipe
+ *fill*         0x0000000040083867        0x1 
+ .text          0x0000000040083868      0xb0e build/fs/ramfs/ramfs.o
+                0x0000000040083868                ramfs_close
+                0x0000000040083870                ramfs_lseek
+                0x00000000400838a0                ramfs_stat
+                0x00000000400838dc                ramfs_read
+                0x000000004008392c                ramfs_write
+                0x00000000400839b0                ramfs_pread
+                0x00000000400839f8                ramfs_pwrite
+                0x0000000040083a78                ramfs_readdir
+                0x0000000040083ae0                ramfs_open
+                0x0000000040083c2c                ramfs_mkdir
+                0x0000000040083dd4                ramfs_alloc_node
+                0x0000000040083e20                ramfs_free_node
+                0x0000000040083e80                ramfs_rmdir
+                0x0000000040083f40                ramfs_unlink
+                0x000000004008401c                ramfs_rename
+                0x0000000040084240                ramfs_find_child
+                0x0000000040084290                ramfs_mount
+ *fill*         0x0000000040084376        0x2 
+ .text          0x0000000040084378      0x34e build/fs/devfs/devfs.o
+                0x00000000400844dc                devfs_register
+                0x0000000040084580                devfs_mount
+ *fill*         0x00000000400846c6        0x2 
+ .text          0x00000000400846c8      0x2ac build/fs/flashfs/flashfs.o
+                0x00000000400846c8                flashfs_open
+                0x00000000400846d0                flashfs_close
+                0x00000000400846d8                flashfs_read
+                0x00000000400846e0                flashfs_lseek
+                0x00000000400846e8                flashfs_stat
+                0x00000000400846f0                flashfs_mkdir
+                0x00000000400846f8                flashfs_rmdir
+                0x0000000040084700                flashfs_rename
+                0x0000000040084708                flashfs_chdir
+                0x0000000040084710                flashfs_write
+                0x0000000040084718                flashfs_readdir
+                0x0000000040084720                flashfs_unlink
+                0x0000000040084768                flashfs_format
+                0x0000000040084894                flashfs_mount
+                0x0000000040084928                flashfs_unmount
+ .text          0x0000000040084974      0x324 build/libc/string/string.o
+                0x0000000040084974                memcpy
+                0x000000004008498c                memmove
+                0x00000000400849c4                memset
+                0x00000000400849e0                memcmp
+                0x0000000040084a08                memchr
+                0x0000000040084a28                strcpy
+                0x0000000040084a3c                strncpy
+                0x0000000040084a74                strcat
+                0x0000000040084a9c                strncat
+                0x0000000040084ad4                strcmp
+                0x0000000040084b00                strncmp
+                0x0000000040084b2c                strlen
+                0x0000000040084b44                strchr
+                0x0000000040084b64                strrchr
+                0x0000000040084b8c                strstr
+                0x0000000040084bd0                strtok
+                0x0000000040084c64                strcspn
+ .text          0x0000000040084c98      0x79d build/libc/stdio/stdio.o
+                0x0000000040084ca8                fputc
+                0x0000000040084d28                fputs
+                0x0000000040084d48                putchar
+                0x0000000040084d60                puts
+                0x0000000040084d90                fgetc
+                0x0000000040084dec                getchar
+                0x0000000040084e40                ungetc
+                0x0000000040084e70                fgets
+                0x0000000040084f1c                vsnprintf
+                0x0000000040085170                snprintf
+                0x000000004008519c                vfprintf
+                0x00000000400851d8                fprintf
+                0x0000000040085208                printf
+                0x000000004008523c                vprintf
+                0x000000004008525c                fread
+                0x00000000400852d4                fwrite
+                0x0000000040085304                fseek
+                0x0000000040085330                ftell
+                0x0000000040085340                fflush
+                0x000000004008537c                feof
+                0x0000000040085384                ferror
+                0x0000000040085398                fopen
+                0x0000000040085408                fclose
+ *fill*         0x0000000040085435        0x3 
+ .text          0x0000000040085438      0x2fb build/libc/stdlib/stdlib.o
+                0x000000004008543c                malloc
+                0x0000000040085450                free
+                0x0000000040085468                calloc
+                0x000000004008548c                realloc
+                0x000000004008549c                atoi
+                0x0000000040085548                atol
+                0x0000000040085554                strtol
+                0x0000000040085620                strtoul
+                0x000000004008563c                rand
+                0x000000004008565c                srand
+                0x000000004008566c                exit
+                0x0000000040085680                _exit
+                0x0000000040085690                abs
+                0x0000000040085698                labs
+                0x00000000400856a0                system
+                0x00000000400856b4                getenv
+                0x00000000400856f8                setenv
+                0x0000000040085700                unsetenv
+                0x000000004008570c                getcwd
+                0x0000000040085724                chdir
+ *fill*         0x0000000040085733        0x1 
+ .text          0x0000000040085734      0x440 build/libc/posix/posix.o
+                0x0000000040085744                open
+                0x0000000040085790                close
+                0x00000000400857c0                read
+                0x00000000400857f0                write
+                0x0000000040085820                lseek
+                0x000000004008584c                stat
+                0x0000000040085868                fstat
+                0x0000000040085898                mkdir
+                0x00000000400858b0                rmdir
+                0x00000000400858c4                unlink
+                0x00000000400858d8                rename
+                0x00000000400858ec                chmod
+                0x00000000400858f4                chown
+                0x0000000040085900                getpid
+                0x0000000040085914                getppid
+                0x0000000040085934                getuid
+                0x000000004008593c                getgid
+                0x0000000040085944                setuid
+                0x000000004008594c                setgid
+                0x0000000040085954                fork
+                0x0000000040085960                execve
+                0x0000000040085978                waitpid
+                0x0000000040085990                pipe
+                0x00000000400859ac                dup
+                0x00000000400859fc                dup2
+                0x0000000040085a4c                ioctl
+                0x0000000040085a94                getlogin
+                0x0000000040085a9c                isatty
+                0x0000000040085ad0                execvp
+                0x0000000040085b48                putenv
+ .text          0x0000000040085b74        0x8 build/userland/init/init.o
                                           0xf (size before relaxing)
-                0x0000000040084dac                user_init
- *fill*         0x0000000040084db4        0x0 
- .text          0x0000000040084db4      0x4d1 build/userland/sh/shell.o
-                0x0000000040084db8                shell_init
-                0x0000000040084dd8                parse_line
-                0x0000000040084ebc                execute_command
-                0x0000000040084f10                builtin_cd
-                0x0000000040084f60                builtin_echo
-                0x0000000040084fb0                builtin_env
-                0x0000000040084fd4                builtin_export
-                0x0000000040084ff4                builtin_unset
-                0x0000000040085020                builtin_history
-                0x00000000400850ec                shell_main
- *fill*         0x0000000040085285        0x3 
- .text          0x0000000040085288       0x9e build/arch/xtensa/cpu/xtensa_regs.o
-                0x0000000040085288                read_psr
-                0x000000004008528f                write_psr
-                0x0000000040085297                read_epsr
-                0x000000004008529e                read_epc
-                0x00000000400852a5                write_epc
-                0x00000000400852ad                read_exccause
-                0x00000000400852b4                read_excvaddr
-                0x00000000400852bb                read_intenable
-                0x00000000400852c2                write_intenable
-                0x00000000400852ca                write_intclear
-                0x00000000400852cc                read_ccount
-                0x00000000400852d3                write_ccount
-                0x00000000400852db                read_ccompare0
-                0x00000000400852e2                read_ccompare1
-                0x00000000400852e9                write_ccompare0
-                0x00000000400852f1                write_ccompare1
-                0x00000000400852f9                read_sar
-                0x0000000040085300                write_sar
-                0x0000000040085308                rsync
-                0x000000004008530d                esync
-                0x0000000040085312                dsync
-                0x0000000040085317                isync
-                0x000000004008531c                memw
-                0x0000000040085321                waiti
- *fill*         0x0000000040085326        0x2 
- .text          0x0000000040085328       0xc4 build/arch/xtensa/context/context.o
-                0x0000000040085328                context_switch
-                0x0000000040085389                context_save
-                0x00000000400853bd                context_restore
- *fill*         0x00000000400853ec        0x0 
- *fill*         0x00000000400853ec        0x0 
- *fill*         0x00000000400853ec        0x0 
- *fill*         0x00000000400853ec        0x0 
- *fill*         0x00000000400853ec        0x0 
- *fill*         0x00000000400853ec        0x0 
- *fill*         0x00000000400853ec        0x0 
- *fill*         0x00000000400853ec        0x0 
- *fill*         0x00000000400853ec        0x0 
- *fill*         0x00000000400853ec        0x0 
- *fill*         0x00000000400853ec        0x0 
- .text          0x00000000400853ec      0x160 build/libc/ctype/ctype.o
-                0x00000000400853ec                isdigit
-                0x0000000040085400                isalpha
-                0x0000000040085418                isalnum
-                0x000000004008543c                isspace
-                0x0000000040085460                islower
-                0x0000000040085474                isupper
-                0x0000000040085488                isxdigit
-                0x00000000400854a8                isprint
-                0x00000000400854bc                iscntrl
-                0x00000000400854dc                ispunct
-                0x0000000040085518                isgraph
-                0x000000004008552c                tolower
-                0x000000004008553c                toupper
- *fill*         0x000000004008554c        0x0 
+                0x0000000040085b74                user_init
+ *fill*         0x0000000040085b7c        0x0 
+ .text          0x0000000040085b7c      0x709 build/userland/sh/shell.o
+                0x0000000040085b80                shell_init
+                0x0000000040085ba0                parse_line
+                0x0000000040085c84                execute_command
+                0x0000000040085cd8                builtin_cd
+                0x0000000040085d28                builtin_echo
+                0x0000000040085d78                builtin_env
+                0x0000000040085d9c                builtin_export
+                0x0000000040085dbc                builtin_unset
+                0x0000000040085de8                builtin_history
+                0x0000000040085ed0                builtin_memstat
+                0x00000000400860d8                shell_main
+ *fill*         0x0000000040086285        0x0 
+ *fill*         0x0000000040086285        0x3 
+ .text          0x0000000040086288       0x9e build/arch/xtensa/cpu/xtensa_regs.o
+                0x0000000040086288                read_psr
+                0x000000004008628f                write_psr
+                0x0000000040086297                read_epsr
+                0x000000004008629e                read_epc
+                0x00000000400862a5                write_epc
+                0x00000000400862ad                read_exccause
+                0x00000000400862b4                read_excvaddr
+                0x00000000400862bb                read_intenable
+                0x00000000400862c2                write_intenable
+                0x00000000400862ca                write_intclear
+                0x00000000400862cc                read_ccount
+                0x00000000400862d3                write_ccount
+                0x00000000400862db                read_ccompare0
+                0x00000000400862e2                read_ccompare1
+                0x00000000400862e9                write_ccompare0
+                0x00000000400862f1                write_ccompare1
+                0x00000000400862f9                read_sar
+                0x0000000040086300                write_sar
+                0x0000000040086308                rsync
+                0x000000004008630d                esync
+                0x0000000040086312                dsync
+                0x0000000040086317                isync
+                0x000000004008631c                memw
+                0x0000000040086321                waiti
+ *fill*         0x0000000040086326        0x2 
+ .text          0x0000000040086328       0xc4 build/arch/xtensa/context/context.o
+                0x0000000040086328                context_switch
+                0x0000000040086389                context_save
+                0x00000000400863bd                context_restore
+ *fill*         0x00000000400863ec        0x0 
+ *fill*         0x00000000400863ec        0x0 
+ *fill*         0x00000000400863ec        0x0 
+ *fill*         0x00000000400863ec        0x0 
+ *fill*         0x00000000400863ec        0x0 
+ *fill*         0x00000000400863ec        0x0 
+ *fill*         0x00000000400863ec        0x0 
+ *fill*         0x00000000400863ec        0x0 
+ *fill*         0x00000000400863ec        0x0 
+ *fill*         0x00000000400863ec        0x0 
+ *fill*         0x00000000400863ec        0x0 
+ *fill*         0x00000000400863ec        0x0 
+ .text          0x00000000400863ec      0x160 build/libc/ctype/ctype.o
+                0x00000000400863ec                isdigit
+                0x0000000040086400                isalpha
+                0x0000000040086418                isalnum
+                0x000000004008643c                isspace
+                0x0000000040086460                islower
+                0x0000000040086474                isupper
+                0x0000000040086488                isxdigit
+                0x00000000400864a8                isprint
+                0x00000000400864bc                iscntrl
+                0x00000000400864dc                ispunct
+                0x0000000040086518                isgraph
+                0x000000004008652c                tolower
+                0x000000004008653c                toupper
+ *fill*         0x000000004008654c        0x0 
  *(.rodata .rodata.* .gnu.linkonce.r.*)
- *fill*         0x000000004008554c        0x0 
+ *fill*         0x000000004008654c        0x0 
  .rodata.str1.4
-                0x000000004008554c       0x30 build/arch/xtensa/traps/traps.o
+                0x000000004008654c       0x30 build/arch/xtensa/traps/traps.o
                                          0x34 (size before relaxing)
  .rodata.str1.4
-                0x000000004008557c      0x144 build/kernel/core/kernel.o
- .rodata        0x00000000400856c0       0x90 build/kernel/syscall/syscall.o
+                0x000000004008657c      0x144 build/kernel/core/kernel.o
+ .rodata        0x00000000400866c0       0x90 build/kernel/syscall/syscall.o
  .rodata.str1.4
-                0x0000000040085750       0x74 build/kernel/panic/panic.o
+                0x0000000040086750       0x12 build/kernel/memory/memory.o
+ *fill*         0x0000000040086762        0x2 
+ .rodata.str1.4
+                0x0000000040086764       0x74 build/kernel/panic/panic.o
                                          0x78 (size before relaxing)
  .rodata.str1.4
-                0x00000000400857c4       0x11 build/drivers/uart/uart.o
- *fill*         0x00000000400857d5        0x3 
+                0x00000000400867d8       0x11 build/drivers/uart/uart.o
+ *fill*         0x00000000400867e9        0x3 
  .rodata.str1.4
-                0x00000000400857d8        0x9 build/fs/vfs/vfs.o
- *fill*         0x00000000400857e1        0x3 
+                0x00000000400867ec        0x9 build/fs/vfs/vfs.o
+ *fill*         0x00000000400867f5        0x3 
  .rodata.str1.4
-                0x00000000400857e4        0x4 build/fs/ramfs/ramfs.o
+                0x00000000400867f8        0x4 build/fs/ramfs/ramfs.o
                                           0x8 (size before relaxing)
  .rodata.str1.4
-                0x00000000400857e8       0x28 build/fs/devfs/devfs.o
+                0x00000000400867fc       0x28 build/fs/devfs/devfs.o
  .rodata.str1.4
-                0x0000000040085810        0x7 build/libc/stdio/stdio.o
+                0x0000000040086824        0x7 build/libc/stdio/stdio.o
  .rodata.str1.4
-                0x0000000040085817        0x2 build/libc/stdlib/stdlib.o
- *fill*         0x0000000040085817        0x1 
+                0x000000004008682b        0x2 build/libc/stdlib/stdlib.o
+ *fill*         0x000000004008682b        0x1 
  .rodata.str1.4
-                0x0000000040085818       0x2a build/libc/posix/posix.o
+                0x000000004008682c       0x2a build/libc/posix/posix.o
                                          0x3a (size before relaxing)
- *fill*         0x0000000040085842        0x2 
- .rodata        0x0000000040085844       0x14 build/libc/posix/posix.o
+ *fill*         0x0000000040086856        0x2 
+ .rodata        0x0000000040086858       0x14 build/libc/posix/posix.o
  .rodata.str1.4
-                0x0000000040085858       0x98 build/userland/sh/shell.o
-                                         0xac (size before relaxing)
-                0x00000000400858f0                . = ALIGN (0x4)
-                0x00000000400858f0                _etext = .
+                0x000000004008686c      0x1bc build/userland/sh/shell.o
+                                        0x1d0 (size before relaxing)
+                0x0000000040086a28                . = ALIGN (0x4)
+                0x0000000040086a28                _etext = .
 
-.data           0x000000003fc88000      0x2ac load address 0x00000000400858f0
+.data           0x000000003fc88000      0x2ac load address 0x0000000040086a28
                 0x000000003fc88000                _data_start = .
  *(.data .data.* .gnu.linkonce.d.*)
  .data          0x000000003fc88000        0x4 build/arch/xtensa/timer/timer.o
@@ -850,7 +846,7 @@ LOAD build/userland/sh/shell.o
                 0x000000003fc882ac                . = ALIGN (0x4)
                 0x000000003fc882ac                _data_end = .
 
-.bss            0x000000003fc882ac    0x11f14 load address 0x0000000040085b9c
+.bss            0x000000003fc882ac    0x11f7c load address 0x0000000040086cd4
                 0x000000003fc882ac                _bss_start = .
  *(.bss .bss.* .gnu.linkonce.b.*)
  .bss           0x000000003fc882ac      0x100 build/arch/xtensa/traps/traps.o
@@ -859,39 +855,43 @@ LOAD build/userland/sh/shell.o
                 0x000000003fc884ac                process_table
                 0x000000003fc8852c                cpu_states
  .bss           0x000000003fc88564       0x84 build/kernel/scheduler/scheduler.o
- .bss           0x000000003fc885e8        0xc build/kernel/memory/memory.o
- .bss           0x000000003fc885f4     0x9a84 build/fs/vfs/vfs.o
-                0x000000003fc885f4                mount_count
-                0x000000003fc885f8                open_files
-                0x000000003fc90ff8                mounts
- .bss           0x000000003fc92078     0x6a14 build/fs/ramfs/ramfs.o
- .bss           0x000000003fc98a8c      0x6f8 build/fs/devfs/devfs.o
-                0x000000003fc98a8c                uart_fops
-                0x000000003fc98ac8                random_fops
-                0x000000003fc98b04                zero_fops
-                0x000000003fc98b40                null_fops
- .bss           0x000000003fc99184       0x30 build/fs/flashfs/flashfs.o
-                0x000000003fc99184                flashfs_sb
- .bss           0x000000003fc991b4        0x4 build/libc/string/string.o
- .bss           0x000000003fc991b8        0x4 build/libc/stdlib/stdlib.o
-                0x000000003fc991b8                environ
- .bss           0x000000003fc991bc     0x1004 build/userland/sh/shell.o
+ .bss           0x000000003fc885e8       0x74 build/kernel/memory/memory.o
+ .bss           0x000000003fc8865c     0x9a84 build/fs/vfs/vfs.o
+                0x000000003fc8865c                mount_count
+                0x000000003fc88660                open_files
+                0x000000003fc91060                mounts
+ .bss           0x000000003fc920e0     0x6a14 build/fs/ramfs/ramfs.o
+ .bss           0x000000003fc98af4      0x6f8 build/fs/devfs/devfs.o
+                0x000000003fc98af4                uart_fops
+                0x000000003fc98b30                random_fops
+                0x000000003fc98b6c                zero_fops
+                0x000000003fc98ba8                null_fops
+ .bss           0x000000003fc991ec       0x30 build/fs/flashfs/flashfs.o
+                0x000000003fc991ec                flashfs_sb
+ .bss           0x000000003fc9921c        0x4 build/libc/string/string.o
+ .bss           0x000000003fc99220        0x4 build/libc/stdlib/stdlib.o
+                0x000000003fc99220                environ
+ .bss           0x000000003fc99224     0x1004 build/userland/sh/shell.o
  *(COMMON)
-                0x000000003fc9a1c0                . = ALIGN (0x4)
-                0x000000003fc9a1c0                _bss_end = .
+                0x000000003fc9a228                . = ALIGN (0x4)
+                0x000000003fc9a228                _bss_end = .
 
-.heap           0x000000003fc9a1c0     0x1000 load address 0x0000000040085b9c
-                0x000000003fc9a1c0                _heap_start = .
-                0x000000003fc9b1c0                . = (. + 0x1000)
- *fill*         0x000000003fc9a1c0     0x1000 
-                0x000000003fc9b1c0                _heap_end = .
+.heap           0x000000003fc9a228     0x8000 load address 0x0000000040086cd4
+                0x000000003fc9a228                _heap_start = .
+                0x000000003fca2228                . = (. + 0x8000)
+ *fill*         0x000000003fc9a228     0x8000 
+                0x000000003fca2228                _heap_end = .
 
-.stack          0x000000003fc9b1c0      0x800 load address 0x0000000040085ba0
-                0x000000003fc9b1c0                _stack_bottom = .
-                0x000000003fc9b9c0                . = (. + 0x800)
- *fill*         0x000000003fc9b1c0      0x800 
-                0x000000003fc9b9c0                _stack_top = .
-                0x000000003fc9b9c0                _kernel_end = .
+.stack          0x000000003fca2230     0x2000 load address 0x0000000040086ce0
+                0x000000003fca2230                _stack_bottom = .
+                0x000000003fca4230                . = (. + 0x2000)
+ *fill*         0x000000003fca2230     0x2000 
+                0x000000003fca4230                _stack_top = .
+                0x000000003fca4230                _kernel_end = .
+                0x000000003fc88000                _dram_start = ORIGIN (dram0_0_seg)
+                0x000000003fcb8000                _dram_end = (ORIGIN (dram0_0_seg) + LENGTH (dram0_0_seg))
+                0x000000003f800000                _psram_start = ORIGIN (psram_seg)
+                0x0000000040000000                _psram_end = (ORIGIN (psram_seg) + LENGTH (psram_seg))
 OUTPUT(build/bareos.elf elf32-xtensa-le)
 
 .xtensa.info    0x0000000000000000       0x38
@@ -939,18 +939,22 @@ OUTPUT(build/bareos.elf elf32-xtensa-le)
  .xtensa.info   0x0000000000000038        0x0 build/userland/sh/shell.o
 
 .comment        0x0000000000000000       0x26
- .comment       0x0000000000000000       0x26 build/arch/xtensa/traps/traps.o
+ .comment       0x0000000000000000       0x26 build/arch/xtensa/cpu/cpu.o
                                          0x27 (size before relaxing)
+ .comment       0x0000000000000026       0x27 build/arch/xtensa/traps/traps.o
  .comment       0x0000000000000026       0x27 build/arch/xtensa/timer/timer.o
  .comment       0x0000000000000026       0x27 build/kernel/core/kernel.o
  .comment       0x0000000000000026       0x27 build/kernel/scheduler/scheduler.o
+ .comment       0x0000000000000026       0x27 build/kernel/task/task.o
  .comment       0x0000000000000026       0x27 build/kernel/process/process.o
  .comment       0x0000000000000026       0x27 build/kernel/syscall/syscall.o
  .comment       0x0000000000000026       0x27 build/kernel/exec/exec.o
  .comment       0x0000000000000026       0x27 build/kernel/memory/memory.o
+ .comment       0x0000000000000026       0x27 build/kernel/sync/sync.o
  .comment       0x0000000000000026       0x27 build/kernel/panic/panic.o
  .comment       0x0000000000000026       0x27 build/drivers/uart/uart.o
  .comment       0x0000000000000026       0x27 build/drivers/flash/flash.o
+ .comment       0x0000000000000026       0x27 build/drivers/psram/psram.o
  .comment       0x0000000000000026       0x27 build/fs/vfs/vfs.o
  .comment       0x0000000000000026       0x27 build/fs/ramfs/ramfs.o
  .comment       0x0000000000000026       0x27 build/fs/devfs/devfs.o
@@ -963,280 +967,320 @@ OUTPUT(build/bareos.elf elf32-xtensa-le)
  .comment       0x0000000000000026       0x27 build/userland/init/init.o
  .comment       0x0000000000000026       0x27 build/userland/sh/shell.o
 
-.debug_line     0x0000000000000000    0x103e1
+.debug_line     0x0000000000000000    0x13832
  .debug_line    0x0000000000000000       0xfa build/arch/xtensa/boot/startup.o
- .debug_line    0x00000000000000fa      0x1c4 build/arch/xtensa/cpu/xtensa_regs.o
- .debug_line    0x00000000000002be      0x258 build/arch/xtensa/context/context.o
- .debug_line    0x0000000000000516      0x391 build/arch/xtensa/exceptions/vectors.o
- .debug_line    0x00000000000008a7      0x49c build/arch/xtensa/traps/traps.o
- .debug_line    0x0000000000000d43      0x2e6 build/arch/xtensa/timer/timer.o
- .debug_line    0x0000000000001029      0x35b build/kernel/core/kernel.o
- .debug_line    0x0000000000001384      0xb62 build/kernel/scheduler/scheduler.o
- .debug_line    0x0000000000001ee6      0x7e5 build/kernel/process/process.o
- .debug_line    0x00000000000026cb     0x22bb build/kernel/syscall/syscall.o
- .debug_line    0x0000000000004986      0x2cc build/kernel/exec/exec.o
- .debug_line    0x0000000000004c52      0x72a build/kernel/memory/memory.o
- .debug_line    0x000000000000537c      0x1d2 build/kernel/panic/panic.o
- .debug_line    0x000000000000554e      0x3d0 build/drivers/uart/uart.o
- .debug_line    0x000000000000591e      0x931 build/drivers/flash/flash.o
- .debug_line    0x000000000000624f     0x1e5d build/fs/vfs/vfs.o
- .debug_line    0x00000000000080ac     0x25a8 build/fs/ramfs/ramfs.o
- .debug_line    0x000000000000a654      0xa89 build/fs/devfs/devfs.o
- .debug_line    0x000000000000b0dd      0x848 build/fs/flashfs/flashfs.o
- .debug_line    0x000000000000b925      0xd06 build/libc/string/string.o
- .debug_line    0x000000000000c62b     0x1920 build/libc/stdio/stdio.o
- .debug_line    0x000000000000df4b      0x968 build/libc/stdlib/stdlib.o
- .debug_line    0x000000000000e8b3      0x423 build/libc/ctype/ctype.o
- .debug_line    0x000000000000ecd6      0xbca build/libc/posix/posix.o
- .debug_line    0x000000000000f8a0       0x5b build/userland/init/init.o
- .debug_line    0x000000000000f8fb      0xae6 build/userland/sh/shell.o
+ .debug_line    0x00000000000000fa      0x11b build/arch/xtensa/cpu/cpu.o
+ .debug_line    0x0000000000000215      0x1c4 build/arch/xtensa/cpu/xtensa_regs.o
+ .debug_line    0x00000000000003d9      0x258 build/arch/xtensa/context/context.o
+ .debug_line    0x0000000000000631      0x391 build/arch/xtensa/exceptions/vectors.o
+ .debug_line    0x00000000000009c2      0x49c build/arch/xtensa/traps/traps.o
+ .debug_line    0x0000000000000e5e      0x2e6 build/arch/xtensa/timer/timer.o
+ .debug_line    0x0000000000001144      0x35b build/kernel/core/kernel.o
+ .debug_line    0x000000000000149f      0xb62 build/kernel/scheduler/scheduler.o
+ .debug_line    0x0000000000002001      0x5f3 build/kernel/task/task.o
+ .debug_line    0x00000000000025f4      0x805 build/kernel/process/process.o
+ .debug_line    0x0000000000002df9     0x22bb build/kernel/syscall/syscall.o
+ .debug_line    0x00000000000050b4      0x2cc build/kernel/exec/exec.o
+ .debug_line    0x0000000000005380     0x238e build/kernel/memory/memory.o
+ .debug_line    0x000000000000770e      0x4df build/kernel/sync/sync.o
+ .debug_line    0x0000000000007bed      0x1d2 build/kernel/panic/panic.o
+ .debug_line    0x0000000000007dbf      0x3d0 build/drivers/uart/uart.o
+ .debug_line    0x000000000000818f      0x931 build/drivers/flash/flash.o
+ .debug_line    0x0000000000008ac0      0x9f5 build/drivers/psram/psram.o
+ .debug_line    0x00000000000094b5     0x1e5d build/fs/vfs/vfs.o
+ .debug_line    0x000000000000b312     0x25a8 build/fs/ramfs/ramfs.o
+ .debug_line    0x000000000000d8ba      0xa89 build/fs/devfs/devfs.o
+ .debug_line    0x000000000000e343      0x848 build/fs/flashfs/flashfs.o
+ .debug_line    0x000000000000eb8b      0xd06 build/libc/string/string.o
+ .debug_line    0x000000000000f891     0x1920 build/libc/stdio/stdio.o
+ .debug_line    0x00000000000111b1      0x968 build/libc/stdlib/stdlib.o
+ .debug_line    0x0000000000011b19      0x423 build/libc/ctype/ctype.o
+ .debug_line    0x0000000000011f3c      0xbca build/libc/posix/posix.o
+ .debug_line    0x0000000000012b06       0x5b build/userland/init/init.o
+ .debug_line    0x0000000000012b61      0xcd1 build/userland/sh/shell.o
 
 .debug_line_str
-                0x0000000000000000      0x4a5
+                0x0000000000000000      0x525
  .debug_line_str
                 0x0000000000000000       0x1b build/arch/xtensa/boot/startup.o
                                          0x36 (size before relaxing)
  .debug_line_str
-                0x000000000000001b       0x1e build/arch/xtensa/cpu/xtensa_regs.o
+                0x000000000000001b       0xd1 build/arch/xtensa/cpu/cpu.o
+                                        0x11d (size before relaxing)
+ .debug_line_str
+                0x00000000000000ec        0xe build/arch/xtensa/cpu/xtensa_regs.o
                                          0x3c (size before relaxing)
  .debug_line_str
-                0x0000000000000039       0x1e build/arch/xtensa/context/context.o
+                0x00000000000000fa       0x1e build/arch/xtensa/context/context.o
                                          0x3c (size before relaxing)
  .debug_line_str
-                0x0000000000000057       0x21 build/arch/xtensa/exceptions/vectors.o
+                0x0000000000000118       0x21 build/arch/xtensa/exceptions/vectors.o
                                          0x42 (size before relaxing)
  .debug_line_str
-                0x0000000000000078       0xe0 build/arch/xtensa/traps/traps.o
+                0x0000000000000139       0x35 build/arch/xtensa/traps/traps.o
                                         0x13a (size before relaxing)
  .debug_line_str
-                0x0000000000000158       0x35 build/arch/xtensa/timer/timer.o
+                0x000000000000016e       0x35 build/arch/xtensa/timer/timer.o
                                         0x143 (size before relaxing)
  .debug_line_str
-                0x000000000000018d       0x21 build/kernel/core/kernel.o
+                0x00000000000001a3       0x21 build/kernel/core/kernel.o
                                         0x134 (size before relaxing)
  .debug_line_str
-                0x00000000000001ae       0x2e build/kernel/scheduler/scheduler.o
+                0x00000000000001c4       0x2e build/kernel/scheduler/scheduler.o
                                         0x12f (size before relaxing)
  .debug_line_str
-                0x00000000000001dc       0x77 build/kernel/process/process.o
+                0x00000000000001f2       0x6e build/kernel/task/task.o
+                                        0x160 (size before relaxing)
+ .debug_line_str
+                0x0000000000000260       0x28 build/kernel/process/process.o
                                         0x172 (size before relaxing)
  .debug_line_str
-                0x0000000000000253       0x2e build/kernel/syscall/syscall.o
+                0x0000000000000288       0x2e build/kernel/syscall/syscall.o
                                         0x178 (size before relaxing)
  .debug_line_str
-                0x0000000000000281       0x33 build/kernel/exec/exec.o
+                0x00000000000002b6       0x33 build/kernel/exec/exec.o
                                         0x12b (size before relaxing)
  .debug_line_str
-                0x00000000000002b4       0x25 build/kernel/memory/memory.o
-                                        0x15b (size before relaxing)
+                0x00000000000002e9       0x2d build/kernel/memory/memory.o
+                                        0x174 (size before relaxing)
  .debug_line_str
-                0x00000000000002d9       0x22 build/kernel/panic/panic.o
+                0x0000000000000316       0x1f build/kernel/sync/sync.o
+                                        0x12e (size before relaxing)
+ .debug_line_str
+                0x0000000000000335       0x22 build/kernel/panic/panic.o
                                         0x134 (size before relaxing)
  .debug_line_str
-                0x00000000000002fb       0x21 build/drivers/uart/uart.o
+                0x0000000000000357       0x21 build/drivers/uart/uart.o
                                          0xfa (size before relaxing)
  .debug_line_str
-                0x000000000000031c       0x24 build/drivers/flash/flash.o
+                0x0000000000000378       0x24 build/drivers/flash/flash.o
                                         0x109 (size before relaxing)
  .debug_line_str
-                0x0000000000000340       0x1f build/fs/vfs/vfs.o
+                0x000000000000039c       0x24 build/drivers/psram/psram.o
+                                        0x109 (size before relaxing)
+ .debug_line_str
+                0x00000000000003c0       0x1f build/fs/vfs/vfs.o
                                         0x15f (size before relaxing)
  .debug_line_str
-                0x000000000000035f       0x1a build/fs/ramfs/ramfs.o
+                0x00000000000003df       0x1a build/fs/ramfs/ramfs.o
                                         0x160 (size before relaxing)
  .debug_line_str
-                0x0000000000000379       0x1a build/fs/devfs/devfs.o
+                0x00000000000003f9       0x1a build/fs/devfs/devfs.o
                                         0x160 (size before relaxing)
  .debug_line_str
-                0x0000000000000393       0x2a build/fs/flashfs/flashfs.o
+                0x0000000000000413       0x2a build/fs/flashfs/flashfs.o
                                         0x181 (size before relaxing)
  .debug_line_str
-                0x00000000000003bd       0x21 build/libc/string/string.o
+                0x000000000000043d       0x21 build/libc/string/string.o
                                          0xf9 (size before relaxing)
  .debug_line_str
-                0x00000000000003de       0x27 build/libc/stdio/stdio.o
+                0x000000000000045e       0x27 build/libc/stdio/stdio.o
                                         0x13f (size before relaxing)
  .debug_line_str
-                0x0000000000000405       0x21 build/libc/stdlib/stdlib.o
+                0x0000000000000485       0x21 build/libc/stdlib/stdlib.o
                                         0x11e (size before relaxing)
  .debug_line_str
-                0x0000000000000426       0x1e build/libc/ctype/ctype.o
+                0x00000000000004a6       0x1e build/libc/ctype/ctype.o
                                          0x99 (size before relaxing)
  .debug_line_str
-                0x0000000000000444       0x1e build/libc/posix/posix.o
+                0x00000000000004c4       0x1e build/libc/posix/posix.o
                                         0x13f (size before relaxing)
  .debug_line_str
-                0x0000000000000462       0x23 build/userland/init/init.o
+                0x00000000000004e2       0x23 build/userland/init/init.o
                                          0x9f (size before relaxing)
  .debug_line_str
-                0x0000000000000485       0x20 build/userland/sh/shell.o
-                                        0x11b (size before relaxing)
+                0x0000000000000505       0x20 build/userland/sh/shell.o
+                                        0x128 (size before relaxing)
 
-.debug_info     0x0000000000000000    0x104de
+.debug_info     0x0000000000000000    0x13971
  .debug_info    0x0000000000000000       0x23 build/arch/xtensa/boot/startup.o
- .debug_info    0x0000000000000023       0x25 build/arch/xtensa/cpu/xtensa_regs.o
- .debug_info    0x0000000000000048       0x25 build/arch/xtensa/context/context.o
- .debug_info    0x000000000000006d       0x23 build/arch/xtensa/exceptions/vectors.o
- .debug_info    0x0000000000000090      0x638 build/arch/xtensa/traps/traps.o
- .debug_info    0x00000000000006c8      0x667 build/arch/xtensa/timer/timer.o
- .debug_info    0x0000000000000d2f      0x8b7 build/kernel/core/kernel.o
- .debug_info    0x00000000000015e6      0x805 build/kernel/scheduler/scheduler.o
- .debug_info    0x0000000000001deb      0x7f2 build/kernel/process/process.o
- .debug_info    0x00000000000025dd     0x2282 build/kernel/syscall/syscall.o
- .debug_info    0x000000000000485f      0xadd build/kernel/exec/exec.o
- .debug_info    0x000000000000533c      0x459 build/kernel/memory/memory.o
- .debug_info    0x0000000000005795      0x6aa build/kernel/panic/panic.o
- .debug_info    0x0000000000005e3f      0x24d build/drivers/uart/uart.o
- .debug_info    0x000000000000608c      0x84a build/drivers/flash/flash.o
- .debug_info    0x00000000000068d6     0x1b0d build/fs/vfs/vfs.o
- .debug_info    0x00000000000083e3     0x17b1 build/fs/ramfs/ramfs.o
- .debug_info    0x0000000000009b94     0x1046 build/fs/devfs/devfs.o
- .debug_info    0x000000000000abda      0xfb7 build/fs/flashfs/flashfs.o
- .debug_info    0x000000000000bb91      0x6c1 build/libc/string/string.o
- .debug_info    0x000000000000c252     0x1624 build/libc/stdio/stdio.o
- .debug_info    0x000000000000d876      0x73d build/libc/stdlib/stdlib.o
- .debug_info    0x000000000000dfb3      0x42f build/libc/ctype/ctype.o
- .debug_info    0x000000000000e3e2     0x15c8 build/libc/posix/posix.o
- .debug_info    0x000000000000f9aa       0x9f build/userland/init/init.o
- .debug_info    0x000000000000fa49      0xa95 build/userland/sh/shell.o
+ .debug_info    0x0000000000000023      0x203 build/arch/xtensa/cpu/cpu.o
+ .debug_info    0x0000000000000226       0x25 build/arch/xtensa/cpu/xtensa_regs.o
+ .debug_info    0x000000000000024b       0x25 build/arch/xtensa/context/context.o
+ .debug_info    0x0000000000000270       0x23 build/arch/xtensa/exceptions/vectors.o
+ .debug_info    0x0000000000000293      0x638 build/arch/xtensa/traps/traps.o
+ .debug_info    0x00000000000008cb      0x6a3 build/arch/xtensa/timer/timer.o
+ .debug_info    0x0000000000000f6e      0x8f3 build/kernel/core/kernel.o
+ .debug_info    0x0000000000001861      0x841 build/kernel/scheduler/scheduler.o
+ .debug_info    0x00000000000020a2      0x683 build/kernel/task/task.o
+ .debug_info    0x0000000000002725      0x8cc build/kernel/process/process.o
+ .debug_info    0x0000000000002ff1     0x22c3 build/kernel/syscall/syscall.o
+ .debug_info    0x00000000000052b4      0xb1e build/kernel/exec/exec.o
+ .debug_info    0x0000000000005dd2     0x1871 build/kernel/memory/memory.o
+ .debug_info    0x0000000000007643      0x7a6 build/kernel/sync/sync.o
+ .debug_info    0x0000000000007de9      0x6e6 build/kernel/panic/panic.o
+ .debug_info    0x00000000000084cf      0x24d build/drivers/uart/uart.o
+ .debug_info    0x000000000000871c      0x84a build/drivers/flash/flash.o
+ .debug_info    0x0000000000008f66      0x9d1 build/drivers/psram/psram.o
+ .debug_info    0x0000000000009937     0x1b0d build/fs/vfs/vfs.o
+ .debug_info    0x000000000000b444     0x17b1 build/fs/ramfs/ramfs.o
+ .debug_info    0x000000000000cbf5     0x1087 build/fs/devfs/devfs.o
+ .debug_info    0x000000000000dc7c      0xfb7 build/fs/flashfs/flashfs.o
+ .debug_info    0x000000000000ec33      0x6c1 build/libc/string/string.o
+ .debug_info    0x000000000000f2f4     0x1624 build/libc/stdio/stdio.o
+ .debug_info    0x0000000000010918      0x73d build/libc/stdlib/stdlib.o
+ .debug_info    0x0000000000011055      0x42f build/libc/ctype/ctype.o
+ .debug_info    0x0000000000011484     0x1609 build/libc/posix/posix.o
+ .debug_info    0x0000000000012a8d       0x9f build/userland/init/init.o
+ .debug_info    0x0000000000012b2c      0xe45 build/userland/sh/shell.o
 
-.debug_abbrev   0x0000000000000000     0x3605
+.debug_abbrev   0x0000000000000000     0x3fc7
  .debug_abbrev  0x0000000000000000       0x12 build/arch/xtensa/boot/startup.o
- .debug_abbrev  0x0000000000000012       0x14 build/arch/xtensa/cpu/xtensa_regs.o
- .debug_abbrev  0x0000000000000026       0x14 build/arch/xtensa/context/context.o
- .debug_abbrev  0x000000000000003a       0x12 build/arch/xtensa/exceptions/vectors.o
- .debug_abbrev  0x000000000000004c      0x23d build/arch/xtensa/traps/traps.o
- .debug_abbrev  0x0000000000000289      0x217 build/arch/xtensa/timer/timer.o
- .debug_abbrev  0x00000000000004a0      0x21c build/kernel/core/kernel.o
- .debug_abbrev  0x00000000000006bc      0x277 build/kernel/scheduler/scheduler.o
- .debug_abbrev  0x0000000000000933      0x1ef build/kernel/process/process.o
- .debug_abbrev  0x0000000000000b22      0x431 build/kernel/syscall/syscall.o
- .debug_abbrev  0x0000000000000f53      0x1c1 build/kernel/exec/exec.o
- .debug_abbrev  0x0000000000001114      0x21a build/kernel/memory/memory.o
- .debug_abbrev  0x000000000000132e      0x151 build/kernel/panic/panic.o
- .debug_abbrev  0x000000000000147f      0x199 build/drivers/uart/uart.o
- .debug_abbrev  0x0000000000001618      0x208 build/drivers/flash/flash.o
- .debug_abbrev  0x0000000000001820      0x452 build/fs/vfs/vfs.o
- .debug_abbrev  0x0000000000001c72      0x3c1 build/fs/ramfs/ramfs.o
- .debug_abbrev  0x0000000000002033      0x2ef build/fs/devfs/devfs.o
- .debug_abbrev  0x0000000000002322      0x30f build/fs/flashfs/flashfs.o
- .debug_abbrev  0x0000000000002631      0x194 build/libc/string/string.o
- .debug_abbrev  0x00000000000027c5      0x3ab build/libc/stdio/stdio.o
- .debug_abbrev  0x0000000000002b70      0x2a5 build/libc/stdlib/stdlib.o
- .debug_abbrev  0x0000000000002e15      0x111 build/libc/ctype/ctype.o
- .debug_abbrev  0x0000000000002f26      0x39c build/libc/posix/posix.o
- .debug_abbrev  0x00000000000032c2       0x5f build/userland/init/init.o
- .debug_abbrev  0x0000000000003321      0x2e4 build/userland/sh/shell.o
+ .debug_abbrev  0x0000000000000012      0x12e build/arch/xtensa/cpu/cpu.o
+ .debug_abbrev  0x0000000000000140       0x14 build/arch/xtensa/cpu/xtensa_regs.o
+ .debug_abbrev  0x0000000000000154       0x14 build/arch/xtensa/context/context.o
+ .debug_abbrev  0x0000000000000168       0x12 build/arch/xtensa/exceptions/vectors.o
+ .debug_abbrev  0x000000000000017a      0x23d build/arch/xtensa/traps/traps.o
+ .debug_abbrev  0x00000000000003b7      0x217 build/arch/xtensa/timer/timer.o
+ .debug_abbrev  0x00000000000005ce      0x21c build/kernel/core/kernel.o
+ .debug_abbrev  0x00000000000007ea      0x277 build/kernel/scheduler/scheduler.o
+ .debug_abbrev  0x0000000000000a61      0x1e2 build/kernel/task/task.o
+ .debug_abbrev  0x0000000000000c43      0x1ef build/kernel/process/process.o
+ .debug_abbrev  0x0000000000000e32      0x431 build/kernel/syscall/syscall.o
+ .debug_abbrev  0x0000000000001263      0x1c1 build/kernel/exec/exec.o
+ .debug_abbrev  0x0000000000001424      0x504 build/kernel/memory/memory.o
+ .debug_abbrev  0x0000000000001928      0x1c6 build/kernel/sync/sync.o
+ .debug_abbrev  0x0000000000001aee      0x151 build/kernel/panic/panic.o
+ .debug_abbrev  0x0000000000001c3f      0x199 build/drivers/uart/uart.o
+ .debug_abbrev  0x0000000000001dd8      0x208 build/drivers/flash/flash.o
+ .debug_abbrev  0x0000000000001fe0      0x1fc build/drivers/psram/psram.o
+ .debug_abbrev  0x00000000000021dc      0x452 build/fs/vfs/vfs.o
+ .debug_abbrev  0x000000000000262e      0x3c1 build/fs/ramfs/ramfs.o
+ .debug_abbrev  0x00000000000029ef      0x2ef build/fs/devfs/devfs.o
+ .debug_abbrev  0x0000000000002cde      0x30f build/fs/flashfs/flashfs.o
+ .debug_abbrev  0x0000000000002fed      0x194 build/libc/string/string.o
+ .debug_abbrev  0x0000000000003181      0x3ab build/libc/stdio/stdio.o
+ .debug_abbrev  0x000000000000352c      0x2a5 build/libc/stdlib/stdlib.o
+ .debug_abbrev  0x00000000000037d1      0x111 build/libc/ctype/ctype.o
+ .debug_abbrev  0x00000000000038e2      0x39c build/libc/posix/posix.o
+ .debug_abbrev  0x0000000000003c7e       0x5f build/userland/init/init.o
+ .debug_abbrev  0x0000000000003cdd      0x2ea build/userland/sh/shell.o
 
-.debug_aranges  0x0000000000000000      0x350
+.debug_aranges  0x0000000000000000      0x3d0
  .debug_aranges
                 0x0000000000000000       0x28 build/arch/xtensa/boot/startup.o
  .debug_aranges
-                0x0000000000000028       0x20 build/arch/xtensa/cpu/xtensa_regs.o
+                0x0000000000000028       0x20 build/arch/xtensa/cpu/cpu.o
  .debug_aranges
-                0x0000000000000048       0x20 build/arch/xtensa/context/context.o
+                0x0000000000000048       0x20 build/arch/xtensa/cpu/xtensa_regs.o
  .debug_aranges
-                0x0000000000000068       0x28 build/arch/xtensa/exceptions/vectors.o
+                0x0000000000000068       0x20 build/arch/xtensa/context/context.o
  .debug_aranges
-                0x0000000000000090       0x20 build/arch/xtensa/traps/traps.o
+                0x0000000000000088       0x28 build/arch/xtensa/exceptions/vectors.o
  .debug_aranges
-                0x00000000000000b0       0x20 build/arch/xtensa/timer/timer.o
+                0x00000000000000b0       0x20 build/arch/xtensa/traps/traps.o
  .debug_aranges
-                0x00000000000000d0       0x20 build/kernel/core/kernel.o
+                0x00000000000000d0       0x20 build/arch/xtensa/timer/timer.o
  .debug_aranges
-                0x00000000000000f0       0x20 build/kernel/scheduler/scheduler.o
+                0x00000000000000f0       0x20 build/kernel/core/kernel.o
  .debug_aranges
-                0x0000000000000110       0x20 build/kernel/process/process.o
+                0x0000000000000110       0x20 build/kernel/scheduler/scheduler.o
  .debug_aranges
-                0x0000000000000130       0x20 build/kernel/syscall/syscall.o
+                0x0000000000000130       0x20 build/kernel/task/task.o
  .debug_aranges
-                0x0000000000000150       0x20 build/kernel/exec/exec.o
+                0x0000000000000150       0x20 build/kernel/process/process.o
  .debug_aranges
-                0x0000000000000170       0x20 build/kernel/memory/memory.o
+                0x0000000000000170       0x20 build/kernel/syscall/syscall.o
  .debug_aranges
-                0x0000000000000190       0x20 build/kernel/panic/panic.o
+                0x0000000000000190       0x20 build/kernel/exec/exec.o
  .debug_aranges
-                0x00000000000001b0       0x20 build/drivers/uart/uart.o
+                0x00000000000001b0       0x20 build/kernel/memory/memory.o
  .debug_aranges
-                0x00000000000001d0       0x20 build/drivers/flash/flash.o
+                0x00000000000001d0       0x20 build/kernel/sync/sync.o
  .debug_aranges
-                0x00000000000001f0       0x20 build/fs/vfs/vfs.o
+                0x00000000000001f0       0x20 build/kernel/panic/panic.o
  .debug_aranges
-                0x0000000000000210       0x20 build/fs/ramfs/ramfs.o
+                0x0000000000000210       0x20 build/drivers/uart/uart.o
  .debug_aranges
-                0x0000000000000230       0x20 build/fs/devfs/devfs.o
+                0x0000000000000230       0x20 build/drivers/flash/flash.o
  .debug_aranges
-                0x0000000000000250       0x20 build/fs/flashfs/flashfs.o
+                0x0000000000000250       0x20 build/drivers/psram/psram.o
  .debug_aranges
-                0x0000000000000270       0x20 build/libc/string/string.o
+                0x0000000000000270       0x20 build/fs/vfs/vfs.o
  .debug_aranges
-                0x0000000000000290       0x20 build/libc/stdio/stdio.o
+                0x0000000000000290       0x20 build/fs/ramfs/ramfs.o
  .debug_aranges
-                0x00000000000002b0       0x20 build/libc/stdlib/stdlib.o
+                0x00000000000002b0       0x20 build/fs/devfs/devfs.o
  .debug_aranges
-                0x00000000000002d0       0x20 build/libc/ctype/ctype.o
+                0x00000000000002d0       0x20 build/fs/flashfs/flashfs.o
  .debug_aranges
-                0x00000000000002f0       0x20 build/libc/posix/posix.o
+                0x00000000000002f0       0x20 build/libc/string/string.o
  .debug_aranges
-                0x0000000000000310       0x20 build/userland/init/init.o
+                0x0000000000000310       0x20 build/libc/stdio/stdio.o
  .debug_aranges
-                0x0000000000000330       0x20 build/userland/sh/shell.o
+                0x0000000000000330       0x20 build/libc/stdlib/stdlib.o
+ .debug_aranges
+                0x0000000000000350       0x20 build/libc/ctype/ctype.o
+ .debug_aranges
+                0x0000000000000370       0x20 build/libc/posix/posix.o
+ .debug_aranges
+                0x0000000000000390       0x20 build/userland/init/init.o
+ .debug_aranges
+                0x00000000000003b0       0x20 build/userland/sh/shell.o
 
-.debug_str      0x0000000000000000     0x158d
+.debug_str      0x0000000000000000     0x19bb
  .debug_str     0x0000000000000000       0x48 build/arch/xtensa/boot/startup.o
- .debug_str     0x0000000000000048        0xe build/arch/xtensa/cpu/xtensa_regs.o
+ .debug_str     0x0000000000000048      0x151 build/arch/xtensa/cpu/cpu.o
+                                        0x185 (size before relaxing)
+ .debug_str     0x0000000000000199        0xe build/arch/xtensa/cpu/xtensa_regs.o
                                          0x4c (size before relaxing)
- .debug_str     0x0000000000000056        0xa build/arch/xtensa/context/context.o
+ .debug_str     0x00000000000001a7        0xa build/arch/xtensa/context/context.o
                                          0x48 (size before relaxing)
- .debug_str     0x0000000000000060        0xa build/arch/xtensa/exceptions/vectors.o
+ .debug_str     0x00000000000001b1        0xa build/arch/xtensa/exceptions/vectors.o
                                          0x48 (size before relaxing)
- .debug_str     0x000000000000006a      0x2a9 build/arch/xtensa/traps/traps.o
+ .debug_str     0x00000000000001bb      0x188 build/arch/xtensa/traps/traps.o
                                         0x2f0 (size before relaxing)
- .debug_str     0x0000000000000313      0x191 build/arch/xtensa/timer/timer.o
-                                        0x347 (size before relaxing)
- .debug_str     0x00000000000004a4      0x11c build/kernel/core/kernel.o
-                                        0x3c2 (size before relaxing)
- .debug_str     0x00000000000005c0       0x7b build/kernel/scheduler/scheduler.o
-                                        0x330 (size before relaxing)
- .debug_str     0x000000000000063b       0x6d build/kernel/process/process.o
-                                        0x359 (size before relaxing)
- .debug_str     0x00000000000006a8      0x354 build/kernel/syscall/syscall.o
-                                        0x6e3 (size before relaxing)
- .debug_str     0x00000000000009fc       0x4e build/kernel/exec/exec.o
-                                        0x440 (size before relaxing)
- .debug_str     0x0000000000000a4a       0x61 build/kernel/memory/memory.o
-                                        0x1e4 (size before relaxing)
- .debug_str     0x0000000000000aab       0x2c build/kernel/panic/panic.o
-                                        0x2e9 (size before relaxing)
- .debug_str     0x0000000000000ad7       0x1b build/drivers/uart/uart.o
+ .debug_str     0x0000000000000343      0x195 build/arch/xtensa/timer/timer.o
+                                        0x36c (size before relaxing)
+ .debug_str     0x00000000000004d8      0x116 build/kernel/core/kernel.o
+                                        0x3e7 (size before relaxing)
+ .debug_str     0x00000000000005ee       0x7b build/kernel/scheduler/scheduler.o
+                                        0x355 (size before relaxing)
+ .debug_str     0x0000000000000669       0x68 build/kernel/task/task.o
+                                        0x2db (size before relaxing)
+ .debug_str     0x00000000000006d1       0x8c build/kernel/process/process.o
+                                        0x3d3 (size before relaxing)
+ .debug_str     0x000000000000075d      0x34a build/kernel/syscall/syscall.o
+                                        0x708 (size before relaxing)
+ .debug_str     0x0000000000000aa7       0x4e build/kernel/exec/exec.o
+                                        0x465 (size before relaxing)
+ .debug_str     0x0000000000000af5      0x2f3 build/kernel/memory/memory.o
+                                        0x5d2 (size before relaxing)
+ .debug_str     0x0000000000000de8       0x8a build/kernel/sync/sync.o
+                                        0x394 (size before relaxing)
+ .debug_str     0x0000000000000e72       0x23 build/kernel/panic/panic.o
+                                        0x30e (size before relaxing)
+ .debug_str     0x0000000000000e95       0x1b build/drivers/uart/uart.o
                                         0x13d (size before relaxing)
- .debug_str     0x0000000000000af2       0xb7 build/drivers/flash/flash.o
+ .debug_str     0x0000000000000eb0       0xb7 build/drivers/flash/flash.o
                                         0x1d8 (size before relaxing)
- .debug_str     0x0000000000000ba9      0x10a build/fs/vfs/vfs.o
+ .debug_str     0x0000000000000f67       0x4f build/drivers/psram/psram.o
+                                        0x1c1 (size before relaxing)
+ .debug_str     0x0000000000000fb6      0x10a build/fs/vfs/vfs.o
                                         0x48a (size before relaxing)
- .debug_str     0x0000000000000cb3      0x1bf build/fs/ramfs/ramfs.o
+ .debug_str     0x00000000000010c0      0x1bf build/fs/ramfs/ramfs.o
                                         0x4ca (size before relaxing)
- .debug_str     0x0000000000000e72       0xcd build/fs/devfs/devfs.o
-                                        0x4e2 (size before relaxing)
- .debug_str     0x0000000000000f3f      0x28e build/fs/flashfs/flashfs.o
+ .debug_str     0x000000000000127f       0xcd build/fs/devfs/devfs.o
+                                        0x507 (size before relaxing)
+ .debug_str     0x000000000000134c      0x28e build/fs/flashfs/flashfs.o
                                         0x5af (size before relaxing)
- .debug_str     0x00000000000011cd       0x7e build/libc/string/string.o
+ .debug_str     0x00000000000015da       0x7e build/libc/string/string.o
                                         0x1af (size before relaxing)
- .debug_str     0x000000000000124b      0x138 build/libc/stdio/stdio.o
+ .debug_str     0x0000000000001658      0x138 build/libc/stdio/stdio.o
                                         0x40b (size before relaxing)
- .debug_str     0x0000000000001383       0x73 build/libc/stdlib/stdlib.o
+ .debug_str     0x0000000000001790       0x65 build/libc/stdlib/stdlib.o
                                         0x22b (size before relaxing)
- .debug_str     0x00000000000013f6       0x69 build/libc/ctype/ctype.o
+ .debug_str     0x00000000000017f5       0x69 build/libc/ctype/ctype.o
                                         0x162 (size before relaxing)
- .debug_str     0x000000000000145f       0x7e build/libc/posix/posix.o
-                                        0x589 (size before relaxing)
- .debug_str     0x00000000000014dd        0xb build/userland/init/init.o
+ .debug_str     0x000000000000185e       0x78 build/libc/posix/posix.o
+                                        0x5ae (size before relaxing)
+ .debug_str     0x00000000000018d6        0xb build/userland/init/init.o
                                         0x10e (size before relaxing)
- .debug_str     0x00000000000014e8       0xa5 build/userland/sh/shell.o
-                                        0x298 (size before relaxing)
+ .debug_str     0x00000000000018e1       0xda build/userland/sh/shell.o
+                                        0x391 (size before relaxing)
 
 .debug_rnglists
-                0x0000000000000000      0x6b1
+                0x0000000000000000      0x8e7
  .debug_rnglists
                 0x0000000000000000       0x19 build/arch/xtensa/boot/startup.o
  .debug_rnglists
@@ -1248,101 +1292,117 @@ OUTPUT(build/bareos.elf elf32-xtensa-le)
  .debug_rnglists
                 0x000000000000007e       0x31 build/kernel/scheduler/scheduler.o
  .debug_rnglists
-                0x00000000000000af       0x17 build/kernel/process/process.o
+                0x00000000000000af       0x1c build/kernel/task/task.o
  .debug_rnglists
-                0x00000000000000c6       0xdd build/kernel/syscall/syscall.o
+                0x00000000000000cb       0x17 build/kernel/process/process.o
  .debug_rnglists
-                0x00000000000001a3       0x27 build/kernel/memory/memory.o
+                0x00000000000000e2       0xdd build/kernel/syscall/syscall.o
  .debug_rnglists
-                0x00000000000001ca       0x2d build/drivers/uart/uart.o
+                0x00000000000001bf      0x178 build/kernel/memory/memory.o
  .debug_rnglists
-                0x00000000000001f7       0x7a build/drivers/flash/flash.o
+                0x0000000000000337       0x2d build/drivers/uart/uart.o
  .debug_rnglists
-                0x0000000000000271      0x105 build/fs/vfs/vfs.o
+                0x0000000000000364       0x7a build/drivers/flash/flash.o
  .debug_rnglists
-                0x0000000000000376      0x135 build/fs/ramfs/ramfs.o
+                0x00000000000003de       0xb3 build/drivers/psram/psram.o
  .debug_rnglists
-                0x00000000000004ab       0x4c build/fs/devfs/devfs.o
+                0x0000000000000491      0x105 build/fs/vfs/vfs.o
  .debug_rnglists
-                0x00000000000004f7       0x42 build/fs/flashfs/flashfs.o
+                0x0000000000000596      0x135 build/fs/ramfs/ramfs.o
  .debug_rnglists
-                0x0000000000000539       0x3c build/libc/string/string.o
+                0x00000000000006cb       0x4c build/fs/devfs/devfs.o
  .debug_rnglists
-                0x0000000000000575       0xa8 build/libc/stdio/stdio.o
+                0x0000000000000717       0x42 build/fs/flashfs/flashfs.o
  .debug_rnglists
-                0x000000000000061d       0x22 build/libc/stdlib/stdlib.o
+                0x0000000000000759       0x3c build/libc/string/string.o
  .debug_rnglists
-                0x000000000000063f       0x22 build/libc/ctype/ctype.o
+                0x0000000000000795       0xa8 build/libc/stdio/stdio.o
  .debug_rnglists
-                0x0000000000000661       0x17 build/libc/posix/posix.o
+                0x000000000000083d       0x22 build/libc/stdlib/stdlib.o
  .debug_rnglists
-                0x0000000000000678       0x39 build/userland/sh/shell.o
+                0x000000000000085f       0x22 build/libc/ctype/ctype.o
+ .debug_rnglists
+                0x0000000000000881       0x17 build/libc/posix/posix.o
+ .debug_rnglists
+                0x0000000000000898       0x4f build/userland/sh/shell.o
 
-.debug_frame    0x0000000000000000     0x1a20
- .debug_frame   0x0000000000000000       0xe8 build/arch/xtensa/traps/traps.o
- .debug_frame   0x00000000000000e8       0xa0 build/arch/xtensa/timer/timer.o
- .debug_frame   0x0000000000000188       0xa0 build/kernel/core/kernel.o
- .debug_frame   0x0000000000000228       0xe8 build/kernel/scheduler/scheduler.o
- .debug_frame   0x0000000000000310       0xa0 build/kernel/process/process.o
- .debug_frame   0x00000000000003b0      0x250 build/kernel/syscall/syscall.o
- .debug_frame   0x0000000000000600       0x40 build/kernel/exec/exec.o
- .debug_frame   0x0000000000000640       0xe8 build/kernel/memory/memory.o
- .debug_frame   0x0000000000000728       0x28 build/kernel/panic/panic.o
- .debug_frame   0x0000000000000750       0xa0 build/drivers/uart/uart.o
- .debug_frame   0x00000000000007f0       0x88 build/drivers/flash/flash.o
- .debug_frame   0x0000000000000878      0x250 build/fs/vfs/vfs.o
- .debug_frame   0x0000000000000ac8      0x1a8 build/fs/ramfs/ramfs.o
- .debug_frame   0x0000000000000c70      0x118 build/fs/devfs/devfs.o
- .debug_frame   0x0000000000000d88      0x178 build/fs/flashfs/flashfs.o
- .debug_frame   0x0000000000000f00      0x1a8 build/libc/string/string.o
- .debug_frame   0x00000000000010a8      0x238 build/libc/stdio/stdio.o
- .debug_frame   0x00000000000012e0      0x1f0 build/libc/stdlib/stdlib.o
- .debug_frame   0x00000000000014d0      0x148 build/libc/ctype/ctype.o
- .debug_frame   0x0000000000001618      0x2e0 build/libc/posix/posix.o
- .debug_frame   0x00000000000018f8       0x28 build/userland/init/init.o
- .debug_frame   0x0000000000001920      0x100 build/userland/sh/shell.o
+.debug_frame    0x0000000000000000     0x1df0
+ .debug_frame   0x0000000000000000       0x58 build/arch/xtensa/cpu/cpu.o
+ .debug_frame   0x0000000000000058       0xe8 build/arch/xtensa/traps/traps.o
+ .debug_frame   0x0000000000000140       0xa0 build/arch/xtensa/timer/timer.o
+ .debug_frame   0x00000000000001e0       0xa0 build/kernel/core/kernel.o
+ .debug_frame   0x0000000000000280       0xe8 build/kernel/scheduler/scheduler.o
+ .debug_frame   0x0000000000000368       0x70 build/kernel/task/task.o
+ .debug_frame   0x00000000000003d8       0xe8 build/kernel/process/process.o
+ .debug_frame   0x00000000000004c0      0x250 build/kernel/syscall/syscall.o
+ .debug_frame   0x0000000000000710       0x40 build/kernel/exec/exec.o
+ .debug_frame   0x0000000000000750      0x238 build/kernel/memory/memory.o
+ .debug_frame   0x0000000000000988       0xe8 build/kernel/sync/sync.o
+ .debug_frame   0x0000000000000a70       0x28 build/kernel/panic/panic.o
+ .debug_frame   0x0000000000000a98       0xa0 build/drivers/uart/uart.o
+ .debug_frame   0x0000000000000b38       0x88 build/drivers/flash/flash.o
+ .debug_frame   0x0000000000000bc0       0x70 build/drivers/psram/psram.o
+ .debug_frame   0x0000000000000c30      0x250 build/fs/vfs/vfs.o
+ .debug_frame   0x0000000000000e80      0x1a8 build/fs/ramfs/ramfs.o
+ .debug_frame   0x0000000000001028      0x118 build/fs/devfs/devfs.o
+ .debug_frame   0x0000000000001140      0x178 build/fs/flashfs/flashfs.o
+ .debug_frame   0x00000000000012b8      0x1a8 build/libc/string/string.o
+ .debug_frame   0x0000000000001460      0x238 build/libc/stdio/stdio.o
+ .debug_frame   0x0000000000001698      0x1f0 build/libc/stdlib/stdlib.o
+ .debug_frame   0x0000000000001888      0x148 build/libc/ctype/ctype.o
+ .debug_frame   0x00000000000019d0      0x2e0 build/libc/posix/posix.o
+ .debug_frame   0x0000000000001cb0       0x28 build/userland/init/init.o
+ .debug_frame   0x0000000000001cd8      0x118 build/userland/sh/shell.o
 
 .debug_loclists
-                0x0000000000000000     0x56cb
+                0x0000000000000000     0x6670
  .debug_loclists
-                0x0000000000000000       0xf9 build/arch/xtensa/traps/traps.o
+                0x0000000000000000       0x3d build/arch/xtensa/cpu/cpu.o
  .debug_loclists
-                0x00000000000000f9      0x103 build/arch/xtensa/timer/timer.o
+                0x000000000000003d       0xf9 build/arch/xtensa/traps/traps.o
  .debug_loclists
-                0x00000000000001fc       0x74 build/kernel/core/kernel.o
+                0x0000000000000136      0x103 build/arch/xtensa/timer/timer.o
  .debug_loclists
-                0x0000000000000270      0x2b6 build/kernel/scheduler/scheduler.o
+                0x0000000000000239       0x74 build/kernel/core/kernel.o
  .debug_loclists
-                0x0000000000000526      0x117 build/kernel/process/process.o
+                0x00000000000002ad      0x2b6 build/kernel/scheduler/scheduler.o
  .debug_loclists
-                0x000000000000063d      0xef9 build/kernel/syscall/syscall.o
+                0x0000000000000563       0xc0 build/kernel/task/task.o
  .debug_loclists
-                0x0000000000001536      0x106 build/kernel/exec/exec.o
+                0x0000000000000623      0x10a build/kernel/process/process.o
  .debug_loclists
-                0x000000000000163c      0x207 build/kernel/memory/memory.o
+                0x000000000000072d      0xef9 build/kernel/syscall/syscall.o
  .debug_loclists
-                0x0000000000001843       0x2c build/kernel/panic/panic.o
+                0x0000000000001626      0x106 build/kernel/exec/exec.o
  .debug_loclists
-                0x000000000000186f       0xde build/drivers/uart/uart.o
+                0x000000000000172c      0x9cd build/kernel/memory/memory.o
  .debug_loclists
-                0x000000000000194d      0x54d build/drivers/flash/flash.o
+                0x00000000000020f9       0x83 build/kernel/sync/sync.o
  .debug_loclists
-                0x0000000000001e9a      0xa96 build/fs/vfs/vfs.o
+                0x000000000000217c       0x2c build/kernel/panic/panic.o
  .debug_loclists
-                0x0000000000002930      0xb10 build/fs/ramfs/ramfs.o
+                0x00000000000021a8       0xde build/drivers/uart/uart.o
  .debug_loclists
-                0x0000000000003440      0x369 build/fs/devfs/devfs.o
+                0x0000000000002286      0x54d build/drivers/flash/flash.o
  .debug_loclists
-                0x00000000000037a9      0x2a8 build/fs/flashfs/flashfs.o
+                0x00000000000027d3      0x62d build/drivers/psram/psram.o
  .debug_loclists
-                0x0000000000003a51      0x653 build/libc/string/string.o
+                0x0000000000002e00      0xa96 build/fs/vfs/vfs.o
  .debug_loclists
-                0x00000000000040a4      0xa80 build/libc/stdio/stdio.o
+                0x0000000000003896      0xb10 build/fs/ramfs/ramfs.o
  .debug_loclists
-                0x0000000000004b24      0x2d0 build/libc/stdlib/stdlib.o
+                0x00000000000043a6      0x369 build/fs/devfs/devfs.o
  .debug_loclists
-                0x0000000000004df4      0x19c build/libc/ctype/ctype.o
+                0x000000000000470f      0x2a8 build/fs/flashfs/flashfs.o
  .debug_loclists
-                0x0000000000004f90      0x3ec build/libc/posix/posix.o
+                0x00000000000049b7      0x653 build/libc/string/string.o
  .debug_loclists
-                0x000000000000537c      0x34f build/userland/sh/shell.o
+                0x000000000000500a      0xa80 build/libc/stdio/stdio.o
+ .debug_loclists
+                0x0000000000005a8a      0x2d0 build/libc/stdlib/stdlib.o
+ .debug_loclists
+                0x0000000000005d5a      0x19c build/libc/ctype/ctype.o
+ .debug_loclists
+                0x0000000000005ef6      0x3ec build/libc/posix/posix.o
+ .debug_loclists
+                0x00000000000062e2      0x38e build/userland/sh/shell.o

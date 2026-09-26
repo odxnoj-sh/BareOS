@@ -25,6 +25,8 @@ struct task *task_create(struct process *proc, void (*entry)(void), uint8_t prio
     task->flags = 0;
     task->process = proc;
     task->exit_code = 0;
+    task->heap_allocated = 0;
+    task->heap_freed = 0;
 
     task->stack_size = TASK_STACK_SIZE;
     task->stack_base = kmalloc_aligned(TASK_STACK_SIZE, 16);
@@ -33,6 +35,9 @@ struct task *task_create(struct process *proc, void (*entry)(void), uint8_t prio
         kfree(task);
         return NULL;
     }
+
+    memset(task->stack_base, 0xA5, task->stack_size);
+    task->stack_used = 0;
 
     task->context = (struct task_context *)((uint32_t)task->stack_base + task->stack_size - sizeof(struct task_context));
     memset(task->context, 0, sizeof(struct task_context));
@@ -48,24 +53,6 @@ struct task *task_create(struct process *proc, void (*entry)(void), uint8_t prio
 
     task_table[task->tid] = task;
     return task;
-}
-
-void task_destroy(struct task *task) {
-    if (!task) return;
-
-    if (task->stack_base) {
-        kfree(task->stack_base);
-    }
-
-    if (task->prev) task->prev->next = task->next;
-    if (task->next) task->next->prev = task->prev;
-    if (task->process && task->process->tasks == task) {
-        task->process->tasks = task->next;
-    }
-    if (task->process) task->process->task_count--;
-
-    free_tid(task->tid);
-    kfree(task);
 }
 
 struct process *process_create(const char *name) {
@@ -98,6 +85,8 @@ struct process *process_create(const char *name) {
     proc->heap_start = NULL;
     proc->heap_end = NULL;
     proc->heap_brk = NULL;
+    proc->heap_allocated = 0;
+    proc->heap_freed = 0;
 
     process_table[proc->pid] = proc;
     return proc;
@@ -136,4 +125,28 @@ int get_fd_count(void) {
     struct task *current = cpu_states[0].current_task;
     if (!current || !current->process) return 0;
     return current->process->fd_count;
+}
+
+void process_account_alloc(struct process *proc, size_t size) {
+    if (proc) {
+        proc->heap_allocated += size;
+    }
+}
+
+void process_account_free(struct process *proc, size_t size) {
+    if (proc) {
+        proc->heap_freed += size;
+    }
+}
+
+void task_account_alloc(struct task *task, size_t size) {
+    if (task) {
+        task->heap_allocated += size;
+    }
+}
+
+void task_account_free(struct task *task, size_t size) {
+    if (task) {
+        task->heap_freed += size;
+    }
 }

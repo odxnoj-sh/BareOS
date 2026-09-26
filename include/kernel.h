@@ -92,11 +92,14 @@ struct task {
     struct task_context *context;
     void *stack_base;
     size_t stack_size;
+    size_t stack_used;
     struct task *next;
     struct task *prev;
     struct process *process;
     uint32_t wake_time;
     int exit_code;
+    uint32_t heap_allocated;
+    uint32_t heap_freed;
 };
 
 struct process {
@@ -114,6 +117,8 @@ struct process {
     void *heap_start;
     void *heap_end;
     void *heap_brk;
+    uint32_t heap_allocated;
+    uint32_t heap_freed;
     struct process *parent;
     struct process *children;
     struct process *sibling;
@@ -136,6 +141,29 @@ extern struct process *process_table[MAX_PROCESSES];
 extern struct task *task_table[MAX_TASKS];
 extern int current_pid;
 extern int current_tid;
+
+struct mutex {
+    volatile int locked;
+    struct task *owner;
+    int count;
+};
+
+void mutex_init(struct mutex *m);
+void mutex_lock(struct mutex *m);
+void mutex_unlock(struct mutex *m);
+
+struct semaphore {
+    volatile int count;
+    struct task *waiters;
+};
+
+void semaphore_init(struct semaphore *s, int value);
+void semaphore_wait(struct semaphore *s);
+void semaphore_signal(struct semaphore *s);
+
+void spinlock_init(volatile int *lock);
+void spinlock_acquire(volatile int *lock);
+void spinlock_release(volatile int *lock);
 
 void kernel_main(void);
 void kernel_init(void);
@@ -164,6 +192,32 @@ void *kmalloc(size_t size);
 void *kzalloc(size_t size);
 void kfree(void *ptr);
 void *kmalloc_aligned(size_t size, size_t align);
+void *kmalloc_psram(size_t size);
+void *kzalloc_psram(size_t size);
+void kfree_psram(void *ptr);
+void *krealloc(void *ptr, size_t size);
+
+void memory_stats(uint32_t *total, uint32_t *used, uint32_t *free);
+void memory_region_stats(int region, uint32_t *total, uint32_t *used, uint32_t *free, uint32_t *block_count);
+int memory_check_heap(void);
+int psram_is_available(void);
+uint32_t psram_get_total(void);
+uint32_t psram_get_free(void);
+uint32_t psram_get_used(void);
+uint32_t internal_get_total(void);
+uint32_t internal_get_free(void);
+uint32_t internal_get_used(void);
+
+struct mem_region_info {
+    uint32_t start;
+    uint32_t end;
+    uint32_t size;
+    uint32_t used;
+    uint32_t free;
+    char name[16];
+};
+
+void memory_get_regions(struct mem_region_info *info, int max_regions);
 
 void syscall_handler(struct task_context *ctx);
 

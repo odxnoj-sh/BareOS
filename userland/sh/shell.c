@@ -16,6 +16,7 @@ void builtin_env(void);
 void builtin_export(int argc, char **argv);
 void builtin_unset(int argc, char **argv);
 void builtin_history(void);
+void builtin_memstat(void);
 
 void shell_init(void) {
     extern char *cwd;
@@ -65,6 +66,8 @@ void shell_main(void) {
             builtin_unset(argc, argv);
         } else if (strcmp(argv[0], "history") == 0) {
             builtin_history();
+        } else if (strcmp(argv[0], "memstat") == 0) {
+            builtin_memstat();
         } else {
             execute_command(argc, argv);
         }
@@ -145,4 +148,40 @@ void builtin_history(void) {
     for (int i = 0; i < history_count; i++) {
         printf("%d  %s\n", i + 1, history[i]);
     }
+}
+
+void builtin_memstat(void) {
+    uint32_t total, used, free;
+    memory_stats(&total, &used, &free);
+    printf("=== Memory Statistics ===\n");
+    printf("Total:   %u KB\n", total / 1024);
+    printf("Used:    %u KB\n", used / 1024);
+    printf("Free:    %u KB\n", free / 1024);
+    printf("\n");
+
+    for (int i = 0; i < 2; i++) {
+        uint32_t r_total, r_used, r_free, r_blocks;
+        memory_region_stats(i, &r_total, &r_used, &r_free, &r_blocks);
+        if (r_total == 0) continue;
+        printf("Region %d:\n", i);
+        printf("  Total:  %u KB\n", r_total / 1024);
+        printf("  Used:   %u KB\n", r_used / 1024);
+        printf("  Free:   %u KB\n", r_free / 1024);
+        printf("  Blocks: %u\n", r_blocks);
+    }
+
+    if (psram_is_available()) {
+        printf("\nPSRAM:\n");
+        printf("  Total: %u KB\n", psram_get_total() / 1024);
+        printf("  Used:  %u KB\n", psram_get_used() / 1024);
+        printf("  Free:  %u KB\n", psram_get_free() / 1024);
+    }
+
+    printf("\nInternal DRAM:\n");
+    printf("  Total: %u KB\n", internal_get_total() / 1024);
+    printf("  Used:  %u KB\n", internal_get_used() / 1024);
+    printf("  Free:  %u KB\n", internal_get_free() / 1024);
+
+    int check = memory_check_heap();
+    printf("\nHeap integrity: %s\n", check == 0 ? "OK" : "CORRUPTED");
 }
