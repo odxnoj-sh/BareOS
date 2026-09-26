@@ -92,3 +92,32 @@ The ESP32-S3 has no MMU. This fundamentally changes OS design:
 - Better type safety
 - Widely supported by GCC/Clang
 - No C++ runtime overhead
+
+## Why Layered Network Stack?
+
+- Clear separation of concerns
+- Each layer has single responsibility
+- Easy to test and debug
+- Hardware drivers can be swapped without changing upper layers
+- Loopback uses same upper layers as real hardware
+
+## Why Socket Integration with VFS?
+
+- Sockets are file descriptors
+- Reuses existing fd allocation and management
+- Consistent API with files/pipes
+- No parallel fd namespace needed
+
+## Why Real Checksums?
+
+- Loopback must behave like real network
+- Catches corruption in transit
+- Required for interoperability
+- IPv4/UDP/ICMP all have standard checksums
+
+## Why ARP Cache with Timeout?
+
+- Ethernet networks need address resolution
+- Cache avoids repeated ARP requests
+- Timeout handles topology changes
+- Small cache sufficient for embedded use

@@ -32,6 +32,7 @@ if not exist build\kernel\sync mkdir build\kernel\sync
 if not exist build\kernel\signal mkdir build\kernel\signal
 if not exist build\kernel\time mkdir build\kernel\time
 if not exist build\kernel\panic mkdir build\kernel\panic
+if not exist build\kernel\net mkdir build\kernel\net
 if not exist build\drivers\uart mkdir build\drivers\uart
 if not exist build\drivers\gpio mkdir build\drivers\gpio
 if not exist build\drivers\timer mkdir build\drivers\timer
@@ -137,6 +138,10 @@ if errorlevel 1 exit /b 1
 
 echo Compiling kernel/panic/panic.c
 %CC% %CFLAGS% -c kernel/panic/panic.c -o build/kernel/panic/panic.o
+if errorlevel 1 exit /b 1
+
+echo Compiling kernel/net/net.c
+%CC% %CFLAGS% -c kernel/net/net.c -o build/kernel/net/net.o
 if errorlevel 1 exit /b 1
 
 echo Compiling drivers/uart/uart.c
@@ -249,6 +254,7 @@ echo Linking build/bareos.elf
   build/kernel/signal/signal.o ^
   build/kernel/time/time.o ^
   build/kernel/panic/panic.o ^
+  build/kernel/net/net.o ^
   build/drivers/uart/uart.o ^
   build/drivers/gpio/gpio.o ^
   build/drivers/timer/timer.o ^

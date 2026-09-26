@@ -166,3 +166,83 @@ int execvp(const char *file, char *const argv[]) {
 int putenv(char *string) {
     return setenv(strtok(string, "="), strtok(NULL, "="), 1);
 }
+
+int htons(int hostshort) {
+    return __builtin_bswap16(hostshort);
+}
+
+int htonl(int hostlong) {
+    return __builtin_bswap32(hostlong);
+}
+
+int ntohs(int netshort) {
+    return __builtin_bswap16(netshort);
+}
+
+int ntohl(int netlong) {
+    return __builtin_bswap32(netlong);
+}
+
+int socket(int domain, int type, int protocol) {
+    register long a0 __asm__("a0") = SYSCALL_SOCKET;
+    register long a2 __asm__("a2") = domain;
+    register long a3 __asm__("a3") = type;
+    register long a4 __asm__("a4") = protocol;
+    __asm__ volatile("syscall" : "+r"(a0) : "r"(a2), "r"(a3), "r"(a4) : "memory");
+    return (int)a0;
+}
+
+int bind(int sockfd, const struct sockaddr *addr, socklen_t addrlen) {
+    register long a0 __asm__("a0") = SYSCALL_BIND;
+    register long a2 __asm__("a2") = sockfd;
+    register long a3 __asm__("a3") = (long)addr;
+    register long a4 __asm__("a4") = addrlen;
+    __asm__ volatile("syscall" : "+r"(a0) : "r"(a2), "r"(a3), "r"(a4) : "memory");
+    return (int)a0;
+}
+
+int connect(int sockfd, const struct sockaddr *addr, socklen_t addrlen) {
+    register long a0 __asm__("a0") = SYSCALL_CONNECT;
+    register long a2 __asm__("a2") = sockfd;
+    register long a3 __asm__("a3") = (long)addr;
+    register long a4 __asm__("a4") = addrlen;
+    __asm__ volatile("syscall" : "+r"(a0) : "r"(a2), "r"(a3), "r"(a4) : "memory");
+    return (int)a0;
+}
+
+int sendto(int sockfd, const void *buf, size_t len, int flags, const struct sockaddr *dest_addr, socklen_t addrlen) {
+    register long a0 __asm__("a0") = SYSCALL_SENDTO;
+    register long a2 __asm__("a2") = sockfd;
+    register long a3 __asm__("a3") = (long)buf;
+    register long a4 __asm__("a4") = len;
+    register long a5 __asm__("a5") = flags;
+    register long a6 __asm__("a6") = (long)dest_addr;
+    register long a7 __asm__("a7") = addrlen;
+    __asm__ volatile("syscall" : "+r"(a0) : "r"(a2), "r"(a3), "r"(a4), "r"(a5), "r"(a6), "r"(a7) : "memory");
+    return (int)a0;
+}
+
+int recvfrom(int sockfd, void *buf, size_t len, int flags, struct sockaddr *src_addr, socklen_t *addrlen) {
+    register long a0 __asm__("a0") = SYSCALL_RECVFROM;
+    register long a2 __asm__("a2") = sockfd;
+    register long a3 __asm__("a3") = (long)buf;
+    register long a4 __asm__("a4") = len;
+    register long a5 __asm__("a5") = flags;
+    register long a6 __asm__("a6") = (long)src_addr;
+    register long a7 __asm__("a7") = (long)addrlen;
+    __asm__ volatile("syscall" : "+r"(a0) : "r"(a2), "r"(a3), "r"(a4), "r"(a5), "r"(a6), "r"(a7) : "memory");
+    return (int)a0;
+}
+
+int inet_pton(int af, const char *src, void *dst) {
+    (void)af; (void)src; (void)dst;
+    return -1;
+}
+
+char *inet_ntoa(struct in_addr in) {
+    static char buf[16];
+    uint32_t addr = __builtin_bswap32(in.s_addr);
+    snprintf(buf, sizeof(buf), "%u.%u.%u.%u",
+        (addr >> 24) & 0xFF, (addr >> 16) & 0xFF, (addr >> 8) & 0xFF, addr & 0xFF);
+    return buf;
+}

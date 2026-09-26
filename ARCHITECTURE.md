@@ -52,6 +52,15 @@ The kernel manages two physical memory regions:
 - Per-region statistics
 - Heap integrity checking
 
+### Network Stack
+
+- Layered design: socket API → UDP → IPv4 → ARP/link layer → network interface → hardware driver
+- Loopback interface (lo0) with 127.0.0.1/8
+- Packet buffer abstraction with prepend/append/trim
+- Real checksums for IPv4, UDP, ICMP
+- Socket integration with VFS file descriptor system
+- ARP cache with timeout
+
 ### Process Model
 
 - No fork() - no MMU for COW

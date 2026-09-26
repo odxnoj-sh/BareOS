@@ -131,6 +131,31 @@ int dup2(int oldfd, int newfd);
 
 int ioctl(int fd, unsigned long request, ...);
 
+#define AF_INET 2
+#define SOCK_DGRAM 2
+
+typedef int socklen_t;
+
+struct in_addr {
+    uint32_t s_addr;
+};
+
+int socket(int domain, int type, int protocol);
+int bind(int sockfd, const struct sockaddr *addr, socklen_t addrlen);
+int connect(int sockfd, const struct sockaddr *addr, socklen_t addrlen);
+int sendto(int sockfd, const void *buf, size_t len, int flags, const struct sockaddr *dest_addr, socklen_t addrlen);
+int recvfrom(int sockfd, void *buf, size_t len, int flags, struct sockaddr *src_addr, socklen_t *addrlen);
+
+int htons(int hostshort);
+int htonl(int hostlong);
+int ntohs(int netshort);
+int ntohl(int netlong);
+
+int inet_pton(int af, const char *src, void *dst);
+char *inet_ntoa(struct in_addr in);
+
+int pipe(int pipefd[2]);
+
 void *memcpy(void *dest, const void *src, size_t n);
 void *memmove(void *dest, const void *src, size_t n);
 void *memset(void *s, int c, size_t n);

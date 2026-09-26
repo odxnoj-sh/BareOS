@@ -60,6 +60,15 @@
 #define SYSCALL_CHDIR 33
 #define SYSCALL_GETCWD 34
 #define SYSCALL_FSTAT 35
+#define SYSCALL_SOCKET 36
+#define SYSCALL_BIND 37
+#define SYSCALL_CONNECT 38
+#define SYSCALL_SENDTO 39
+#define SYSCALL_RECVFROM 40
+
+#define AF_INET 2
+#define SOCK_DGRAM 2
+#define IPPROTO_UDP 17
 
 typedef int pid_t;
 typedef int tid_t;
@@ -71,6 +80,7 @@ typedef unsigned int mode_t;
 typedef unsigned int dev_t;
 typedef long time_t;
 typedef long clock_t;
+typedef int socklen_t;
 
 struct stat;
 
@@ -240,5 +250,23 @@ int syscall_fstat(int fd, struct stat *st);
 int syscall_dup(int oldfd);
 int syscall_dup2(int oldfd, int newfd);
 int do_execve(const char *path, char *const argv[], char *const envp[]);
+
+struct sockaddr {
+    uint16_t sa_family;
+    char sa_data[14];
+};
+
+struct sockaddr_in {
+    uint16_t sin_family;
+    uint16_t sin_port;
+    uint32_t sin_addr;
+    char sin_zero[8];
+};
+
+int syscall_socket(int domain, int type, int protocol);
+int syscall_bind(int sockfd, const struct sockaddr *addr, socklen_t addrlen);
+int syscall_connect(int sockfd, const struct sockaddr *addr, socklen_t addrlen);
+int syscall_sendto(int sockfd, const void *buf, size_t len, int flags, const struct sockaddr *dest_addr, socklen_t addrlen);
+int syscall_recvfrom(int sockfd, void *buf, size_t len, int flags, struct sockaddr *src_addr, socklen_t *addrlen);
 
 #endif

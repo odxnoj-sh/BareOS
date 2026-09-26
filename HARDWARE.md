@@ -119,3 +119,28 @@ MEMORY {
 4. Send reset commands (0x66, 0x99)
 5. Configure SPI1 cache control register
 6. Enable cache in SYSCON
+
+## Network Stack Implementation
+
+### Loopback Interface
+
+- Interface name: `lo`
+- IP address: 127.0.0.1/8
+- MAC address: 00:00:00:00:00:00
+- MTU: 1536 bytes
+- Transmit function delivers packets back to receive path
+
+### Protocol Support
+
+- Ethernet: frame handling, ARP
+- IPv4: header parsing, checksum, routing to local interfaces
+- ICMP: Echo Request (type 8), Echo Reply (type 0)
+- ARP: Request/Reply, cache with 5-minute timeout
+- UDP: Header, checksum, port demultiplexing
+
+### Socket API
+
+- AF_INET / SOCK_DGRAM
+- socket(), bind(), connect(), sendto(), recvfrom(), close()
+- Integrated with VFS file descriptor system
+- Port allocation: ephemeral (1024-65535) + explicit bind

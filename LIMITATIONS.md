@@ -29,10 +29,27 @@
 
 ## Networking
 
-- No network stack implemented
+- Loopback interface only (127.0.0.1/8)
+- No physical network hardware driver
 - No WiFi driver
 - No Ethernet driver
-- No TCP/IP, UDP, DHCP, DNS
+- IPv4 only (no IPv6)
+- UDP only (no TCP)
+- No DHCP client
+- No DNS resolver
+- No routing between interfaces
+- No firewall or packet filtering
+- No packet capture/debugging interface
+
+## Network Stack Specific
+
+- ARP cache limited to 16 entries
+- No ARP persistence across reboots
+- No ICMP error message generation (only echo)
+- No IP fragmentation/reassembly
+- No multicast or broadcast support
+- Socket receive buffer limited by packet buffer size
+- No socket options (SO_REUSEADDR, etc.)
 
 ## Multicore
 
@@ -61,7 +78,7 @@
 
 ## Userland
 
-- Minimal command set (25 commands)
+- Minimal command set (25+ commands)
 - No text editors (vi, nano)
 - No scripting language (awk, sed, perl, python)
 - No compiler toolchain on target
@@ -115,3 +132,7 @@
 8. Improve shell with history, completion, job control
 9. Add dynamic module loading
 10. Implement proper signal handling with sigaction
+11. Add TCP protocol support
+12. Add IPv6 support
+13. Add DHCP client
+14. Add DNS resolver

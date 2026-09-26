@@ -17,6 +17,9 @@ void builtin_export(int argc, char **argv);
 void builtin_unset(int argc, char **argv);
 void builtin_history(void);
 void builtin_memstat(void);
+void builtin_netstat(void);
+void builtin_ping(int argc, char **argv);
+void builtin_udptest(int argc, char **argv);
 
 void shell_init(void) {
     extern char *cwd;
@@ -68,6 +71,12 @@ void shell_main(void) {
             builtin_history();
         } else if (strcmp(argv[0], "memstat") == 0) {
             builtin_memstat();
+        } else if (strcmp(argv[0], "netstat") == 0) {
+            builtin_netstat();
+        } else if (strcmp(argv[0], "ping") == 0) {
+            builtin_ping(argc, argv);
+        } else if (strcmp(argv[0], "udptest") == 0) {
+            builtin_udptest(argc, argv);
         } else {
             execute_command(argc, argv);
         }
@@ -184,4 +193,79 @@ void builtin_memstat(void) {
 
     int check = memory_check_heap();
     printf("\nHeap integrity: %s\n", check == 0 ? "OK" : "CORRUPTED");
+}
+
+void builtin_netstat(void) {
+    extern void netstat_print(void);
+    netstat_print();
+}
+
+void builtin_ping(int argc, char **argv) {
+    (void)argc; (void)argv;
+    printf("Ping not yet implemented\n");
+}
+
+void builtin_udptest(int argc, char **argv) {
+    if (argc < 2) {
+        printf("Usage: udptest server|client [port]\n");
+        return;
+    }
+
+    int port = argc > 2 ? atoi(argv[2]) : 4000;
+
+    if (strcmp(argv[1], "server") == 0) {
+        int sock = socket(AF_INET, SOCK_DGRAM, 0);
+        if (sock < 0) {
+            printf("socket failed\n");
+            return;
+        }
+
+        struct sockaddr_in addr;
+        addr.sin_family = AF_INET;
+        addr.sin_addr = 0x7F000001;
+        addr.sin_port = port;
+
+        if (bind(sock, (struct sockaddr *)&addr, sizeof(addr)) < 0) {
+            printf("bind failed\n");
+            close(sock);
+            return;
+        }
+
+        printf("UDP server listening on 127.0.0.1:%d\n", port);
+
+        char buf[256];
+        struct sockaddr_in from;
+        socklen_t fromlen = sizeof(from);
+
+        while (1) {
+            int n = recvfrom(sock, buf, sizeof(buf) - 1, 0, (struct sockaddr *)&from, &fromlen);
+            if (n > 0) {
+                buf[n] = 0;
+                printf("Received: %s\n", buf);
+            }
+        }
+    } else if (strcmp(argv[1], "client") == 0) {
+        int sock = socket(AF_INET, SOCK_DGRAM, 0);
+        if (sock < 0) {
+            printf("socket failed\n");
+            return;
+        }
+
+        struct sockaddr_in addr;
+        addr.sin_family = AF_INET;
+        addr.sin_addr = 0x7F000001;
+        addr.sin_port = port;
+
+        char *msg = "Hello UDP!";
+        int n = sendto(sock, msg, strlen(msg), 0, (struct sockaddr *)&addr, sizeof(addr));
+        if (n > 0) {
+            printf("Sent %d bytes to 127.0.0.1:%d\n", n, port);
+        } else {
+            printf("sendto failed\n");
+        }
+
+        close(sock);
+    } else {
+        printf("Usage: udptest server|client [port]\n");
+    }
 }

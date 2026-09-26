@@ -1,5 +1,6 @@
 #include <kernel.h>
 #include <xtensa.h>
+#include <net.h>
 
 extern void context_switch(struct task *prev, struct task *next);
 
@@ -90,6 +91,8 @@ void scheduler_tick(void) {
         }
         t = next;
     }
+
+    net_tick();
 }
 
 void schedule(void) {

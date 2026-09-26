@@ -4,6 +4,10 @@
 #include <memory.h>
 #include <vfs.h>
 #include <exec/exec.h>
+#include <net.h>
+
+extern int sock_alloc_fd(struct socket *s);
+extern void sock_free_fd(struct socket *s);
 
 struct pipe {
     char buffer[4096];
@@ -231,6 +235,96 @@ void syscall_handler(struct task_context *ctx) {
             int oldfd = ctx->a3;
             int newfd = ctx->a4;
             ret = syscall_dup2(oldfd, newfd);
+            break;
+        }
+        case SYSCALL_SOCKET: {
+            int domain = ctx->a3;
+            int type = ctx->a4;
+            int protocol = ctx->a5;
+            struct socket *s = sock_create(domain, type, protocol);
+            if (s) {
+                ret = sock_alloc_fd(s);
+                if (ret < 0) {
+                    sock_close(s);
+                }
+            } else {
+                ret = -1;
+            }
+            break;
+        }
+        case SYSCALL_BIND: {
+            int sockfd = ctx->a3;
+            struct sockaddr *addr = (struct sockaddr *)ctx->a4;
+            (void)ctx->a5;
+            struct file *f = get_file(sockfd);
+            if (f && f->private_data) {
+                struct socket *s = (struct socket *)f->private_data;
+                struct sockaddr_in *sin = (struct sockaddr_in *)addr;
+                ret = sock_bind(s, sin->sin_addr, __builtin_bswap16(sin->sin_port));
+            } else {
+                ret = -1;
+            }
+            break;
+        }
+        case SYSCALL_CONNECT: {
+            int sockfd = ctx->a3;
+            struct sockaddr *addr = (struct sockaddr *)ctx->a4;
+            (void)ctx->a5;
+            struct file *f = get_file(sockfd);
+            if (f && f->private_data) {
+                struct socket *s = (struct socket *)f->private_data;
+                struct sockaddr_in *sin = (struct sockaddr_in *)addr;
+                ret = sock_connect(s, sin->sin_addr, __builtin_bswap16(sin->sin_port));
+            } else {
+                ret = -1;
+            }
+            break;
+        }
+        case SYSCALL_SENDTO: {
+            int sockfd = ctx->a3;
+            const void *buf = (const void *)ctx->a4;
+            size_t len = ctx->a5;
+            (void)ctx->a6;
+            struct sockaddr *dest_addr = (struct sockaddr *)ctx->a7;
+            (void)ctx->a8;
+            struct file *f = get_file(sockfd);
+            if (f && f->private_data) {
+                struct socket *s = (struct socket *)f->private_data;
+                uint32_t addr = 0;
+                uint16_t port = 0;
+                if (dest_addr) {
+                    struct sockaddr_in *sin = (struct sockaddr_in *)dest_addr;
+                    addr = sin->sin_addr;
+                    port = __builtin_bswap16(sin->sin_port);
+                }
+                ret = sock_sendto(s, buf, len, addr, port);
+            } else {
+                ret = -1;
+            }
+            break;
+        }
+        case SYSCALL_RECVFROM: {
+            int sockfd = ctx->a3;
+            void *buf = (void *)ctx->a4;
+            size_t len = ctx->a5;
+            (void)ctx->a6;
+            struct sockaddr *src_addr = (struct sockaddr *)ctx->a7;
+            (void)ctx->a8;
+            struct file *f = get_file(sockfd);
+            if (f && f->private_data) {
+                struct socket *s = (struct socket *)f->private_data;
+                uint32_t addr = 0;
+                uint16_t port = 0;
+                ret = sock_recvfrom(s, buf, len, &addr, &port);
+                if (ret >= 0 && src_addr) {
+                    struct sockaddr_in *sin = (struct sockaddr_in *)src_addr;
+                    sin->sin_family = AF_INET;
+                    sin->sin_addr = addr;
+                    sin->sin_port = __builtin_bswap16(port);
+                }
+            } else {
+                ret = -1;
+            }
             break;
         }
         default:
