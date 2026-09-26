@@ -22,6 +22,7 @@ struct file_operations {
     int (*rmdir)(struct file *, const char *);
     int (*unlink)(struct file *, const char *);
     int (*rename)(struct file *, const char *, const char *);
+    int (*chdir)(struct file *, const char *);
 };
 
 struct file {

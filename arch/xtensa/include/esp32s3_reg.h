@@ -5,6 +5,43 @@
 #define DR_REG_UART1_BASE 0x60001000
 #define DR_REG_SPI0_BASE 0x60002000
 #define DR_REG_SPI1_BASE 0x60003000
+#define DR_REG_SPIMEM_BASE 0x60002000
+
+#define SPI_MEM_CMD_REG(base) ((base) + 0x00)
+#define SPI_MEM_ADDR_REG(base) ((base) + 0x04)
+#define SPI_MEM_CTRL_REG(base) ((base) + 0x08)
+#define SPI_MEM_CTRL1_REG(base) ((base) + 0x0C)
+#define SPI_MEM_RD_CMD_REG(base) ((base) + 0x10)
+#define SPI_MEM_WR_CMD_REG(base) ((base) + 0x14)
+#define SPI_MEM_DIN_MODE_REG(base) ((base) + 0x18)
+#define SPI_MEM_DIN_NUM_REG(base) ((base) + 0x1C)
+#define SPI_MEM_DOUT_MODE_REG(base) ((base) + 0x20)
+#define SPI_MEM_DOUT_NUM_REG(base) ((base) + 0x24)
+#define SPI_MEM_MISC_REG(base) ((base) + 0x28)
+#define SPI_MEM_TX_CRC_REG(base) ((base) + 0x2C)
+#define SPI_MEM_CACHE_SCTRL_REG(base) ((base) + 0x30)
+#define SPI_MEM_SRAM_USR_CMD_REG(base) ((base) + 0x34)
+#define SPI_MEM_SRAM_USR_ADDR_REG(base) ((base) + 0x38)
+#define SPI_MEM_DATA_REG(base) ((base) + 0x40)
+#define SPI_MEM_FLASH_SU_REG(base) ((base) + 0x44)
+#define SPI_MEM_FLASH_WAITI_REG(base) ((base) + 0x48)
+#define SPI_MEM_FLASH_SUS_REG(base) ((base) + 0x4C)
+#define SPI_MEM_SPI_W0_REG(base) ((base) + 0x58)
+#define SPI_MEM_SPI_W1_REG(base) ((base) + 0x5C)
+#define SPI_MEM_SPI_W2_REG(base) ((base) + 0x60)
+#define SPI_MEM_SPI_W3_REG(base) ((base) + 0x64)
+#define SPI_MEM_SPI_W4_REG(base) ((base) + 0x68)
+#define SPI_MEM_SPI_W5_REG(base) ((base) + 0x6C)
+#define SPI_MEM_SPI_W6_REG(base) ((base) + 0x70)
+#define SPI_MEM_SPI_W7_REG(base) ((base) + 0x74)
+#define SPI_MEM_SPI_W8_REG(base) ((base) + 0x78)
+#define SPI_MEM_SPI_W9_REG(base) ((base) + 0x7C)
+#define SPI_MEM_SPI_W10_REG(base) ((base) + 0x80)
+#define SPI_MEM_SPI_W11_REG(base) ((base) + 0x84)
+#define SPI_MEM_SPI_W12_REG(base) ((base) + 0x88)
+#define SPI_MEM_SPI_W13_REG(base) ((base) + 0x8C)
+#define SPI_MEM_SPI_W14_REG(base) ((base) + 0x90)
+#define SPI_MEM_SPI_W15_REG(base) ((base) + 0x94)
 #define DR_REG_GPIO_BASE 0x60004000
 #define DR_REG_GPIO_SD_BASE 0x60004F00
 #define DR_REG_FE2_BASE 0x60006000

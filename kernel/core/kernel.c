@@ -11,6 +11,8 @@ extern void uart_putc(char);
 extern int uart_getc(void);
 extern void fs_init(void);
 extern void user_init(void);
+extern void flash_init(void);
+extern int flashfs_mount(const char *source, const char *target, int flags, void *data);
 
 struct cpu_state cpu_states[2];
 struct process *process_table[MAX_PROCESSES];
@@ -47,6 +49,12 @@ void kernel_main(void) {
 
     timer_init();
     uart_puts("Timer initialized\n");
+
+    flash_init();
+    uart_puts("Flash initialized\n");
+
+    flashfs_mount(NULL, "/storage", 0, NULL);
+    uart_puts("Flash filesystem mounted\n");
 
     scheduler_init();
     uart_puts("Scheduler initialized\n");

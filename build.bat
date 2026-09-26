@@ -8,8 +8,8 @@ set OBJCOPY=xtensa-esp32s3-elf-objcopy
 set OBJDUMP=xtensa-esp32s3-elf-objdump
 set SIZE=xtensa-esp32s3-elf-size
 
-set CFLAGS=-std=c11 -ffreestanding -nostdlib -nostartfiles -nodefaultlibs -Wall -Wextra -Werror -O2 -g -mlongcalls -mtext-section-literals -mno-target-align -Iinclude -Iarch/xtensa/include -Ilibc/include -Ikernel -DBAREOS_VERSION="0.1.0" -DBAREOS_ARCH="xtensa"
-set ASFLAGS=-mlongcalls -mtext-section-literals -mno-target-align -Iarch/xtensa/include
+set CFLAGS=-std=c11 -ffreestanding -nostdlib -nostartfiles -nodefaultlibs -Wall -Wextra -Werror -O2 -g -mlongcalls -mtext-section-literals -mno-target-align -Iinclude -Iarch/xtensa/include -Ilibc/include -Ikernel -Ifs/flashfs -DBAREOS_VERSION="0.1.0" -DBAREOS_ARCH="xtensa"
+set ASFLAGS=-mlongcalls -mtext-section-literals -mno-target-align -Iarch/xtensa/include -Ifs/flashfs
 set LDFLAGS=-T linker/bareos.ld -nostdlib -nostartfiles -nodefaultlibs -Wl,--gc-sections -Wl,-Map=build/bareos.map
 
 if not exist build mkdir build
@@ -45,6 +45,7 @@ if not exist build\fs\vfs mkdir build\fs\vfs
 if not exist build\fs\ramfs mkdir build\fs\ramfs
 if not exist build\fs\devfs mkdir build\fs\devfs
 if not exist build\fs\storage mkdir build\fs\storage
+if not exist build\fs\flashfs mkdir build\fs\flashfs
 if not exist build\libc\string mkdir build\libc\string
 if not exist build\libc\stdio mkdir build\libc\stdio
 if not exist build\libc\stdlib mkdir build\libc\stdlib
@@ -190,6 +191,10 @@ echo Compiling fs/storage/storage.c
 %CC% %CFLAGS% -c fs/storage/storage.c -o build/fs/storage/storage.o
 if errorlevel 1 exit /b 1
 
+echo Compiling fs/flashfs/flashfs.c
+%CC% %CFLAGS% -c fs/flashfs/flashfs.c -o build/fs/flashfs/flashfs.o
+if errorlevel 1 exit /b 1
+
 echo Compiling libc/string/string.c
 %CC% %CFLAGS% -c libc/string/string.c -o build/libc/string/string.o
 if errorlevel 1 exit /b 1
@@ -257,6 +262,7 @@ echo Linking build/bareos.elf
   build/fs/ramfs/ramfs.o ^
   build/fs/devfs/devfs.o ^
   build/fs/storage/storage.o ^
+  build/fs/flashfs/flashfs.o ^
   build/libc/string/string.o ^
   build/libc/stdio/stdio.o ^
   build/libc/stdlib/stdlib.o ^
