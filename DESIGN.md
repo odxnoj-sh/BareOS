@@ -131,3 +131,14 @@ The ESP32-S3 has no MMU. This fundamentally changes OS design:
 - MAC address read from hardware registers
 - Integrates with existing net_iface abstraction
 - No WiFi-specific code in IPv4/UDP/ICMP layers
+- Management frame handling (probe, auth, assoc) in driver layer
+- State machine with timeouts and retries
+- Open system authentication (no WPA/WPA2 in this phase)
+
+## Why Open System Authentication Only?
+
+- WPA/WPA2 requires 4-way handshake and crypto engine
+- Crypto engine access requires firmware mailbox protocol
+- Open authentication demonstrates full association path
+- Can be extended to WPA when firmware mailbox is implemented
+- Documents limitation clearly

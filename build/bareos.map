@@ -262,8 +262,8 @@ Discarded input sections
  .xt.prop       0x0000000000000000       0x90 build/drivers/console/console.o
  .literal       0x0000000000000000        0x0 build/drivers/wifi/wifi.o
  .data          0x0000000000000000        0x0 build/drivers/wifi/wifi.o
- .xt.lit        0x0000000000000000       0x48 build/drivers/wifi/wifi.o
- .xt.prop       0x0000000000000000      0x324 build/drivers/wifi/wifi.o
+ .xt.lit        0x0000000000000000       0x88 build/drivers/wifi/wifi.o
+ .xt.prop       0x0000000000000000      0x75c build/drivers/wifi/wifi.o
  .literal       0x0000000000000000        0x0 build/fs/vfs/vfs.o
  .xt.lit        0x0000000000000000       0x68 build/fs/vfs/vfs.o
  .xt.prop       0x0000000000000000      0x7f8 build/fs/vfs/vfs.o
@@ -338,8 +338,8 @@ Discarded input sections
  .xt.prop       0x0000000000000000       0x30 build/userland/init/init.o
  .literal       0x0000000000000000        0x0 build/userland/sh/shell.o
  .data          0x0000000000000000        0x0 build/userland/sh/shell.o
- .xt.lit        0x0000000000000000       0x70 build/userland/sh/shell.o
- .xt.prop       0x0000000000000000      0x66c build/userland/sh/shell.o
+ .xt.lit        0x0000000000000000       0x80 build/userland/sh/shell.o
+ .xt.prop       0x0000000000000000      0x7e0 build/userland/sh/shell.o
 
 Memory Configuration
 
@@ -397,7 +397,7 @@ LOAD build/userland/init/init.o
 LOAD build/userland/sh/shell.o
                 0x0000000040080000                . = 0x40080000
 
-.text           0x0000000040080000     0x88c4
+.text           0x0000000040080000     0x96ec
  *(.vector_table)
  .vector_table  0x0000000040080000       0x74 build/arch/xtensa/boot/startup.o
                                          0x78 (size before relaxing)
@@ -591,315 +591,325 @@ LOAD build/userland/sh/shell.o
                 0x000000004008423c                psram_read
                 0x00000000400842c8                psram_write
                 0x0000000040084370                psram_get_size
- .text          0x0000000040084378      0x45f build/drivers/wifi/wifi.o
-                0x00000000400844ac                wifi_isr
-                0x0000000040084550                wifi_init
-                0x0000000040084710                wifi_start
-                0x0000000040084748                wifi_stop
-                0x0000000040084798                wifi_set_ip
-                0x00000000400847b8                wifi_get_state
-                0x00000000400847c8                wifi_get_mac
-                0x00000000400847d0                wifi_assoc
- *fill*         0x00000000400847d7        0x1 
- .text          0x00000000400847d8      0xa0f build/fs/vfs/vfs.o
-                0x0000000040084960                file_alloc
-                0x00000000400849a0                file_free
-                0x00000000400849cc                vfs_open
-                0x0000000040084a8c                vfs_close
-                0x0000000040084abc                vfs_read
-                0x0000000040084adc                vfs_write
-                0x0000000040084afc                vfs_lseek
-                0x0000000040084b1c                vfs_pread
-                0x0000000040084b80                vfs_pwrite
-                0x0000000040084be4                vfs_ioctl
-                0x0000000040084c04                vfs_readdir
-                0x0000000040084c38                vfs_stat
-                0x0000000040084cf4                vfs_fstat
-                0x0000000040084d44                fs_init
-                0x0000000040084da4                vfs_mkdir
-                0x0000000040084e4c                vfs_rmdir
-                0x0000000040084eec                vfs_unlink
-                0x0000000040084f90                vfs_rename
-                0x0000000040085058                vfs_chdir
-                0x00000000400850c8                vfs_getcwd
-                0x0000000040085100                vfs_register_fs
-                0x0000000040085164                vfs_unregister_fs
-                0x00000000400851e0                vfs_pipe
- *fill*         0x00000000400851e7        0x1 
- .text          0x00000000400851e8      0xb0e build/fs/ramfs/ramfs.o
-                0x00000000400851e8                ramfs_close
-                0x00000000400851f0                ramfs_lseek
-                0x0000000040085220                ramfs_stat
-                0x000000004008525c                ramfs_read
-                0x00000000400852ac                ramfs_write
-                0x0000000040085330                ramfs_pread
-                0x0000000040085378                ramfs_pwrite
-                0x00000000400853f8                ramfs_readdir
-                0x0000000040085460                ramfs_open
-                0x00000000400855ac                ramfs_mkdir
-                0x0000000040085754                ramfs_alloc_node
-                0x00000000400857a0                ramfs_free_node
-                0x0000000040085800                ramfs_rmdir
-                0x00000000400858c0                ramfs_unlink
-                0x000000004008599c                ramfs_rename
-                0x0000000040085bc0                ramfs_find_child
-                0x0000000040085c10                ramfs_mount
- *fill*         0x0000000040085cf6        0x2 
- .text          0x0000000040085cf8      0x34e build/fs/devfs/devfs.o
-                0x0000000040085e5c                devfs_register
-                0x0000000040085f00                devfs_mount
- *fill*         0x0000000040086046        0x2 
- .text          0x0000000040086048      0x2ac build/fs/flashfs/flashfs.o
-                0x0000000040086048                flashfs_open
-                0x0000000040086050                flashfs_close
-                0x0000000040086058                flashfs_read
-                0x0000000040086060                flashfs_lseek
-                0x0000000040086068                flashfs_stat
-                0x0000000040086070                flashfs_mkdir
-                0x0000000040086078                flashfs_rmdir
-                0x0000000040086080                flashfs_rename
-                0x0000000040086088                flashfs_chdir
-                0x0000000040086090                flashfs_write
-                0x0000000040086098                flashfs_readdir
-                0x00000000400860a0                flashfs_unlink
-                0x00000000400860e8                flashfs_format
-                0x0000000040086214                flashfs_mount
-                0x00000000400862a8                flashfs_unmount
- .text          0x00000000400862f4      0x324 build/libc/string/string.o
-                0x00000000400862f4                memcpy
-                0x000000004008630c                memmove
-                0x0000000040086344                memset
-                0x0000000040086360                memcmp
-                0x0000000040086388                memchr
-                0x00000000400863a8                strcpy
-                0x00000000400863bc                strncpy
-                0x00000000400863f4                strcat
-                0x000000004008641c                strncat
-                0x0000000040086454                strcmp
-                0x0000000040086480                strncmp
-                0x00000000400864ac                strlen
-                0x00000000400864c4                strchr
-                0x00000000400864e4                strrchr
-                0x000000004008650c                strstr
-                0x0000000040086550                strtok
-                0x00000000400865e4                strcspn
- .text          0x0000000040086618      0x79d build/libc/stdio/stdio.o
-                0x0000000040086628                fputc
-                0x00000000400866a8                fputs
-                0x00000000400866c8                putchar
-                0x00000000400866e0                puts
-                0x0000000040086710                fgetc
-                0x000000004008676c                getchar
-                0x00000000400867c0                ungetc
-                0x00000000400867f0                fgets
-                0x000000004008689c                vsnprintf
-                0x0000000040086af0                snprintf
-                0x0000000040086b1c                vfprintf
-                0x0000000040086b58                fprintf
-                0x0000000040086b88                printf
-                0x0000000040086bbc                vprintf
-                0x0000000040086bdc                fread
-                0x0000000040086c54                fwrite
-                0x0000000040086c84                fseek
-                0x0000000040086cb0                ftell
-                0x0000000040086cc0                fflush
-                0x0000000040086cfc                feof
-                0x0000000040086d04                ferror
-                0x0000000040086d18                fopen
-                0x0000000040086d88                fclose
- *fill*         0x0000000040086db5        0x3 
- .text          0x0000000040086db8      0x2fb build/libc/stdlib/stdlib.o
-                0x0000000040086dbc                malloc
-                0x0000000040086dd0                free
-                0x0000000040086de8                calloc
-                0x0000000040086e0c                realloc
-                0x0000000040086e1c                atoi
-                0x0000000040086ec8                atol
-                0x0000000040086ed4                strtol
-                0x0000000040086fa0                strtoul
-                0x0000000040086fbc                rand
-                0x0000000040086fdc                srand
-                0x0000000040086fec                exit
-                0x0000000040087000                _exit
-                0x0000000040087010                abs
-                0x0000000040087018                labs
-                0x0000000040087020                system
-                0x0000000040087034                getenv
-                0x0000000040087078                setenv
-                0x0000000040087080                unsetenv
-                0x000000004008708c                getcwd
-                0x00000000400870a4                chdir
- *fill*         0x00000000400870b3        0x1 
- .text          0x00000000400870b4      0x51a build/libc/posix/posix.o
-                0x00000000400870c4                open
-                0x0000000040087110                close
-                0x0000000040087140                read
-                0x0000000040087170                write
-                0x00000000400871a0                lseek
-                0x00000000400871cc                stat
-                0x00000000400871e8                fstat
-                0x0000000040087218                mkdir
-                0x0000000040087230                rmdir
-                0x0000000040087244                unlink
-                0x0000000040087258                rename
-                0x000000004008726c                chmod
-                0x0000000040087274                chown
-                0x0000000040087280                getpid
-                0x0000000040087294                getppid
-                0x00000000400872b4                getuid
-                0x00000000400872bc                getgid
-                0x00000000400872c4                setuid
-                0x00000000400872cc                setgid
-                0x00000000400872d4                fork
-                0x00000000400872e0                execve
-                0x00000000400872f8                waitpid
-                0x0000000040087310                pipe
-                0x000000004008732c                dup
-                0x000000004008737c                dup2
-                0x00000000400873cc                ioctl
-                0x0000000040087414                getlogin
-                0x000000004008741c                isatty
-                0x0000000040087450                execvp
-                0x00000000400874c8                putenv
-                0x00000000400874f4                htons
-                0x0000000040087508                htonl
-                0x0000000040087520                ntohs
-                0x0000000040087534                ntohl
-                0x000000004008754c                socket
-                0x0000000040087558                bind
-                0x0000000040087564                connect
-                0x0000000040087570                sendto
-                0x000000004008757c                recvfrom
-                0x0000000040087588                inet_pton
-                0x000000004008759c                inet_ntoa
- *fill*         0x00000000400875ce        0x2 
- .text          0x00000000400875d0        0x8 build/userland/init/init.o
+ .text          0x0000000040084378      0xd6b build/drivers/wifi/wifi.o
+                0x0000000040084388                wifi_transmit
+                0x0000000040084bfc                wifi_isr
+                0x0000000040084c40                wifi_set_credentials
+                0x0000000040084d1c                wifi_init
+                0x0000000040084f64                wifi_assoc
+                0x0000000040084fdc                wifi_start
+                0x000000004008501c                wifi_stop
+                0x0000000040085080                wifi_set_ip
+                0x00000000400850a0                wifi_get_state
+                0x00000000400850b0                wifi_get_mac
+                0x00000000400850bc                wifi_get_ssid
+                0x00000000400850c8                wifi_get_rssi
+                0x00000000400850d8                wifi_get_channel
+ *fill*         0x00000000400850e3        0x1 
+ .text          0x00000000400850e4      0xa0f build/fs/vfs/vfs.o
+                0x000000004008526c                file_alloc
+                0x00000000400852ac                file_free
+                0x00000000400852d8                vfs_open
+                0x0000000040085398                vfs_close
+                0x00000000400853c8                vfs_read
+                0x00000000400853e8                vfs_write
+                0x0000000040085408                vfs_lseek
+                0x0000000040085428                vfs_pread
+                0x000000004008548c                vfs_pwrite
+                0x00000000400854f0                vfs_ioctl
+                0x0000000040085510                vfs_readdir
+                0x0000000040085544                vfs_stat
+                0x0000000040085600                vfs_fstat
+                0x0000000040085650                fs_init
+                0x00000000400856b0                vfs_mkdir
+                0x0000000040085758                vfs_rmdir
+                0x00000000400857f8                vfs_unlink
+                0x000000004008589c                vfs_rename
+                0x0000000040085964                vfs_chdir
+                0x00000000400859d4                vfs_getcwd
+                0x0000000040085a0c                vfs_register_fs
+                0x0000000040085a70                vfs_unregister_fs
+                0x0000000040085aec                vfs_pipe
+ *fill*         0x0000000040085af3        0x1 
+ .text          0x0000000040085af4      0xb0e build/fs/ramfs/ramfs.o
+                0x0000000040085af4                ramfs_close
+                0x0000000040085afc                ramfs_lseek
+                0x0000000040085b2c                ramfs_stat
+                0x0000000040085b68                ramfs_read
+                0x0000000040085bb8                ramfs_write
+                0x0000000040085c3c                ramfs_pread
+                0x0000000040085c84                ramfs_pwrite
+                0x0000000040085d04                ramfs_readdir
+                0x0000000040085d6c                ramfs_open
+                0x0000000040085eb8                ramfs_mkdir
+                0x0000000040086060                ramfs_alloc_node
+                0x00000000400860ac                ramfs_free_node
+                0x000000004008610c                ramfs_rmdir
+                0x00000000400861cc                ramfs_unlink
+                0x00000000400862a8                ramfs_rename
+                0x00000000400864cc                ramfs_find_child
+                0x000000004008651c                ramfs_mount
+ *fill*         0x0000000040086602        0x2 
+ .text          0x0000000040086604      0x34e build/fs/devfs/devfs.o
+                0x0000000040086768                devfs_register
+                0x000000004008680c                devfs_mount
+ *fill*         0x0000000040086952        0x2 
+ .text          0x0000000040086954      0x2ac build/fs/flashfs/flashfs.o
+                0x0000000040086954                flashfs_open
+                0x000000004008695c                flashfs_close
+                0x0000000040086964                flashfs_read
+                0x000000004008696c                flashfs_lseek
+                0x0000000040086974                flashfs_stat
+                0x000000004008697c                flashfs_mkdir
+                0x0000000040086984                flashfs_rmdir
+                0x000000004008698c                flashfs_rename
+                0x0000000040086994                flashfs_chdir
+                0x000000004008699c                flashfs_write
+                0x00000000400869a4                flashfs_readdir
+                0x00000000400869ac                flashfs_unlink
+                0x00000000400869f4                flashfs_format
+                0x0000000040086b20                flashfs_mount
+                0x0000000040086bb4                flashfs_unmount
+ .text          0x0000000040086c00      0x324 build/libc/string/string.o
+                0x0000000040086c00                memcpy
+                0x0000000040086c18                memmove
+                0x0000000040086c50                memset
+                0x0000000040086c6c                memcmp
+                0x0000000040086c94                memchr
+                0x0000000040086cb4                strcpy
+                0x0000000040086cc8                strncpy
+                0x0000000040086d00                strcat
+                0x0000000040086d28                strncat
+                0x0000000040086d60                strcmp
+                0x0000000040086d8c                strncmp
+                0x0000000040086db8                strlen
+                0x0000000040086dd0                strchr
+                0x0000000040086df0                strrchr
+                0x0000000040086e18                strstr
+                0x0000000040086e5c                strtok
+                0x0000000040086ef0                strcspn
+ .text          0x0000000040086f24      0x79d build/libc/stdio/stdio.o
+                0x0000000040086f34                fputc
+                0x0000000040086fb4                fputs
+                0x0000000040086fd4                putchar
+                0x0000000040086fec                puts
+                0x000000004008701c                fgetc
+                0x0000000040087078                getchar
+                0x00000000400870cc                ungetc
+                0x00000000400870fc                fgets
+                0x00000000400871a8                vsnprintf
+                0x00000000400873fc                snprintf
+                0x0000000040087428                vfprintf
+                0x0000000040087464                fprintf
+                0x0000000040087494                printf
+                0x00000000400874c8                vprintf
+                0x00000000400874e8                fread
+                0x0000000040087560                fwrite
+                0x0000000040087590                fseek
+                0x00000000400875bc                ftell
+                0x00000000400875cc                fflush
+                0x0000000040087608                feof
+                0x0000000040087610                ferror
+                0x0000000040087624                fopen
+                0x0000000040087694                fclose
+ *fill*         0x00000000400876c1        0x3 
+ .text          0x00000000400876c4      0x2fb build/libc/stdlib/stdlib.o
+                0x00000000400876c8                malloc
+                0x00000000400876dc                free
+                0x00000000400876f4                calloc
+                0x0000000040087718                realloc
+                0x0000000040087728                atoi
+                0x00000000400877d4                atol
+                0x00000000400877e0                strtol
+                0x00000000400878ac                strtoul
+                0x00000000400878c8                rand
+                0x00000000400878e8                srand
+                0x00000000400878f8                exit
+                0x000000004008790c                _exit
+                0x000000004008791c                abs
+                0x0000000040087924                labs
+                0x000000004008792c                system
+                0x0000000040087940                getenv
+                0x0000000040087984                setenv
+                0x000000004008798c                unsetenv
+                0x0000000040087998                getcwd
+                0x00000000400879b0                chdir
+ *fill*         0x00000000400879bf        0x1 
+ .text          0x00000000400879c0      0x51a build/libc/posix/posix.o
+                0x00000000400879d0                open
+                0x0000000040087a1c                close
+                0x0000000040087a4c                read
+                0x0000000040087a7c                write
+                0x0000000040087aac                lseek
+                0x0000000040087ad8                stat
+                0x0000000040087af4                fstat
+                0x0000000040087b24                mkdir
+                0x0000000040087b3c                rmdir
+                0x0000000040087b50                unlink
+                0x0000000040087b64                rename
+                0x0000000040087b78                chmod
+                0x0000000040087b80                chown
+                0x0000000040087b8c                getpid
+                0x0000000040087ba0                getppid
+                0x0000000040087bc0                getuid
+                0x0000000040087bc8                getgid
+                0x0000000040087bd0                setuid
+                0x0000000040087bd8                setgid
+                0x0000000040087be0                fork
+                0x0000000040087bec                execve
+                0x0000000040087c04                waitpid
+                0x0000000040087c1c                pipe
+                0x0000000040087c38                dup
+                0x0000000040087c88                dup2
+                0x0000000040087cd8                ioctl
+                0x0000000040087d20                getlogin
+                0x0000000040087d28                isatty
+                0x0000000040087d5c                execvp
+                0x0000000040087dd4                putenv
+                0x0000000040087e00                htons
+                0x0000000040087e14                htonl
+                0x0000000040087e2c                ntohs
+                0x0000000040087e40                ntohl
+                0x0000000040087e58                socket
+                0x0000000040087e64                bind
+                0x0000000040087e70                connect
+                0x0000000040087e7c                sendto
+                0x0000000040087e88                recvfrom
+                0x0000000040087e94                inet_pton
+                0x0000000040087ea8                inet_ntoa
+ *fill*         0x0000000040087eda        0x2 
+ .text          0x0000000040087edc        0x8 build/userland/init/init.o
                                           0xf (size before relaxing)
-                0x00000000400875d0                user_init
- *fill*         0x00000000400875d8        0x0 
- .text          0x00000000400875d8      0x950 build/userland/sh/shell.o
-                0x00000000400875dc                shell_init
-                0x00000000400875fc                parse_line
-                0x00000000400876e0                execute_command
-                0x0000000040087734                builtin_cd
-                0x0000000040087784                builtin_echo
-                0x00000000400877d4                builtin_env
-                0x00000000400877f8                builtin_export
-                0x0000000040087818                builtin_unset
-                0x0000000040087844                builtin_history
-                0x000000004008792c                builtin_memstat
-                0x0000000040087a90                builtin_netstat
-                0x0000000040087aa4                builtin_ping
-                0x0000000040087b2c                builtin_udptest
-                0x0000000040087d34                shell_main
- *fill*         0x0000000040087f28        0x0 
- *fill*         0x0000000040087f28        0x0 
- .text          0x0000000040087f28       0x9e build/arch/xtensa/cpu/xtensa_regs.o
-                0x0000000040087f28                read_psr
-                0x0000000040087f2f                write_psr
-                0x0000000040087f37                read_epsr
-                0x0000000040087f3e                read_epc
-                0x0000000040087f45                write_epc
-                0x0000000040087f4d                read_exccause
-                0x0000000040087f54                read_excvaddr
-                0x0000000040087f5b                read_intenable
-                0x0000000040087f62                write_intenable
-                0x0000000040087f6a                write_intclear
-                0x0000000040087f6c                read_ccount
-                0x0000000040087f73                write_ccount
-                0x0000000040087f7b                read_ccompare0
-                0x0000000040087f82                read_ccompare1
-                0x0000000040087f89                write_ccompare0
-                0x0000000040087f91                write_ccompare1
-                0x0000000040087f99                read_sar
-                0x0000000040087fa0                write_sar
-                0x0000000040087fa8                rsync
-                0x0000000040087fad                esync
-                0x0000000040087fb2                dsync
-                0x0000000040087fb7                isync
-                0x0000000040087fbc                memw
-                0x0000000040087fc1                waiti
- *fill*         0x0000000040087fc6        0x2 
- .text          0x0000000040087fc8       0xc4 build/arch/xtensa/context/context.o
-                0x0000000040087fc8                context_switch
-                0x0000000040088029                context_save
-                0x000000004008805d                context_restore
- *fill*         0x000000004008808c        0x0 
- *fill*         0x000000004008808c        0x0 
- *fill*         0x000000004008808c        0x0 
- *fill*         0x000000004008808c        0x0 
- *fill*         0x000000004008808c        0x0 
- *fill*         0x000000004008808c        0x0 
- *fill*         0x000000004008808c        0x0 
- *fill*         0x000000004008808c        0x0 
- *fill*         0x000000004008808c        0x0 
- *fill*         0x000000004008808c        0x0 
- *fill*         0x000000004008808c        0x0 
- *fill*         0x000000004008808c        0x0 
- *fill*         0x000000004008808c        0x0 
- .text          0x000000004008808c      0x160 build/libc/ctype/ctype.o
-                0x000000004008808c                isdigit
-                0x00000000400880a0                isalpha
-                0x00000000400880b8                isalnum
-                0x00000000400880dc                isspace
-                0x0000000040088100                islower
-                0x0000000040088114                isupper
-                0x0000000040088128                isxdigit
-                0x0000000040088148                isprint
-                0x000000004008815c                iscntrl
-                0x000000004008817c                ispunct
-                0x00000000400881b8                isgraph
-                0x00000000400881cc                tolower
-                0x00000000400881dc                toupper
- *fill*         0x00000000400881ec        0x0 
- *fill*         0x00000000400881ec        0x0 
+                0x0000000040087edc                user_init
+ *fill*         0x0000000040087ee4        0x0 
+ .text          0x0000000040087ee4      0xc32 build/userland/sh/shell.o
+                0x0000000040087ee8                shell_init
+                0x0000000040087f08                parse_line
+                0x0000000040087fec                execute_command
+                0x0000000040088040                builtin_cd
+                0x0000000040088090                builtin_echo
+                0x00000000400880e0                builtin_env
+                0x0000000040088104                builtin_export
+                0x0000000040088124                builtin_unset
+                0x0000000040088150                builtin_history
+                0x0000000040088238                builtin_memstat
+                0x000000004008839c                builtin_netstat
+                0x00000000400883b0                builtin_ping
+                0x0000000040088438                builtin_udptest
+                0x00000000400885c4                builtin_ifconfig
+                0x00000000400886f8                builtin_wifi
+                0x00000000400888f0                shell_main
+ *fill*         0x0000000040088b16        0x0 
+ *fill*         0x0000000040088b16        0x2 
+ .text          0x0000000040088b18       0x9e build/arch/xtensa/cpu/xtensa_regs.o
+                0x0000000040088b18                read_psr
+                0x0000000040088b1f                write_psr
+                0x0000000040088b27                read_epsr
+                0x0000000040088b2e                read_epc
+                0x0000000040088b35                write_epc
+                0x0000000040088b3d                read_exccause
+                0x0000000040088b44                read_excvaddr
+                0x0000000040088b4b                read_intenable
+                0x0000000040088b52                write_intenable
+                0x0000000040088b5a                write_intclear
+                0x0000000040088b5c                read_ccount
+                0x0000000040088b63                write_ccount
+                0x0000000040088b6b                read_ccompare0
+                0x0000000040088b72                read_ccompare1
+                0x0000000040088b79                write_ccompare0
+                0x0000000040088b81                write_ccompare1
+                0x0000000040088b89                read_sar
+                0x0000000040088b90                write_sar
+                0x0000000040088b98                rsync
+                0x0000000040088b9d                esync
+                0x0000000040088ba2                dsync
+                0x0000000040088ba7                isync
+                0x0000000040088bac                memw
+                0x0000000040088bb1                waiti
+ *fill*         0x0000000040088bb6        0x2 
+ .text          0x0000000040088bb8       0xc4 build/arch/xtensa/context/context.o
+                0x0000000040088bb8                context_switch
+                0x0000000040088c19                context_save
+                0x0000000040088c4d                context_restore
+ *fill*         0x0000000040088c7c        0x0 
+ *fill*         0x0000000040088c7c        0x0 
+ *fill*         0x0000000040088c7c        0x0 
+ *fill*         0x0000000040088c7c        0x0 
+ *fill*         0x0000000040088c7c        0x0 
+ *fill*         0x0000000040088c7c        0x0 
+ *fill*         0x0000000040088c7c        0x0 
+ *fill*         0x0000000040088c7c        0x0 
+ *fill*         0x0000000040088c7c        0x0 
+ *fill*         0x0000000040088c7c        0x0 
+ *fill*         0x0000000040088c7c        0x0 
+ *fill*         0x0000000040088c7c        0x0 
+ *fill*         0x0000000040088c7c        0x0 
+ .text          0x0000000040088c7c      0x160 build/libc/ctype/ctype.o
+                0x0000000040088c7c                isdigit
+                0x0000000040088c90                isalpha
+                0x0000000040088ca8                isalnum
+                0x0000000040088ccc                isspace
+                0x0000000040088cf0                islower
+                0x0000000040088d04                isupper
+                0x0000000040088d18                isxdigit
+                0x0000000040088d38                isprint
+                0x0000000040088d4c                iscntrl
+                0x0000000040088d6c                ispunct
+                0x0000000040088da8                isgraph
+                0x0000000040088dbc                tolower
+                0x0000000040088dcc                toupper
+ *fill*         0x0000000040088ddc        0x0 
+ *fill*         0x0000000040088ddc        0x0 
  *(.rodata .rodata.* .gnu.linkonce.r.*)
+ *fill*         0x0000000040088ddc        0x0 
  .rodata.str1.4
-                0x00000000400881ec       0x30 build/arch/xtensa/traps/traps.o
+                0x0000000040088ddc       0x30 build/arch/xtensa/traps/traps.o
                                          0x34 (size before relaxing)
  .rodata.str1.4
-                0x000000004008821c      0x170 build/kernel/core/kernel.o
- .rodata        0x000000004008838c       0xa4 build/kernel/syscall/syscall.o
+                0x0000000040088e0c      0x170 build/kernel/core/kernel.o
+ .rodata        0x0000000040088f7c       0xa4 build/kernel/syscall/syscall.o
  .rodata.str1.4
-                0x0000000040088430       0x12 build/kernel/memory/memory.o
- *fill*         0x0000000040088442        0x2 
+                0x0000000040089020       0x12 build/kernel/memory/memory.o
+ *fill*         0x0000000040089032        0x2 
  .rodata.str1.4
-                0x0000000040088444       0x74 build/kernel/panic/panic.o
+                0x0000000040089034       0x74 build/kernel/panic/panic.o
                                          0x78 (size before relaxing)
  .rodata.str1.4
-                0x00000000400884b8       0xaa build/kernel/net/net.o
+                0x00000000400890a8       0xaa build/kernel/net/net.o
                                          0xae (size before relaxing)
- *fill*         0x0000000040088562        0x2 
+ *fill*         0x0000000040089152        0x2 
  .rodata.str1.4
-                0x0000000040088564       0x11 build/drivers/uart/uart.o
- *fill*         0x0000000040088575        0x3 
+                0x0000000040089154       0x11 build/drivers/uart/uart.o
+ *fill*         0x0000000040089165        0x3 
  .rodata.str1.4
-                0x0000000040088578        0x6 build/drivers/wifi/wifi.o
- *fill*         0x000000004008857e        0x2 
+                0x0000000040089168       0x26 build/drivers/wifi/wifi.o
+ *fill*         0x000000004008918e        0x2 
  .rodata.str1.4
-                0x0000000040088580        0x9 build/fs/vfs/vfs.o
- *fill*         0x0000000040088589        0x3 
+                0x0000000040089190        0x9 build/fs/vfs/vfs.o
+ *fill*         0x0000000040089199        0x3 
  .rodata.str1.4
-                0x000000004008858c        0x4 build/fs/ramfs/ramfs.o
+                0x000000004008919c        0x4 build/fs/ramfs/ramfs.o
                                           0x8 (size before relaxing)
  .rodata.str1.4
-                0x0000000040088590       0x28 build/fs/devfs/devfs.o
+                0x00000000400891a0       0x28 build/fs/devfs/devfs.o
  .rodata.str1.4
-                0x00000000400885b8        0x7 build/libc/stdio/stdio.o
+                0x00000000400891c8        0x7 build/libc/stdio/stdio.o
  .rodata.str1.4
-                0x00000000400885bf        0x2 build/libc/stdlib/stdlib.o
- *fill*         0x00000000400885bf        0x1 
+                0x00000000400891cf        0x2 build/libc/stdlib/stdlib.o
+ *fill*         0x00000000400891cf        0x1 
  .rodata.str1.4
-                0x00000000400885c0       0x34 build/libc/posix/posix.o
+                0x00000000400891d0       0x34 build/libc/posix/posix.o
                                          0x48 (size before relaxing)
- .rodata        0x00000000400885f4       0x14 build/libc/posix/posix.o
+ .rodata        0x0000000040089204       0x14 build/libc/posix/posix.o
  .rodata.str1.4
-                0x0000000040088608      0x2bc build/userland/sh/shell.o
-                                        0x2d0 (size before relaxing)
-                0x00000000400888c4                . = ALIGN (0x4)
-                0x00000000400888c4                _etext = .
+                0x0000000040089218      0x4bb build/userland/sh/shell.o
+                                        0x4cf (size before relaxing)
+ *fill*         0x00000000400896d3        0x1 
+ .rodata        0x00000000400896d4       0x18 build/userland/sh/shell.o
+                0x00000000400896ec                . = ALIGN (0x4)
+                0x00000000400896ec                _etext = .
 
-.data           0x000000003fc88000      0x2f0 load address 0x00000000400888c4
+.data           0x000000003fc88000      0x2f0 load address 0x00000000400896ec
                 0x000000003fc88000                _data_start = .
  *(.data .data.* .gnu.linkonce.d.*)
  .data          0x000000003fc88000        0x4 build/arch/xtensa/timer/timer.o
@@ -923,7 +933,7 @@ LOAD build/userland/sh/shell.o
                 0x000000003fc882f0                . = ALIGN (0x4)
                 0x000000003fc882f0                _data_end = .
 
-.bss            0x000000003fc882f0    0x18328 load address 0x0000000040088bb4
+.bss            0x000000003fc882f0    0x19c34 load address 0x00000000400899dc
                 0x000000003fc882f0                _bss_start = .
  *(.bss .bss.* .gnu.linkonce.b.*)
  .bss           0x000000003fc882f0      0x100 build/arch/xtensa/traps/traps.o
@@ -935,40 +945,40 @@ LOAD build/userland/sh/shell.o
  .bss           0x000000003fc8862c       0x74 build/kernel/memory/memory.o
  .bss           0x000000003fc886a0      0x16c build/kernel/net/net.o
  *fill*         0x000000003fc8880c        0x4 
- .bss           0x000000003fc88810     0x622c build/drivers/wifi/wifi.o
- .bss           0x000000003fc8ea3c     0x9a84 build/fs/vfs/vfs.o
-                0x000000003fc8ea3c                mount_count
-                0x000000003fc8ea40                open_files
-                0x000000003fc97440                mounts
- .bss           0x000000003fc984c0     0x6a14 build/fs/ramfs/ramfs.o
- .bss           0x000000003fc9eed4      0x6f8 build/fs/devfs/devfs.o
-                0x000000003fc9eed4                uart_fops
-                0x000000003fc9ef10                random_fops
-                0x000000003fc9ef4c                zero_fops
-                0x000000003fc9ef88                null_fops
- .bss           0x000000003fc9f5cc       0x30 build/fs/flashfs/flashfs.o
-                0x000000003fc9f5cc                flashfs_sb
- .bss           0x000000003fc9f5fc        0x4 build/libc/string/string.o
- .bss           0x000000003fc9f600        0x4 build/libc/stdlib/stdlib.o
-                0x000000003fc9f600                environ
- .bss           0x000000003fc9f604       0x10 build/libc/posix/posix.o
- .bss           0x000000003fc9f614     0x1004 build/userland/sh/shell.o
+ .bss           0x000000003fc88810     0x7b38 build/drivers/wifi/wifi.o
+ .bss           0x000000003fc90348     0x9a84 build/fs/vfs/vfs.o
+                0x000000003fc90348                mount_count
+                0x000000003fc9034c                open_files
+                0x000000003fc98d4c                mounts
+ .bss           0x000000003fc99dcc     0x6a14 build/fs/ramfs/ramfs.o
+ .bss           0x000000003fca07e0      0x6f8 build/fs/devfs/devfs.o
+                0x000000003fca07e0                uart_fops
+                0x000000003fca081c                random_fops
+                0x000000003fca0858                zero_fops
+                0x000000003fca0894                null_fops
+ .bss           0x000000003fca0ed8       0x30 build/fs/flashfs/flashfs.o
+                0x000000003fca0ed8                flashfs_sb
+ .bss           0x000000003fca0f08        0x4 build/libc/string/string.o
+ .bss           0x000000003fca0f0c        0x4 build/libc/stdlib/stdlib.o
+                0x000000003fca0f0c                environ
+ .bss           0x000000003fca0f10       0x10 build/libc/posix/posix.o
+ .bss           0x000000003fca0f20     0x1004 build/userland/sh/shell.o
  *(COMMON)
-                0x000000003fca0618                . = ALIGN (0x4)
-                0x000000003fca0618                _bss_end = .
+                0x000000003fca1f24                . = ALIGN (0x4)
+                0x000000003fca1f24                _bss_end = .
 
-.heap           0x000000003fca0618     0x8000 load address 0x0000000040088bb4
-                0x000000003fca0618                _heap_start = .
-                0x000000003fca8618                . = (. + 0x8000)
- *fill*         0x000000003fca0618     0x8000 
-                0x000000003fca8618                _heap_end = .
+.heap           0x000000003fca1f24     0x8000 load address 0x00000000400899dc
+                0x000000003fca1f24                _heap_start = .
+                0x000000003fca9f24                . = (. + 0x8000)
+ *fill*         0x000000003fca1f24     0x8000 
+                0x000000003fca9f24                _heap_end = .
 
-.stack          0x000000003fca8620     0x2000 load address 0x0000000040088bc0
-                0x000000003fca8620                _stack_bottom = .
-                0x000000003fcaa620                . = (. + 0x2000)
- *fill*         0x000000003fca8620     0x2000 
-                0x000000003fcaa620                _stack_top = .
-                0x000000003fcaa620                _kernel_end = .
+.stack          0x000000003fca9f30     0x2000 load address 0x00000000400899e0
+                0x000000003fca9f30                _stack_bottom = .
+                0x000000003fcabf30                . = (. + 0x2000)
+ *fill*         0x000000003fca9f30     0x2000 
+                0x000000003fcabf30                _stack_top = .
+                0x000000003fcabf30                _kernel_end = .
                 0x000000003fc88000                _dram_start = ORIGIN (dram0_0_seg)
                 0x000000003fcb8000                _dram_end = (ORIGIN (dram0_0_seg) + LENGTH (dram0_0_seg))
                 0x000000003f800000                _psram_start = ORIGIN (psram_seg)
@@ -1052,7 +1062,7 @@ OUTPUT(build/bareos.elf elf32-xtensa-le)
  .comment       0x0000000000000026       0x27 build/userland/init/init.o
  .comment       0x0000000000000026       0x27 build/userland/sh/shell.o
 
-.debug_line     0x0000000000000000    0x189b5
+.debug_line     0x0000000000000000    0x1a3ea
  .debug_line    0x0000000000000000       0xfa build/arch/xtensa/boot/startup.o
  .debug_line    0x00000000000000fa      0x11b build/arch/xtensa/cpu/cpu.o
  .debug_line    0x0000000000000215      0x1c4 build/arch/xtensa/cpu/xtensa_regs.o
@@ -1073,21 +1083,21 @@ OUTPUT(build/bareos.elf elf32-xtensa-le)
  .debug_line    0x000000000000bce7      0x3d0 build/drivers/uart/uart.o
  .debug_line    0x000000000000c0b7      0x931 build/drivers/flash/flash.o
  .debug_line    0x000000000000c9e8      0x9f5 build/drivers/psram/psram.o
- .debug_line    0x000000000000d3dd      0xbcc build/drivers/wifi/wifi.o
- .debug_line    0x000000000000dfa9     0x1e5d build/fs/vfs/vfs.o
- .debug_line    0x000000000000fe06     0x25a8 build/fs/ramfs/ramfs.o
- .debug_line    0x00000000000123ae      0xa89 build/fs/devfs/devfs.o
- .debug_line    0x0000000000012e37      0x848 build/fs/flashfs/flashfs.o
- .debug_line    0x000000000001367f      0xd06 build/libc/string/string.o
- .debug_line    0x0000000000014385     0x1920 build/libc/stdio/stdio.o
- .debug_line    0x0000000000015ca5      0x968 build/libc/stdlib/stdlib.o
- .debug_line    0x000000000001660d      0x423 build/libc/ctype/ctype.o
- .debug_line    0x0000000000016a30      0xe76 build/libc/posix/posix.o
- .debug_line    0x00000000000178a6       0x5b build/userland/init/init.o
- .debug_line    0x0000000000017901     0x10b4 build/userland/sh/shell.o
+ .debug_line    0x000000000000d3dd     0x220f build/drivers/wifi/wifi.o
+ .debug_line    0x000000000000f5ec     0x1e5d build/fs/vfs/vfs.o
+ .debug_line    0x0000000000011449     0x25a8 build/fs/ramfs/ramfs.o
+ .debug_line    0x00000000000139f1      0xa89 build/fs/devfs/devfs.o
+ .debug_line    0x000000000001447a      0x848 build/fs/flashfs/flashfs.o
+ .debug_line    0x0000000000014cc2      0xd06 build/libc/string/string.o
+ .debug_line    0x00000000000159c8     0x1920 build/libc/stdio/stdio.o
+ .debug_line    0x00000000000172e8      0x968 build/libc/stdlib/stdlib.o
+ .debug_line    0x0000000000017c50      0x423 build/libc/ctype/ctype.o
+ .debug_line    0x0000000000018073      0xe76 build/libc/posix/posix.o
+ .debug_line    0x0000000000018ee9       0x5b build/userland/init/init.o
+ .debug_line    0x0000000000018f44     0x14a6 build/userland/sh/shell.o
 
 .debug_line_str
-                0x0000000000000000      0x573
+                0x0000000000000000      0x57a
  .debug_line_str
                 0x0000000000000000       0x1b build/arch/xtensa/boot/startup.o
                                          0x36 (size before relaxing)
@@ -1182,10 +1192,10 @@ OUTPUT(build/bareos.elf elf32-xtensa-le)
                 0x0000000000000530       0x23 build/userland/init/init.o
                                          0x9f (size before relaxing)
  .debug_line_str
-                0x0000000000000553       0x20 build/userland/sh/shell.o
-                                        0x128 (size before relaxing)
+                0x0000000000000553       0x27 build/userland/sh/shell.o
+                                        0x12f (size before relaxing)
 
-.debug_info     0x0000000000000000    0x18dd0
+.debug_info     0x0000000000000000    0x1a220
  .debug_info    0x0000000000000000       0x23 build/arch/xtensa/boot/startup.o
  .debug_info    0x0000000000000023      0x203 build/arch/xtensa/cpu/cpu.o
  .debug_info    0x0000000000000226       0x25 build/arch/xtensa/cpu/xtensa_regs.o
@@ -1206,20 +1216,20 @@ OUTPUT(build/bareos.elf elf32-xtensa-le)
  .debug_info    0x000000000000be65      0x24d build/drivers/uart/uart.o
  .debug_info    0x000000000000c0b2      0x84a build/drivers/flash/flash.o
  .debug_info    0x000000000000c8fc      0x9d1 build/drivers/psram/psram.o
- .debug_info    0x000000000000d2cd     0x1021 build/drivers/wifi/wifi.o
- .debug_info    0x000000000000e2ee     0x1b0d build/fs/vfs/vfs.o
- .debug_info    0x000000000000fdfb     0x17b1 build/fs/ramfs/ramfs.o
- .debug_info    0x00000000000115ac     0x1087 build/fs/devfs/devfs.o
- .debug_info    0x0000000000012633      0xfb7 build/fs/flashfs/flashfs.o
- .debug_info    0x00000000000135ea      0x6c1 build/libc/string/string.o
- .debug_info    0x0000000000013cab     0x1624 build/libc/stdio/stdio.o
- .debug_info    0x00000000000152cf      0x73d build/libc/stdlib/stdlib.o
- .debug_info    0x0000000000015a0c      0x42f build/libc/ctype/ctype.o
- .debug_info    0x0000000000015e3b     0x1adc build/libc/posix/posix.o
- .debug_info    0x0000000000017917       0x9f build/userland/init/init.o
- .debug_info    0x00000000000179b6     0x141a build/userland/sh/shell.o
+ .debug_info    0x000000000000d2cd     0x1f2e build/drivers/wifi/wifi.o
+ .debug_info    0x000000000000f1fb     0x1b0d build/fs/vfs/vfs.o
+ .debug_info    0x0000000000010d08     0x17b1 build/fs/ramfs/ramfs.o
+ .debug_info    0x00000000000124b9     0x1087 build/fs/devfs/devfs.o
+ .debug_info    0x0000000000013540      0xfb7 build/fs/flashfs/flashfs.o
+ .debug_info    0x00000000000144f7      0x6c1 build/libc/string/string.o
+ .debug_info    0x0000000000014bb8     0x1624 build/libc/stdio/stdio.o
+ .debug_info    0x00000000000161dc      0x73d build/libc/stdlib/stdlib.o
+ .debug_info    0x0000000000016919      0x42f build/libc/ctype/ctype.o
+ .debug_info    0x0000000000016d48     0x1adc build/libc/posix/posix.o
+ .debug_info    0x0000000000018824       0x9f build/userland/init/init.o
+ .debug_info    0x00000000000188c3     0x195d build/userland/sh/shell.o
 
-.debug_abbrev   0x0000000000000000     0x4955
+.debug_abbrev   0x0000000000000000     0x4b31
  .debug_abbrev  0x0000000000000000       0x12 build/arch/xtensa/boot/startup.o
  .debug_abbrev  0x0000000000000012      0x12e build/arch/xtensa/cpu/cpu.o
  .debug_abbrev  0x0000000000000140       0x14 build/arch/xtensa/cpu/xtensa_regs.o
@@ -1240,18 +1250,18 @@ OUTPUT(build/bareos.elf elf32-xtensa-le)
  .debug_abbrev  0x00000000000021d7      0x199 build/drivers/uart/uart.o
  .debug_abbrev  0x0000000000002370      0x208 build/drivers/flash/flash.o
  .debug_abbrev  0x0000000000002578      0x1fc build/drivers/psram/psram.o
- .debug_abbrev  0x0000000000002774      0x376 build/drivers/wifi/wifi.o
- .debug_abbrev  0x0000000000002aea      0x452 build/fs/vfs/vfs.o
- .debug_abbrev  0x0000000000002f3c      0x3c1 build/fs/ramfs/ramfs.o
- .debug_abbrev  0x00000000000032fd      0x2ef build/fs/devfs/devfs.o
- .debug_abbrev  0x00000000000035ec      0x30f build/fs/flashfs/flashfs.o
- .debug_abbrev  0x00000000000038fb      0x194 build/libc/string/string.o
- .debug_abbrev  0x0000000000003a8f      0x3ab build/libc/stdio/stdio.o
- .debug_abbrev  0x0000000000003e3a      0x2a5 build/libc/stdlib/stdlib.o
- .debug_abbrev  0x00000000000040df      0x111 build/libc/ctype/ctype.o
- .debug_abbrev  0x00000000000041f0      0x3b1 build/libc/posix/posix.o
- .debug_abbrev  0x00000000000045a1       0x5f build/userland/init/init.o
- .debug_abbrev  0x0000000000004600      0x355 build/userland/sh/shell.o
+ .debug_abbrev  0x0000000000002774      0x4e6 build/drivers/wifi/wifi.o
+ .debug_abbrev  0x0000000000002c5a      0x452 build/fs/vfs/vfs.o
+ .debug_abbrev  0x00000000000030ac      0x3c1 build/fs/ramfs/ramfs.o
+ .debug_abbrev  0x000000000000346d      0x2ef build/fs/devfs/devfs.o
+ .debug_abbrev  0x000000000000375c      0x30f build/fs/flashfs/flashfs.o
+ .debug_abbrev  0x0000000000003a6b      0x194 build/libc/string/string.o
+ .debug_abbrev  0x0000000000003bff      0x3ab build/libc/stdio/stdio.o
+ .debug_abbrev  0x0000000000003faa      0x2a5 build/libc/stdlib/stdlib.o
+ .debug_abbrev  0x000000000000424f      0x111 build/libc/ctype/ctype.o
+ .debug_abbrev  0x0000000000004360      0x3b1 build/libc/posix/posix.o
+ .debug_abbrev  0x0000000000004711       0x5f build/userland/init/init.o
+ .debug_abbrev  0x0000000000004770      0x3c1 build/userland/sh/shell.o
 
 .debug_aranges  0x0000000000000000      0x410
  .debug_aranges
@@ -1319,7 +1329,7 @@ OUTPUT(build/bareos.elf elf32-xtensa-le)
  .debug_aranges
                 0x00000000000003f0       0x20 build/userland/sh/shell.o
 
-.debug_str      0x0000000000000000     0x1fdd
+.debug_str      0x0000000000000000     0x224d
  .debug_str     0x0000000000000000       0x48 build/arch/xtensa/boot/startup.o
  .debug_str     0x0000000000000048      0x151 build/arch/xtensa/cpu/cpu.o
                                         0x185 (size before relaxing)
@@ -1359,33 +1369,33 @@ OUTPUT(build/bareos.elf elf32-xtensa-le)
                                         0x1d8 (size before relaxing)
  .debug_str     0x000000000000135f       0x4f build/drivers/psram/psram.o
                                         0x1c1 (size before relaxing)
- .debug_str     0x00000000000013ae      0x1b1 build/drivers/wifi/wifi.o
-                                        0x536 (size before relaxing)
- .debug_str     0x000000000000155f      0x103 build/fs/vfs/vfs.o
+ .debug_str     0x00000000000013ae      0x400 build/drivers/wifi/wifi.o
+                                        0x80c (size before relaxing)
+ .debug_str     0x00000000000017ae       0xfc build/fs/vfs/vfs.o
                                         0x48a (size before relaxing)
- .debug_str     0x0000000000001662      0x1b8 build/fs/ramfs/ramfs.o
+ .debug_str     0x00000000000018aa      0x1b8 build/fs/ramfs/ramfs.o
                                         0x4ca (size before relaxing)
- .debug_str     0x000000000000181a       0xcd build/fs/devfs/devfs.o
+ .debug_str     0x0000000000001a62       0xcd build/fs/devfs/devfs.o
                                         0x507 (size before relaxing)
- .debug_str     0x00000000000018e7      0x285 build/fs/flashfs/flashfs.o
+ .debug_str     0x0000000000001b2f      0x285 build/fs/flashfs/flashfs.o
                                         0x5af (size before relaxing)
- .debug_str     0x0000000000001b6c       0x79 build/libc/string/string.o
+ .debug_str     0x0000000000001db4       0x72 build/libc/string/string.o
                                         0x1af (size before relaxing)
- .debug_str     0x0000000000001be5      0x130 build/libc/stdio/stdio.o
+ .debug_str     0x0000000000001e26      0x130 build/libc/stdio/stdio.o
                                         0x40b (size before relaxing)
- .debug_str     0x0000000000001d15       0x65 build/libc/stdlib/stdlib.o
+ .debug_str     0x0000000000001f56       0x65 build/libc/stdlib/stdlib.o
                                         0x22b (size before relaxing)
- .debug_str     0x0000000000001d7a       0x69 build/libc/ctype/ctype.o
+ .debug_str     0x0000000000001fbb       0x69 build/libc/ctype/ctype.o
                                         0x162 (size before relaxing)
- .debug_str     0x0000000000001de3       0xe1 build/libc/posix/posix.o
+ .debug_str     0x0000000000002024       0xe1 build/libc/posix/posix.o
                                         0x69b (size before relaxing)
- .debug_str     0x0000000000001ec4        0xb build/userland/init/init.o
+ .debug_str     0x0000000000002105        0xb build/userland/init/init.o
                                         0x10e (size before relaxing)
- .debug_str     0x0000000000001ecf      0x10e build/userland/sh/shell.o
-                                        0x476 (size before relaxing)
+ .debug_str     0x0000000000002110      0x13d build/userland/sh/shell.o
+                                        0x537 (size before relaxing)
 
 .debug_rnglists
-                0x0000000000000000      0xaf3
+                0x0000000000000000      0xbff
  .debug_rnglists
                 0x0000000000000000       0x19 build/arch/xtensa/boot/startup.o
  .debug_rnglists
@@ -1413,29 +1423,29 @@ OUTPUT(build/bareos.elf elf32-xtensa-le)
  .debug_rnglists
                 0x0000000000000530       0xb3 build/drivers/psram/psram.o
  .debug_rnglists
-                0x00000000000005e3       0xaf build/drivers/wifi/wifi.o
+                0x00000000000005e3      0x1b0 build/drivers/wifi/wifi.o
  .debug_rnglists
-                0x0000000000000692      0x105 build/fs/vfs/vfs.o
+                0x0000000000000793      0x105 build/fs/vfs/vfs.o
  .debug_rnglists
-                0x0000000000000797      0x135 build/fs/ramfs/ramfs.o
+                0x0000000000000898      0x135 build/fs/ramfs/ramfs.o
  .debug_rnglists
-                0x00000000000008cc       0x4c build/fs/devfs/devfs.o
+                0x00000000000009cd       0x4c build/fs/devfs/devfs.o
  .debug_rnglists
-                0x0000000000000918       0x42 build/fs/flashfs/flashfs.o
+                0x0000000000000a19       0x42 build/fs/flashfs/flashfs.o
  .debug_rnglists
-                0x000000000000095a       0x3c build/libc/string/string.o
+                0x0000000000000a5b       0x3c build/libc/string/string.o
  .debug_rnglists
-                0x0000000000000996       0xa8 build/libc/stdio/stdio.o
+                0x0000000000000a97       0xa8 build/libc/stdio/stdio.o
  .debug_rnglists
-                0x0000000000000a3e       0x22 build/libc/stdlib/stdlib.o
+                0x0000000000000b3f       0x22 build/libc/stdlib/stdlib.o
  .debug_rnglists
-                0x0000000000000a60       0x22 build/libc/ctype/ctype.o
+                0x0000000000000b61       0x22 build/libc/ctype/ctype.o
  .debug_rnglists
-                0x0000000000000a82       0x17 build/libc/posix/posix.o
+                0x0000000000000b83       0x17 build/libc/posix/posix.o
  .debug_rnglists
-                0x0000000000000a99       0x5a build/userland/sh/shell.o
+                0x0000000000000b9a       0x65 build/userland/sh/shell.o
 
-.debug_frame    0x0000000000000000     0x2410
+.debug_frame    0x0000000000000000     0x24e8
  .debug_frame   0x0000000000000000       0x58 build/arch/xtensa/cpu/cpu.o
  .debug_frame   0x0000000000000058       0xe8 build/arch/xtensa/traps/traps.o
  .debug_frame   0x0000000000000140       0xa0 build/arch/xtensa/timer/timer.o
@@ -1452,21 +1462,21 @@ OUTPUT(build/bareos.elf elf32-xtensa-le)
  .debug_frame   0x0000000000000e68       0xa0 build/drivers/uart/uart.o
  .debug_frame   0x0000000000000f08       0x88 build/drivers/flash/flash.o
  .debug_frame   0x0000000000000f90       0x70 build/drivers/psram/psram.o
- .debug_frame   0x0000000000001000      0x100 build/drivers/wifi/wifi.o
- .debug_frame   0x0000000000001100      0x250 build/fs/vfs/vfs.o
- .debug_frame   0x0000000000001350      0x1a8 build/fs/ramfs/ramfs.o
- .debug_frame   0x00000000000014f8      0x118 build/fs/devfs/devfs.o
- .debug_frame   0x0000000000001610      0x178 build/fs/flashfs/flashfs.o
- .debug_frame   0x0000000000001788      0x1a8 build/libc/string/string.o
- .debug_frame   0x0000000000001930      0x238 build/libc/stdio/stdio.o
- .debug_frame   0x0000000000001b68      0x1f0 build/libc/stdlib/stdlib.o
- .debug_frame   0x0000000000001d58      0x148 build/libc/ctype/ctype.o
- .debug_frame   0x0000000000001ea0      0x3e8 build/libc/posix/posix.o
- .debug_frame   0x0000000000002288       0x28 build/userland/init/init.o
- .debug_frame   0x00000000000022b0      0x160 build/userland/sh/shell.o
+ .debug_frame   0x0000000000001000      0x1a8 build/drivers/wifi/wifi.o
+ .debug_frame   0x00000000000011a8      0x250 build/fs/vfs/vfs.o
+ .debug_frame   0x00000000000013f8      0x1a8 build/fs/ramfs/ramfs.o
+ .debug_frame   0x00000000000015a0      0x118 build/fs/devfs/devfs.o
+ .debug_frame   0x00000000000016b8      0x178 build/fs/flashfs/flashfs.o
+ .debug_frame   0x0000000000001830      0x1a8 build/libc/string/string.o
+ .debug_frame   0x00000000000019d8      0x238 build/libc/stdio/stdio.o
+ .debug_frame   0x0000000000001c10      0x1f0 build/libc/stdlib/stdlib.o
+ .debug_frame   0x0000000000001e00      0x148 build/libc/ctype/ctype.o
+ .debug_frame   0x0000000000001f48      0x3e8 build/libc/posix/posix.o
+ .debug_frame   0x0000000000002330       0x28 build/userland/init/init.o
+ .debug_frame   0x0000000000002358      0x190 build/userland/sh/shell.o
 
 .debug_loclists
-                0x0000000000000000     0x82ef
+                0x0000000000000000     0x8a53
  .debug_loclists
                 0x0000000000000000       0x3d build/arch/xtensa/cpu/cpu.o
  .debug_loclists
@@ -1500,24 +1510,24 @@ OUTPUT(build/bareos.elf elf32-xtensa-le)
  .debug_loclists
                 0x0000000000003fa0      0x62d build/drivers/psram/psram.o
  .debug_loclists
-                0x00000000000045cd      0x313 build/drivers/wifi/wifi.o
+                0x00000000000045cd      0x8bf build/drivers/wifi/wifi.o
  .debug_loclists
-                0x00000000000048e0      0xa96 build/fs/vfs/vfs.o
+                0x0000000000004e8c      0xa96 build/fs/vfs/vfs.o
  .debug_loclists
-                0x0000000000005376      0xb10 build/fs/ramfs/ramfs.o
+                0x0000000000005922      0xb10 build/fs/ramfs/ramfs.o
  .debug_loclists
-                0x0000000000005e86      0x369 build/fs/devfs/devfs.o
+                0x0000000000006432      0x369 build/fs/devfs/devfs.o
  .debug_loclists
-                0x00000000000061ef      0x2a8 build/fs/flashfs/flashfs.o
+                0x000000000000679b      0x2a8 build/fs/flashfs/flashfs.o
  .debug_loclists
-                0x0000000000006497      0x653 build/libc/string/string.o
+                0x0000000000006a43      0x653 build/libc/string/string.o
  .debug_loclists
-                0x0000000000006aea      0xa80 build/libc/stdio/stdio.o
+                0x0000000000007096      0xa80 build/libc/stdio/stdio.o
  .debug_loclists
-                0x000000000000756a      0x2d0 build/libc/stdlib/stdlib.o
+                0x0000000000007b16      0x2d0 build/libc/stdlib/stdlib.o
  .debug_loclists
-                0x000000000000783a      0x19c build/libc/ctype/ctype.o
+                0x0000000000007de6      0x19c build/libc/ctype/ctype.o
  .debug_loclists
-                0x00000000000079d6      0x4b0 build/libc/posix/posix.o
+                0x0000000000007f82      0x4b0 build/libc/posix/posix.o
  .debug_loclists
-                0x0000000000007e86      0x469 build/userland/sh/shell.o
+                0x0000000000008432      0x621 build/userland/sh/shell.o

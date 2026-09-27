@@ -137,8 +137,8 @@ MEMORY {
 - Hardware: ESP32-S3 WiFi MAC/BB/RF
 - MAC address: Read from hardware registers (0x60036040/0x60036044)
 - MTU: 1536 bytes
-- DMA: 8 RX descriptors + 8 TX descriptors in internal DRAM
-- Interrupt: Level-based, handled by dedicated RX task
+- DMA: 8 RX + 8 TX + 4 management descriptors in internal DRAM
+- Interrupt: Level-based, handled by dedicated RX/mgmt tasks
 
 ### Protocol Support
 
@@ -163,8 +163,12 @@ Key registers:
 - WIFI_MAC_INT_RAW/ST/ENA/CLR (0x0000-0x000C)
 - WIFI_MAC_TXCTRL/RXCTRL (0x0010/0x0020)
 - WIFI_MAC_ADDR0/1 (0x0040/0x0044) - MAC address
+- WIFI_MAC_BSSID0/1 (0x0048/0x004C) - BSSID
 - WIFI_MAC_DMA_IN/OUT_CONF (0x0100/0x0110)
 - WIFI_MAC_RX/TX_DMA_DESC (0x0120/0x0130)
+- WIFI_MAC_MAILBOX (0x0200) - firmware mailbox
+- WIFI_MAC_RATE_CTRL (0x0300) - rate control
+- WIFI_MAC_CRYPTO_CTRL (0x0310) - crypto engine
 
 ### WiFi Power Base: 0x60036800
 
@@ -180,9 +184,9 @@ Key registers:
 4. Clear and disable interrupts
 5. Read MAC address from WIFI_MAC_ADDR0/1
 6. Initialize DMA descriptors in internal DRAM
-6. Configure RX/TX DMA descriptor base addresses
-7. Enable RX/TX in MAC control registers
-8. Enable interrupts (RX_DONE, TX_DONE, RX_ERR, TX_ERR)
+7. Configure RX/TX DMA descriptor base addresses
+8. Enable RX/TX in MAC control registers
+9. Enable interrupts (RX_DONE, TX_DONE, RX_ERR, TX_ERR, MGMT_RX, MGMT_TX)
 
 ## WiFi Driver Architecture
 
@@ -203,12 +207,55 @@ Key registers:
 2. Packet copied to next available TX buffer
 3. TX descriptor updated with buffer pointer/length
 4. Descriptor ownership transferred to DMA
-4. Hardware transmits frame
-5. TX_DONE interrupt clears descriptor ownership
+5. Hardware transmits frame
+6. TX_DONE interrupt clears descriptor ownership
+
+### Management Frame Path
+
+1. Dedicated management task handles association state machine
+2. Builds management frames (probe request, auth request, assoc request)
+3. Transmits via dedicated management DMA descriptors
+4. Receives management frames via RX path (filtered by frame type)
+5. Parses probe response, auth response, assoc response
+6. State machine with timeouts and retries
 
 ### Buffer Management
 
-- 8 RX descriptors + 8 TX descriptors (16-byte aligned)
+- 8 RX descriptors + 8 TX descriptors + 4 management descriptors (16-byte aligned)
 - 1536-byte buffers in internal DRAM
 - Descriptors in circular linked list
 - Owner bit tracks CPU/DMA ownership
+- Management buffers for probe/auth/assoc frames
+
+### Association State Machine
+
+```
+DOWN → INIT → UP → SCANNING → AUTHENTICATING → ASSOCIATING → ASSOCIATED
+                    ↓              ↓              ↓
+                  FAILED        FAILED         FAILED
+```
+
+States:
+- DOWN: Driver not initialized
+- INIT: Hardware initialization in progress
+- UP: Hardware ready, not associated
+- SCANNING: Sending probe requests, waiting for probe response
+- AUTHENTICATING: Sent auth request, waiting for auth response
+- ASSOCIATING: Sent assoc request, waiting for assoc response
+- ASSOCIATED: Successfully associated, data path active
+- FAILED: Association failed, cleanup required
+
+Timeouts:
+- Scan: 5 seconds
+- Authentication: 3 seconds
+- Association: 3 seconds
+- Max retries: 3 per state
+
+Supported Security Modes:
+- Open System (implemented)
+- WPA-PSK (stubbed, not implemented)
+
+Credentials:
+- SSID and password provided at runtime via wifi_set_credentials()
+- No hardcoded credentials in source code
+- Configuration via shell command or runtime API

@@ -62,6 +62,21 @@ The kernel manages two physical memory regions:
 - Socket integration with VFS file descriptor system
 - ARP cache with timeout
 
+### WiFi Driver
+
+- Hardware initialization: clocks, resets, MAC/BB/RF power domains
+- MAC address retrieval from hardware registers (0x60036040/0x60036044)
+- DMA descriptor rings: 8 RX + 8 TX + 4 management descriptors
+- Interrupt handling: level-based ISR with semaphore signaling to RX/mgmt tasks
+- RX path: dedicated task processes frames → pbuf → net_iface_input()
+- TX path: copies packet to TX buffer, transfers descriptor ownership to DMA
+- Management frame handling: probe request/response, authentication, association
+- State machine: DOWN → INIT → SCANNING → AUTHENTICATING → ASSOCIATING → ASSOCIATED/FAILED
+- Open system authentication support
+- Association request/response handling
+- Timeout and retry logic (3 retries, configurable timeouts)
+- Credential configuration via runtime API (no hardcoded credentials)
+
 ### Process Model
 
 - No fork() - no MMU for COW

@@ -30,7 +30,7 @@
 ## Networking
 
 - Loopback interface (127.0.0.1/8) - fully functional
-- WiFi interface (wlan0) - driver implemented, hardware untested
+- WiFi interface (wlan0) - driver implemented with association
 - No physical network hardware driver beyond WiFi
 - No Ethernet driver
 - IPv4 only (no IPv6)
@@ -53,15 +53,19 @@
 
 ## WiFi Driver Specific
 
-- No WiFi association/authentication implemented (stub only)
-- No WPA/WPA2/WPA3 support
-- No WiFi scanning
+- Open System authentication only (no WPA/WPA2/WPA3)
+- No WiFi scanning UI
 - No power management
 - No coexistence with Bluetooth
 - MAC address read from registers, eFuse access not implemented
-- Static IP configuration only
+- Static IP configuration only (no DHCP)
 - No regulatory domain support
 - No DFS/radar detection
+- Association retries limited to 3 attempts
+- No roaming support
+- No 802.11n/ac features (HT/VHT)
+- Single antenna (no MIMO)
+- Management frame handling simplified (no protection against replay)
 
 ## Multicore
 
@@ -78,7 +82,7 @@
 - DMA: stub only
 - Flash: stub only
 - PSRAM: real implementation for memory mapping
-- WiFi: driver implemented, hardware integration untested
+- WiFi: driver implemented with open authentication
 - No ADC, DAC, PWM, LEDC, RMT, SDIO, USB, CAN
 
 ## Shell
@@ -136,7 +140,7 @@
 ## Future Work
 
 1. Implement persistent filesystem (littlefs or fatfs on flash)
-2. Add WiFi association/authentication (WPA2-PSK)
+2. Add WiFi WPA/WPA2/WPA3 authentication
 3. Add DHCP client
 4. Add DNS resolver
 5. Complete multicore SMP support

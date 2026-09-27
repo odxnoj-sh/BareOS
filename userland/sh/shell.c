@@ -1,4 +1,5 @@
 #include <libc.h>
+#include <wifi.h>
 
 #define MAX_ARGS 32
 #define MAX_LINE 512
@@ -20,6 +21,8 @@ void builtin_memstat(void);
 void builtin_netstat(void);
 void builtin_ping(int argc, char **argv);
 void builtin_udptest(int argc, char **argv);
+void builtin_ifconfig(int argc, char **argv);
+void builtin_wifi(int argc, char **argv);
 
 void shell_init(void) {
     extern char *cwd;
@@ -77,6 +80,10 @@ void shell_main(void) {
             builtin_ping(argc, argv);
         } else if (strcmp(argv[0], "udptest") == 0) {
             builtin_udptest(argc, argv);
+        } else if (strcmp(argv[0], "ifconfig") == 0) {
+            builtin_ifconfig(argc, argv);
+        } else if (strcmp(argv[0], "wifi") == 0) {
+            builtin_wifi(argc, argv);
         } else {
             execute_command(argc, argv);
         }
@@ -267,5 +274,97 @@ void builtin_udptest(int argc, char **argv) {
         close(sock);
     } else {
         printf("Usage: udptest server|client [port]\n");
+    }
+}
+
+void builtin_ifconfig(int argc, char **argv) {
+    (void)argc; (void)argv;
+    extern void netstat_print(void);
+
+    netstat_print();
+
+    int wstate = wifi_get_state();
+    const char *state_str = "DOWN";
+    switch (wstate) {
+        case 0: state_str = "DOWN"; break;
+        case 1: state_str = "INIT"; break;
+        case 2: state_str = "SCANNING"; break;
+        case 3: state_str = "AUTHENTICATING"; break;
+        case 4: state_str = "ASSOCIATING"; break;
+        case 5: state_str = "ASSOCIATED"; break;
+        case 6: state_str = "FAILED"; break;
+    }
+
+    printf("\nwlan0:\n");
+    printf("  state: %s\n", state_str);
+    const uint8_t *mac = wifi_get_mac();
+    printf("  MAC: %02X:%02X:%02X:%02X:%02X:%02X\n", 
+        mac[0], mac[1], mac[2], mac[3], mac[4], mac[5]);
+    
+    if (wstate == 5) {
+        const char *ssid = wifi_get_ssid();
+        if (ssid && *ssid) {
+            printf("  SSID: %s\n", ssid);
+        }
+        int rssi = wifi_get_rssi();
+        if (rssi != 0) {
+            printf("  RSSI: %d dBm\n", rssi);
+        }
+        uint8_t channel = wifi_get_channel();
+        if (channel != 0) {
+            printf("  Channel: %d\n", channel);
+        }
+    }
+}
+
+void builtin_wifi(int argc, char **argv) {
+    if (argc < 2) {
+        printf("Usage: wifi connect <ssid> [password]\n");
+        printf("       wifi disconnect\n");
+        printf("       wifi status\n");
+        return;
+    }
+
+    if (strcmp(argv[1], "connect") == 0) {
+        if (argc < 3) {
+            printf("Usage: wifi connect <ssid> [password]\n");
+            return;
+        }
+        const char *ssid = argv[2];
+        const char *pass = argc > 3 ? argv[3] : "";
+        printf("Connecting to %s...\n", ssid);
+        wifi_set_credentials(ssid, pass, 0);
+        int ret = wifi_assoc(ssid, pass);
+        if (ret == 0) {
+            printf("Association started\n");
+        } else if (ret == -2) {
+            printf("Security mode not supported (only open networks)\n");
+        } else {
+            printf("Association failed: %d\n", ret);
+        }
+    } else if (strcmp(argv[1], "disconnect") == 0) {
+        wifi_stop();
+        printf("Disconnected\n");
+    } else if (strcmp(argv[1], "status") == 0) {
+        int wstate = wifi_get_state();
+        const char *state_str = "DOWN";
+        switch (wstate) {
+            case 0: state_str = "DOWN"; break;
+            case 1: state_str = "INIT"; break;
+            case 2: state_str = "SCANNING"; break;
+            case 3: state_str = "AUTHENTICATING"; break;
+            case 4: state_str = "ASSOCIATING"; break;
+            case 5: state_str = "ASSOCIATED"; break;
+            case 6: state_str = "FAILED"; break;
+        }
+        printf("WiFi state: %s\n", state_str);
+        if (wstate == 5) {
+            const char *ssid = wifi_get_ssid();
+            if (ssid && *ssid) {
+                printf("SSID: %s\n", ssid);
+            }
+        }
+    } else {
+        printf("Unknown wifi command\n");
     }
 }
