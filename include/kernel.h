@@ -191,6 +191,7 @@ void free_tid(tid_t tid);
 struct process *process_create(const char *name);
 void process_destroy(struct process *proc);
 struct task *task_create(struct process *proc, void (*entry)(void), uint8_t priority);
+struct task *task_create_user(void (*entry)(void), uint8_t priority, size_t stack_size);
 void task_destroy(struct task *task);
 void task_yield(void);
 void task_sleep(uint32_t ticks);

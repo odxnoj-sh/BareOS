@@ -121,3 +121,13 @@ The ESP32-S3 has no MMU. This fundamentally changes OS design:
 - Cache avoids repeated ARP requests
 - Timeout handles topology changes
 - Small cache sufficient for embedded use
+
+## Why ESP32-S3 WiFi Driver Architecture?
+
+- Hardware initialization sequence follows ESP32-S3 technical reference
+- DMA descriptors in internal DRAM for peripheral access
+- RX path uses dedicated task with semaphore for interrupt handling
+- TX path uses simple descriptor ring
+- MAC address read from hardware registers
+- Integrates with existing net_iface abstraction
+- No WiFi-specific code in IPv4/UDP/ICMP layers

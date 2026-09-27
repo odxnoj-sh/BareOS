@@ -56,6 +56,7 @@ The kernel manages two physical memory regions:
 
 - Layered design: socket API → UDP → IPv4 → ARP/link layer → network interface → hardware driver
 - Loopback interface (lo0) with 127.0.0.1/8
+- WiFi interface (wlan0) with ESP32-S3 hardware
 - Packet buffer abstraction with prepend/append/trim
 - Real checksums for IPv4, UDP, ICMP
 - Socket integration with VFS file descriptor system

@@ -14,6 +14,7 @@ extern void user_init(void);
 extern void flash_init(void);
 extern int flashfs_mount(const char *source, const char *target, int flags, void *data);
 extern void net_init(void);
+extern int wifi_init(void);
 
 struct cpu_state cpu_states[2];
 struct process *process_table[MAX_PROCESSES];
@@ -65,6 +66,9 @@ void kernel_main(void) {
 
     net_init();
     uart_puts("Network initialized\n");
+
+    wifi_init();
+    uart_puts("WiFi initialized\n");
 
     struct process *init_proc = process_create("init");
     struct task *init_task = task_create(init_proc, (void*)user_init, PRIORITY_DEFAULT);

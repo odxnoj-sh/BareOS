@@ -42,6 +42,7 @@ if not exist build\drivers\spi mkdir build\drivers\spi
 if not exist build\drivers\i2c mkdir build\drivers\i2c
 if not exist build\drivers\dma mkdir build\drivers\dma
 if not exist build\drivers\console mkdir build\drivers\console
+if not exist build\drivers\wifi mkdir build\drivers\wifi
 if not exist build\fs\vfs mkdir build\fs\vfs
 if not exist build\fs\ramfs mkdir build\fs\ramfs
 if not exist build\fs\devfs mkdir build\fs\devfs
@@ -180,6 +181,10 @@ echo Compiling drivers/console/console.c
 %CC% %CFLAGS% -c drivers/console/console.c -o build/drivers/console/console.o
 if errorlevel 1 exit /b 1
 
+echo Compiling drivers/wifi/wifi.c
+%CC% %CFLAGS% -c drivers/wifi/wifi.c -o build/drivers/wifi/wifi.o
+if errorlevel 1 exit /b 1
+
 echo Compiling fs/vfs/vfs.c
 %CC% %CFLAGS% -c fs/vfs/vfs.c -o build/fs/vfs/vfs.o
 if errorlevel 1 exit /b 1
@@ -264,6 +269,7 @@ echo Linking build/bareos.elf
   build/drivers/i2c/i2c.o ^
   build/drivers/dma/dma.o ^
   build/drivers/console/console.o ^
+  build/drivers/wifi/wifi.o ^
   build/fs/vfs/vfs.o ^
   build/fs/ramfs/ramfs.o ^
   build/fs/devfs/devfs.o ^

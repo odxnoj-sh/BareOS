@@ -36,6 +36,7 @@
 - ADC/DAC
 - Touch sensor
 - Temperature sensor
+- WiFi MAC/BB/RF (2.4 GHz)
 
 ### GPIO
 
@@ -130,6 +131,15 @@ MEMORY {
 - MTU: 1536 bytes
 - Transmit function delivers packets back to receive path
 
+### WiFi Interface
+
+- Interface name: `wlan0`
+- Hardware: ESP32-S3 WiFi MAC/BB/RF
+- MAC address: Read from hardware registers (0x60036040/0x60036044)
+- MTU: 1536 bytes
+- DMA: 8 RX descriptors + 8 TX descriptors in internal DRAM
+- Interrupt: Level-based, handled by dedicated RX task
+
 ### Protocol Support
 
 - Ethernet: frame handling, ARP
@@ -144,3 +154,61 @@ MEMORY {
 - socket(), bind(), connect(), sendto(), recvfrom(), close()
 - Integrated with VFS file descriptor system
 - Port allocation: ephemeral (1024-65535) + explicit bind
+
+## ESP32-S3 WiFi Hardware Registers
+
+### WiFi MAC Base: 0x60036000
+
+Key registers:
+- WIFI_MAC_INT_RAW/ST/ENA/CLR (0x0000-0x000C)
+- WIFI_MAC_TXCTRL/RXCTRL (0x0010/0x0020)
+- WIFI_MAC_ADDR0/1 (0x0040/0x0044) - MAC address
+- WIFI_MAC_DMA_IN/OUT_CONF (0x0100/0x0110)
+- WIFI_MAC_RX/TX_DMA_DESC (0x0120/0x0130)
+
+### WiFi Power Base: 0x60036800
+
+- WIFI_PWR_CLK_EN (0x0000) - clock enable
+- WIFI_PWR_RST_EN (0x0004) - reset control
+- WIFI_PWR_CTRL (0x0010) - power control
+
+### WiFi Initialization Sequence
+
+1. Enable WiFi clocks in PCR (0x60096130/0x60096134)
+2. Enable power domain clocks (WIFI_PWR_CLK_EN)
+3. Assert then deassert resets (WIFI_PWR_RST_EN)
+4. Clear and disable interrupts
+5. Read MAC address from WIFI_MAC_ADDR0/1
+6. Initialize DMA descriptors in internal DRAM
+6. Configure RX/TX DMA descriptor base addresses
+7. Enable RX/TX in MAC control registers
+8. Enable interrupts (RX_DONE, TX_DONE, RX_ERR, TX_ERR)
+
+## WiFi Driver Architecture
+
+### RX Path
+
+1. Hardware receives frame → DMA writes to RX buffer
+2. Interrupt triggered (WIFI_INT_RX_DONE)
+3. ISR signals semaphore
+4. RX task waits on semaphore
+5. Task processes completed RX descriptor
+6. Frame copied to packet buffer (pbuf)
+7. pbuf passed to net_iface_input()
+8. RX descriptor returned to hardware
+
+### TX Path
+
+1. net_iface_output() calls wifi_transmit()
+2. Packet copied to next available TX buffer
+3. TX descriptor updated with buffer pointer/length
+4. Descriptor ownership transferred to DMA
+4. Hardware transmits frame
+5. TX_DONE interrupt clears descriptor ownership
+
+### Buffer Management
+
+- 8 RX descriptors + 8 TX descriptors (16-byte aligned)
+- 1536-byte buffers in internal DRAM
+- Descriptors in circular linked list
+- Owner bit tracks CPU/DMA ownership

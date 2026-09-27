@@ -29,9 +29,9 @@
 
 ## Networking
 
-- Loopback interface only (127.0.0.1/8)
-- No physical network hardware driver
-- No WiFi driver
+- Loopback interface (127.0.0.1/8) - fully functional
+- WiFi interface (wlan0) - driver implemented, hardware untested
+- No physical network hardware driver beyond WiFi
 - No Ethernet driver
 - IPv4 only (no IPv6)
 - UDP only (no TCP)
@@ -51,6 +51,18 @@
 - Socket receive buffer limited by packet buffer size
 - No socket options (SO_REUSEADDR, etc.)
 
+## WiFi Driver Specific
+
+- No WiFi association/authentication implemented (stub only)
+- No WPA/WPA2/WPA3 support
+- No WiFi scanning
+- No power management
+- No coexistence with Bluetooth
+- MAC address read from registers, eFuse access not implemented
+- Static IP configuration only
+- No regulatory domain support
+- No DFS/radar detection
+
 ## Multicore
 
 - Core 1 support is minimal
@@ -66,6 +78,7 @@
 - DMA: stub only
 - Flash: stub only
 - PSRAM: real implementation for memory mapping
+- WiFi: driver implemented, hardware integration untested
 - No ADC, DAC, PWM, LEDC, RMT, SDIO, USB, CAN
 
 ## Shell
@@ -123,16 +136,17 @@
 ## Future Work
 
 1. Implement persistent filesystem (littlefs or fatfs on flash)
-2. Add WiFi driver and lwIP network stack
-3. Complete multicore SMP support
-4. Implement remaining device drivers
-5. Add gdb stub for debugging
-6. Implement power management
-7. Add more userland utilities
-8. Improve shell with history, completion, job control
-9. Add dynamic module loading
-10. Implement proper signal handling with sigaction
-11. Add TCP protocol support
-12. Add IPv6 support
-13. Add DHCP client
-14. Add DNS resolver
+2. Add WiFi association/authentication (WPA2-PSK)
+3. Add DHCP client
+4. Add DNS resolver
+5. Complete multicore SMP support
+6. Implement remaining device drivers
+7. Add gdb stub for debugging
+8. Implement power management
+9. Add more userland utilities
+10. Improve shell with history, completion, job control
+11. Add dynamic module loading
+12. Implement proper signal handling with sigaction
+13. Add TCP protocol support
+14. Add IPv6 support
+15. Add WiFi scanning and regulatory domain support
